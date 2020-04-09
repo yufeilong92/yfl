@@ -20,6 +20,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import com.backpacker.yflLibrary.java.ArithUtil
+import com.backpacker.yflLibrary.java.JavaStringUtil
 import com.backpacker.yflLibrary.java.LocaUtil.getExternalCacheDir
 import com.backpacker.yflLibrary.java.LocaUtil.isMethodsCompat
 import java.io.File
@@ -530,5 +531,19 @@ object KotlinUtil {
 
 
     }
-
+    fun getLatLng(string: String): MutableList<String> {
+        if (JavaStringUtil.isEmpty(string)) {
+            return mutableListOf()
+        }
+        val list = string.split(",")
+        return list as MutableList<String>
+    }
+    /***
+     * @param count 数量
+     * @param count 显示
+     * @return
+     */
+    fun showShopBoxNumber(count:Int,tv: TextView){
+        tv.text=if (count>=100)"99+" else "$count"
+    }
 }

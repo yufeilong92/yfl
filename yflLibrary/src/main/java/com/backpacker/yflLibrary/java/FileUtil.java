@@ -104,4 +104,27 @@ public class FileUtil {
 
         return new File(path).length();
     }
+    public static String saveImag(Context mContext, Bitmap bitmap) {
+        FileOutputStream outputStream;
+        String path = mContext.getExternalCacheDir().getAbsolutePath() + File.separator + "/" + System.currentTimeMillis() + ".png";
+        File file = new File(path);
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            path = file.toString();
+            outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return path;
+    }
+
+    public static String getFilePath(Context mContext){
+        return mContext.getExternalCacheDir().getAbsolutePath()+File.separator+"/";
+    }
 }
