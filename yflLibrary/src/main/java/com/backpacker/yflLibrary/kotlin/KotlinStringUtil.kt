@@ -84,4 +84,20 @@ object KotlinStringUtil {
     fun setTextWithLine(tv: TextView){
         tv.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
     }
+
+    fun setTextViewVOrGWData(tv: TextView, data: String) {
+        if (isEmpty(data)) {
+            tv.visibility = View.GONE
+        } else {
+            tv.visibility = View.VISIBLE
+            tv.text = data
+        }
+    }
+    fun setTextViewVOrG(tv: View, data: String) {
+        if (isEmpty(data)) {
+            tv.visibility = View.GONE
+        } else {
+            tv.visibility = View.VISIBLE
+        }
+    }
 }
