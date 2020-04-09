@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyBarStyle">
+        <attr name="barBg" format="color" />
+        <attr name="bgDrawable" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout">
+        <attr name="flFlow" format="boolean"/>
+        <attr name="flChildSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536"/>
+        </attr>
+        <attr name="flMinChildSpacing" format="dimension"/>
+        <attr name="flChildSpacingForLastRow" format="enum|dimension">
+            <enum name="auto" value="-65536"/>
+            <enum name="align" value="-65537"/>
+        </attr>
+        <attr name="flRowSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536"/>
+        </attr>
+        <attr name="flRtl" format="boolean"/>
+        <attr name="flMaxRows" format="integer"/>
+        <attr name="flRowVerticalGravity" format="enum">
+            <enum name="auto" value="-65536"/>
+            <enum name="top" value="0x30"/>
+            <enum name="center" value="0x10"/>
+            <enum name="bottom" value="0x50"/>
+        </attr>
+        <attr name="android:gravity"/>
+    </declare-styleable>
+    <declare-styleable name="gridPasswordView">
+
+        <attr name="gpvTextColor" format="color|reference" />
+        <attr name="gpvTextSize" format="dimension" />
+
+        <attr name="gpvLineColor" format="color" />
+        <attr name="gpvGridColor" format="color" />
+        <attr name="gpvLineWidth" format="dimension" />
+
+        <attr name="gpvPasswordLength" format="integer" />
+        <attr name="gpvPasswordTransformation" format="string" />
+
+        <attr name="gpvPasswordType" format="enum">
+            <enum name="numberPassword" value="0" />
+            <enum name="textPassword" value="1" />
+            <enum name="textVisiblePassword" value="2" />
+            <enum name="textWebPassword" value="3" />
+        </attr>
+
+    </declare-styleable>
+    <declare-styleable name="CEditText">
+        <attr name="height" format="dimension" />
+        <attr name="count" format="integer" />
+        <attr name="lineWidth" format="dimension"/>
+        <attr name="lineColor" format="color" />
+        <attr name="focusLineColor" format="color" />
+        <attr name="stokesColor" format="color" />
+        <attr name="focusStokeColor" format="color" />
+        <attr name="spaceWidth" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="circleColor" format="color" />
+        <attr name="isDrawCircle" format="boolean" />
+        <attr name="isDrawLine" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="PayPsdInputView">
+        <attr name="maxCount" format="integer" />
+        <attr name="circleColorOne" format="color" />
+        <attr name="bottomLineColor" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="divideLineWidth" format="dimension" />
+        <attr name="divideLineColor" format="color" />
+        <attr name="rectAngle" format="dimension" />
+        <attr name="focusedColor" format="color"/>
+        <attr name="psdType" format="enum">
+            <enum name="weChat" value="0" />
+            <enum name="bottomLine" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="RxAutoImageView">
+        <attr name="ImageSrc" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="GmTitleBarView">
+
+        <!--         左侧文字-->
+        <attr name="lift_content" format="string" />
+        <!--         左侧文字大小-->
+        <attr name="lift_size" format="dimension" />
+        <!--         左侧文字颜色-->
+        <attr name="lift_color" format="color" />
+        <!--         左侧背景-->
+        <attr name="lift_bg" format="color" />
+        <!--         左侧背景-->
+        <attr name="lift_resource" format="reference" />
+        <!--         中间文字-->
+        <attr name="content_content" format="string" />
+        <!--         中间文字大小-->
+        <attr name="content_size" format="dimension" />
+        <!--         中间文字颜色-->
+        <attr name="content_color" format="color" />
+        <!--         中间文字背景-->
+        <attr name="content_bg" format="color" />
+        <!--         中间文字资源-->
+        <attr name="content_resource" format="reference" />
+        <!--         右侧文字-->
+        <attr name="right_content" format="string" />
+        <!--         右侧文字大小-->
+        <attr name="right_size" format="dimension" />
+        <!--         右侧文字颜色-->
+        <attr name="right_color" format="color" />
+        <!--         右侧背景-->
+        <attr name="right_bg" format="color" />
+        <!--         资源背景-->
+        <attr name="right_resource" format="reference" />
+        <!--         左图图片-->
+        <attr name="ic_life_resource" format="reference" />
+        <!--         右图图片-->
+        <attr name="ic_rigth_resource" format="reference" />
+        <!--         左图显示-->
+        <attr name="tv_life_boolean" format="boolean" />
+        <!--         右图显示-->
+        <attr name="tv_right_boolean" format="boolean" />
+        <!--        背景-->
+        <attr name="app_bar_bg" format="color" />
+        <!--        资源背景-->
+        <attr name="app_bar_resource" format="reference" />
+
+        <!--        背景-->
+        <attr name="app_title_bar_bg" format="color" />
+        <!--        资源背景-->
+        <attr name="app_title_bar_resource" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CalendarPickerView">
+        <attr name="android:background"/>
+        <attr name="dividerColor" format="color"/>
+        <attr name="dayBackground" format="reference"/>
+        <attr name="dayTextColor" format="color"/>
+        <attr name="dayHeaderTextColor" format="color"/>
+        <attr name="titleTextStyle" format="reference"/>
+        <attr name="displayHeader" format="boolean"/>
+        <attr name="displayDayNamesHeaderRow" format="boolean"/>
+        <attr name="displayAlwaysDigitNumbers" format="boolean"/>
+        <attr name="headerTextColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="calendar_cell">
+        <attr name="state_selectable" format="boolean" />
+        <attr name="state_current_month" format="boolean" />
+        <attr name="state_today" format="boolean" />
+        <attr name="state_range_first" format="boolean" />
+        <attr name="state_range_middle" format="boolean" />
+        <attr name="state_range_last" format="boolean" />
+        <attr name="state_highlighted" format="boolean" />
+    </declare-styleable>
+</resources>

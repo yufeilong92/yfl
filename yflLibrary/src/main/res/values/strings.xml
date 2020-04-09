@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MyUtils</string>
+    <string name="invalid_date">Date must be between %1$s and %2$s.</string>
+
+    <string name="day_name_format" translatable="false">EEEEE</string>
+    <string name="month_name_format" translatable="false">MMMM yyyy</string>
+    <string name="month_only_name_format" translatable="false">MMMM</string>
+    <string name="year_only_format" translatable="false">yyyy</string>
+    <string name="btnCE" translatable="false">CE</string>
+    <string name="btn7" translatable="false">7</string>
+    <string name="btn8" translatable="false">8</string>
+    <string name="btn9" translatable="false">9</string>
+    <string name="btnDiv" translatable="false">/</string>
+    <string name="btn4" translatable="false">4</string>
+    <string name="btn5" translatable="false">5</string>
+    <string name="btn6" translatable="false">6</string>
+    <string name="btnMul" translatable="false">*</string>
+    <string name="btn1" translatable="false">1</string>
+    <string name="btn2" translatable="false">2</string>
+    <string name="btn3" translatable="false">3</string>
+    <string name="btnAdd" translatable="false">+</string>
+    <string name="btn0" translatable="false">0</string>
+    <string name="btnC" translatable="false">.</string>
+    <string name="btnEqu" translatable="false">=</string>
+    <string name="btnSub" translatable="false">-</string>
+    <string name="btnbackspace" translatable="false">backspace</string>
+</resources>
