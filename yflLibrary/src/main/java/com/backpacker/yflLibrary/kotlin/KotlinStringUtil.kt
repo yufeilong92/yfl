@@ -1,6 +1,7 @@
 package com.backpacker.yflLibrary.kotlin
 
 import android.content.Context
+import android.graphics.Paint
 import android.text.Html
 import android.text.Spanned
 import android.view.View
@@ -79,5 +80,8 @@ object KotlinStringUtil {
 
     fun getTextYMoney(): Spanned {
         return Html.fromHtml("&yen")
+    }
+    fun setTextWithLine(tv: TextView){
+        tv.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG or Paint.ANTI_ALIAS_FLAG
     }
 }
