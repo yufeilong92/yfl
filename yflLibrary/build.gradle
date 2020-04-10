@@ -46,6 +46,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'top.zibin:Luban:1.1.8'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    //百分比布局
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 //    implementation 'com.github.addappcn:android-pickers:2.0.0'
 }
 
