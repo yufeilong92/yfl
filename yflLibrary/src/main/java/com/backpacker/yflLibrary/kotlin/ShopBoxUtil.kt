@@ -11,6 +11,8 @@ import android.view.WindowManager
 import android.view.animation.*
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
+import androidx.annotation.NonNull
 
 /**
  * @Author : YFL  is Creating a porject in My Application
@@ -26,7 +28,7 @@ object ShopBoxUtil {
      * @param start 开始view
      * @param ent  结束view
      */
-    fun setAnim(activity: Activity,  id: Int, start: View, ent: View,startListener:()->Unit,endListener:()->Unit) {
+    fun setShopAnim(activity: Activity, @DrawableRes  id: Int, start: View, ent: View,startListener:()->Unit,endListener:()->Unit) {
         val start_location = IntArray(2)
         start.getLocationInWindow(start_location)
 
@@ -38,14 +40,12 @@ object ShopBoxUtil {
         // 把动画小球添加到动画层
         anim_mask_layout.addView(img)
 
-        val view = addViewToAnimLayout(anim_mask_layout, img, start_location)
+        val view = addViewToAnimLayout( img, start_location)
         // 这是用来存储动画结束位置的X、Y坐标
         val end_location = IntArray(2)
         // rl_gouwuche是小球运动的终点 一般是购物车图标
         ent.getLocationInWindow(end_location)
         // 计算位移
-        //        val endX = 0 - start_location[0] + 40// 动画位移的X坐标
-        //        val endX = 0 - end_location[0] + ent.width * 2 // 动画位移的X坐标
         val point = getScreenSize(activity)
         val endView = IntArray(2)
         ent.getLocationOnScreen(endView)
@@ -92,7 +92,10 @@ object ShopBoxUtil {
 
     }
 
-    fun convertViewToBitmap(view: View): Bitmap {
+    /**
+     * 创建控件的背景
+      */
+   private fun convertViewToBitmap(view: View): Bitmap {
         view.measure(
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
@@ -102,6 +105,9 @@ object ShopBoxUtil {
         return view.drawingCache
     }
 
+    /**
+     *  创建动画的父布局
+     */
     private fun createAnimLayout(activity: Activity): ViewGroup {
         val rootView = activity!!.window.decorView as ViewGroup
         val animLayout = LinearLayout(activity!!)
@@ -116,7 +122,12 @@ object ShopBoxUtil {
         return animLayout
     }
 
-    private fun addViewToAnimLayout(vg: ViewGroup, view: View, location: IntArray): View {
+    /**
+     * 添加动画
+     * @param view  动画过程中的view
+     * @param location  开始位置
+     */
+    private fun addViewToAnimLayout( view: View, location: IntArray): View {
         val x = location[0]
         val y = location[1]
         val lp = LinearLayout.LayoutParams(
@@ -129,6 +140,9 @@ object ShopBoxUtil {
         return view
     }
 
+    /**
+     * 获取屏幕宽高
+     */
     fun getScreenSize(context: Context): Point? {
         val wm =
             context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -144,10 +158,14 @@ object ShopBoxUtil {
         return out
     }
 
-    fun getAddDrawBitMap(con: Context, id: Int): Bitmap {
-        val text = ImageView(con)
+    /**
+     *  创建加载动画过程中的view
+     *  @param id 动画背景id
+     */
+    fun getAddDrawBitMap(con: Context,@DrawableRes id: Int): Bitmap {
+        val iv = ImageView(con)
         // 运动的控件，样式可以自定义
-        text.setImageResource(id)
-        return convertViewToBitmap(text)
+        iv.setImageResource(id)
+        return convertViewToBitmap(iv)
     }
 }
