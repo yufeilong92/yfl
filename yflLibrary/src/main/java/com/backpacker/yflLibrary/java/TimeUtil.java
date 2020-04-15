@@ -796,7 +796,7 @@ public class TimeUtil {
                         break;
                 }
             }
-        } catch (ParseException e) {
+        } catch (Exception e) {
             content = time;
             e.printStackTrace();
         }
