@@ -13,27 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.backpacker.yflLibrary.view.swipeMenuRecyclerView.touch;
+package com.backpacker.yflLibrary.view.swipeRlvMeun;
 
 /**
- * Created by Yolanda on 2016/4/19.
+ * Created by Yan Zhenjie on 2016/7/26.
  */
-public interface OnItemMoveListener {
+public interface OnSwipeMenuItemClickListener {
 
     /**
-     * When drag and drop the callback.
+     * Invoke when the menu item is clicked.
      *
-     * @param fromPosition start position.
-     * @param toPosition   target position.
-     * @return To deal with the returns true, false otherwise.
+     * @param closeable       closeable.
+     * @param adapterPosition adapterPosition.
+     * @param menuPosition    menuPosition.
+     * @param direction       can be {@link SwipeMenuRecyclerView#LEFT_DIRECTION}, {@link SwipeMenuRecyclerView#RIGHT_DIRECTION}.
      */
-    boolean onItemMove(int fromPosition, int toPosition);
-
-    /**
-     * When items should be removed when the callback.
-     *
-     * @param position swipe position.
-     */
-    void onItemDismiss(int position);
+    void onItemClick(Closeable closeable, int adapterPosition, int menuPosition, @SwipeMenuRecyclerView.DirectionMode int direction);
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.backpacker.yflLibrary.view.swipeMenuRecyclerView.touch;
+package com.backpacker.yflLibrary.view.swipeRlvMeun.touch;
 
 
 import androidx.recyclerview.widget.ItemTouchHelper;

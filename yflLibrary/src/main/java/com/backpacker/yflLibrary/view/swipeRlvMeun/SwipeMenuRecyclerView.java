@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.backpacker.yflLibrary.view.swipeMenuRecyclerView;
+package com.backpacker.yflLibrary.view.swipeRlvMeun;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -27,10 +27,10 @@ import androidx.annotation.IntDef;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.backpacker.yflLibrary.view.swipeMenuRecyclerView.touch.DefaultItemTouchHelper;
-import com.backpacker.yflLibrary.view.swipeMenuRecyclerView.touch.OnItemMoveListener;
-import com.backpacker.yflLibrary.view.swipeMenuRecyclerView.touch.OnItemMovementListener;
-import com.backpacker.yflLibrary.view.swipeMenuRecyclerView.touch.OnItemStateChangedListener;
+import com.backpacker.yflLibrary.view.swipeRlvMeun.touch.DefaultItemTouchHelper;
+import com.backpacker.yflLibrary.view.swipeRlvMeun.touch.OnItemMoveListener;
+import com.backpacker.yflLibrary.view.swipeRlvMeun.touch.OnItemMovementListener;
+import com.backpacker.yflLibrary.view.swipeRlvMeun.touch.OnItemStateChangedListener;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

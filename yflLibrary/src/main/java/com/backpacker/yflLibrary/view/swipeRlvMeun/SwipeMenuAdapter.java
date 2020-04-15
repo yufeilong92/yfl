@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.backpacker.yflLibrary.view.swipeMenuRecyclerView;
+package com.backpacker.yflLibrary.view.swipeRlvMeun;
 
 import android.view.LayoutInflater;
 import android.view.View;

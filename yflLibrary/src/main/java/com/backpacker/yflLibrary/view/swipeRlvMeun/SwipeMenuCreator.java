@@ -13,11 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.backpacker.yflLibrary.view.swipeMenuRecyclerView;
+package com.backpacker.yflLibrary.view.swipeRlvMeun;
 
 /**
- * Created by Yan Zhenjie on 2016/7/27.
+ * Created by Yan Zhenjie on 2016/7/26.
  */
-public interface SwipeSwitch extends Openable, Closeable {
+public interface SwipeMenuCreator {
+
+    /**
+     * Create menu for recyclerVie item.
+     *
+     * @param swipeLeftMenu  The menu on the left.
+     * @param swipeRightMenu The menu on the right.
+     * @param viewType       The view type of the new view.
+     */
+    void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType);
 
 }
