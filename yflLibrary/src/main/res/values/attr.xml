@@ -160,4 +160,11 @@
         <!--是否可拖曳-->
         <attr name="customIsDrag" format="boolean" />
     </declare-styleable>
+
+
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="leftViewId" format="reference" />
+        <attr name="rightViewId" format="reference" />
+        <attr name="contentViewId" format="reference" />
+    </declare-styleable>
 </resources>
