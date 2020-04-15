@@ -530,9 +530,9 @@ public class TimeUtil {
         }
         String isFormattType = type.getValue();
         SimpleDateFormat sdf = new SimpleDateFormat(DateFormatUtil.YMDHMS.getValue());
-        Date date=null;
+        Date date = null;
         try {
-            date=sdf.parse(time);
+            date = sdf.parse(time);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -797,6 +797,7 @@ public class TimeUtil {
                 }
             }
         } catch (ParseException e) {
+            content = time;
             e.printStackTrace();
         }
         return content;
