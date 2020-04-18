@@ -11,6 +11,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/banner" />
+            <option value="$PROJECT_DIR$/multi-image-selector" />
+            <option value="$PROJECT_DIR$/update-app" />
+            <option value="$PROJECT_DIR$/update-app-kotlin" />
             <option value="$PROJECT_DIR$/yflLibrary" />
           </set>
         </option>
