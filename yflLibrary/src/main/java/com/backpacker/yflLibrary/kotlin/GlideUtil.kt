@@ -1,14 +1,10 @@
-package com.zzzh.akhalteke.utils
+package com.backpacker.yflLibrary.kotlin
 
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.widget.ImageView
-import com.backpacker.yflLibrary.java.JavaStringUtil
 import com.backpacker.yflLibrary.java.JavaUtil
 import com.backpacker.yflLibrary.java.share.RoundedCornersTransform
-import com.backpacker.yflLibrary.kotlin.KotlinStringUtil
-import com.backpacker.yflLibrary.kotlin.OssGlideUrl
-import com.backpacker.yflLibrary.kotlin.RoundCorner
 import com.backpacker.yflLibrary.view.GlideRoundTransform
 import com.backpacker.yflLibrary.view.GlideRoundedCornersTransform
 import com.bumptech.glide.Glide
@@ -23,7 +19,6 @@ import com.bumptech.glide.Priority
 
 /**
  * @Author : YFL  is Creating a porject in akhalteke-Android-driver
- * @Package com.zzzh.akhalteke.utils
  * @Email : yufeilong92@163.com
  * @Time :2019/5/15 11:42
  * @Purpose :图片加载

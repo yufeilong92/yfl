@@ -2,14 +2,8 @@ package com.backpacker.yflLibrary.kotlin
 
 import android.content.Context
 import android.widget.ImageView
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.graphics.Shader.TileMode
-import android.graphics.*
 import com.backpacker.yflLibrary.view.RoundTransform
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
-import com.zzzh.akhalteke.utils.GlideUtil
 
 
 /**
