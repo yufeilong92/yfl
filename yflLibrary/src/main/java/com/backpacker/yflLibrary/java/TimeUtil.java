@@ -109,7 +109,7 @@ public class TimeUtil {
             return def;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat(formatstr);
-            return sdf.parse(str);
+            return (Date) sdf.parseObject(str);
         } catch (Exception e) {
             return def;
         }
@@ -156,11 +156,11 @@ public class TimeUtil {
      * @param time
      * @return
      */
-    public static long getTimeWString(String time) {
+    public static long getTimeWString(String time,String def) {
         if (JavaStringUtil.isEmpty(time)) {
             return 0;
         }
-        Date date = strToDate(time, null);
+        Date date = strToDate(time, def,null);
         if (date == null)
             return 0;
         return date.getTime();
