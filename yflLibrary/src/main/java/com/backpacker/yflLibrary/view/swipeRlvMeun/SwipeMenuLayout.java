@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
 
+import com.example.UtilsLibrary.R;
+
 import java.util.ArrayList;
 
 /**

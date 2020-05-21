@@ -69,11 +69,11 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
 
     // List of languages that require manually creation of YYYY MMMM date format
     private static final ArrayList<String> explicitlyNumericYearLocaleLanguages =
-        new ArrayList<>(Arrays.asList("ar", "my"));
+            new ArrayList<>(Arrays.asList("ar", "my"));
 
     private final MonthAdapter adapter;
     private final IndexedLinkedHashMap<String, List<List<MonthCellDescriptor>>> cells =
-        new IndexedLinkedHashMap<>();
+            new IndexedLinkedHashMap<>();
     final MonthView.Listener listener = new CellClickedListener();
     final List<MonthDescriptor> months = new ArrayList<>();
     final List<MonthCellDescriptor> selectedCells = new ArrayList<>();
@@ -105,7 +105,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
     private OnDateSelectedListener dateListener;
     private DateSelectableFilter dateConfiguredListener;
     private OnInvalidDateSelectedListener invalidDateListener =
-        new DefaultOnInvalidDateSelectedListener();
+            new DefaultOnInvalidDateSelectedListener();
     private CellClickInterceptor cellClickInterceptor;
     private OnDateResolvedListener dateResolvedListener;
     private List<CalendarCellDecorator> decorators;
@@ -135,24 +135,24 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         Resources res = context.getResources();
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
         final int bg = a.getColor(R.styleable.CalendarPickerView_android_background,
-            res.getColor(R.color.calendar_bg));
+                res.getColor(R.color.calendar_bg));
         dividerColor = a.getColor(R.styleable.CalendarPickerView_dividerColor,
-            res.getColor(R.color.calendar_divider));
+                res.getColor(R.color.calendar_divider));
         dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_dayBackground,
-            R.drawable.calendar_bg_selector);
+                R.drawable.calendar_bg_selector);
         dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_dayTextColor,
-            R.drawable.calendar_text_selector);
+                R.drawable.calendar_text_selector);
         titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_titleTextStyle,
-            R.style.CalendarTitle);
+                R.style.CalendarTitle);
         displayHeader = a.getBoolean(R.styleable.CalendarPickerView_displayHeader, true);
         headerTextColor = a.getColor(R.styleable.CalendarPickerView_headerTextColor,
-            res.getColor(R.color.calendar_text_active));
+                res.getColor(R.color.calendar_text_active));
         dayHeaderTextColor = a.getColor(R.styleable.CalendarPickerView_dayHeaderTextColor,
-            res.getColor(R.color.calendar_text_day_header));
+                res.getColor(R.color.calendar_text_day_header));
         displayDayNamesHeaderRow =
-            a.getBoolean(R.styleable.CalendarPickerView_displayDayNamesHeaderRow, true);
+                a.getBoolean(R.styleable.CalendarPickerView_displayDayNamesHeaderRow, true);
         displayAlwaysDigitNumbers =
-            a.getBoolean(R.styleable.CalendarPickerView_displayAlwaysDigitNumbers, false);
+                a.getBoolean(R.styleable.CalendarPickerView_displayAlwaysDigitNumbers, false);
         a.recycle();
 
         adapter = new MonthAdapter();
@@ -178,7 +178,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
             nextYear.add(Calendar.YEAR, 1);
 
             init(new Date(), nextYear.getTime()) //
-                .withSelectedDate(new Date());
+                    .withSelectedDate(new Date());
         }
     }
 
@@ -198,7 +198,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
     public FluentInitializer init(Date minDate, Date maxDate, TimeZone timeZone, Locale locale) {
         if (minDate == null || maxDate == null) {
             throw new IllegalArgumentException(
-                "minDate and maxDate must be non-null.  " + dbg(minDate, maxDate));
+                    "minDate and maxDate must be non-null.  " + dbg(minDate, maxDate));
         }
         if (locale == null) {
             throw new IllegalArgumentException("Locale is null.");
@@ -220,7 +220,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
             month.setLabel(formatMonthDate(month.getDate()));
         }
         weekdayNameFormat =
-            new SimpleDateFormat(getContext().getString(R.string.day_name_format), locale);
+                new SimpleDateFormat(getContext().getString(R.string.day_name_format), locale);
         weekdayNameFormat.setTimeZone(timeZone);
         fullDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
         fullDateFormat.setTimeZone(timeZone);
@@ -251,12 +251,12 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         final int maxMonth = maxCal.get(MONTH);
         final int maxYear = maxCal.get(YEAR);
         while ((monthCounter.get(MONTH) <= maxMonth // Up to, including the month.
-            || monthCounter.get(YEAR) < maxYear) // Up to the year.
-            && monthCounter.get(YEAR) < maxYear + 1) { // But not > next yr.
+                || monthCounter.get(YEAR) < maxYear) // Up to the year.
+                && monthCounter.get(YEAR) < maxYear + 1) { // But not > next yr.
             Date date = monthCounter.getTime();
             MonthDescriptor month =
-                new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR),
-                    date, formatMonthDate(date));
+                    new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR),
+                            date, formatMonthDate(date));
             cells.put(monthKey(month), getMonthCells(month, monthCounter));
             Logr.d("Adding month %s", month);
             months.add(month);
@@ -361,7 +361,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
             }
             if (selectionMode == SelectionMode.RANGE && selectedDates.size() > 2) {
                 throw new IllegalArgumentException(
-                    "RANGE mode only allows two selectedDates.  You tried to pass " + selectedDates.size());
+                        "RANGE mode only allows two selectedDates.  You tried to pass " + selectedDates.size());
             }
             if (selectedDates != null) {
                 for (Date date : selectedDates) {
@@ -388,7 +388,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
             DateFormatSymbols symbols = new DateFormatSymbols(locale);
             symbols.setShortWeekdays(newShortWeekdays);
             weekdayNameFormat =
-                new SimpleDateFormat(getContext().getString(R.string.day_name_format), symbols);
+                    new SimpleDateFormat(getContext().getString(R.string.day_name_format), symbols);
             return this;
         }
 
@@ -531,7 +531,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (months.isEmpty()) {
             throw new IllegalStateException(
-                "Must have at least one month to display.  Did you forget to call init()?");
+                    "Must have at least one month to display.  Did you forget to call init()?");
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
@@ -634,7 +634,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
      */
     private String formatMonthDate(Date date) {
         int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR
-            | DateUtils.FORMAT_NO_MONTH_DAY;
+                | DateUtils.FORMAT_NO_MONTH_DAY;
 
         // Save default Locale
         Locale defaultLocale = Locale.getDefault();
@@ -650,18 +650,18 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
 
         String dateFormatted;
         if (displayAlwaysDigitNumbers
-            && explicitlyNumericYearLocaleLanguages.contains(locale.getLanguage())) {
+                && explicitlyNumericYearLocaleLanguages.contains(locale.getLanguage())) {
             StringBuilder sb = new StringBuilder();
             SimpleDateFormat sdfMonth = new SimpleDateFormat(getContext()
-                .getString(R.string.month_only_name_format), locale);
+                    .getString(R.string.month_only_name_format), locale);
             SimpleDateFormat sdfYear = new SimpleDateFormat(getContext()
-                .getString(R.string.year_only_format), Locale.ENGLISH);
+                    .getString(R.string.year_only_format), Locale.ENGLISH);
             dateFormatted = sb.append(sdfMonth.format(date.getTime())).append(" ")
-                .append(sdfYear.format(date.getTime())).toString();
+                    .append(sdfYear.format(date.getTime())).toString();
         } else {
             // Format date using the new Locale
             dateFormatted = DateUtils.formatDateRange(getContext(), monthFormatter,
-                date.getTime(), date.getTime(), flags, timeZone.getID()).toString();
+                    date.getTime(), date.getTime(), flags, timeZone.getID()).toString();
         }
         // Call setLength(0) on StringBuilder passed to the Formatter constructor to not accumulate
         // the results
@@ -711,6 +711,11 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 } else if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {
                     // We're moving the start of the range back in time: clear the old start date.
                     clearOldSelections();
+                } else  if (selectedCals.size() == 1 && newlySelectedCal.getTime().getTime()==(selectedCals.get(0).getTime().getTime())){
+                    if (dateResolvedListener!=null){
+                        dateResolvedListener.onDblclickResolved(newlySelectedCal.getTime());
+                    }
+                    clearOldSelections();
                 }
                 break;
 
@@ -751,8 +756,8 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                     for (List<MonthCellDescriptor> week : month) {
                         for (MonthCellDescriptor singleCell : week) {
                             if (singleCell.getDate().after(start)
-                                && singleCell.getDate().before(end)
-                                && singleCell.isSelectable()) {
+                                    && singleCell.getDate().before(end)
+                                    && singleCell.isSelectable()) {
                                 singleCell.setSelected(true);
                                 singleCell.setRangeState(RangeState.MIDDLE);
                                 selectedCells.add(singleCell);
@@ -924,12 +929,12 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         public View getView(int position, View convertView, ViewGroup parent) {
             MonthView monthView = (MonthView) convertView;
             if (monthView == null //
-                || !monthView.getTag(R.id.day_view_adapter_class).equals(dayViewAdapter.getClass())) {
+                    || !monthView.getTag(R.id.day_view_adapter_class).equals(dayViewAdapter.getClass())) {
                 monthView =
-                    MonthView.create(parent, inflater, weekdayNameFormat, listener, today, dividerColor,
-                        dayBackgroundResId, dayTextColorResId, titleTextStyle, displayHeader,
-                        headerTextColor, dayHeaderTextColor, displayDayNamesHeaderRow, displayAlwaysDigitNumbers,
-                        decorators, locale, dayViewAdapter);
+                        MonthView.create(parent, inflater, weekdayNameFormat, listener, today, dividerColor,
+                                dayBackgroundResId, dayTextColorResId, titleTextStyle, displayHeader,
+                                headerTextColor, dayHeaderTextColor, displayDayNamesHeaderRow, displayAlwaysDigitNumbers,
+                                decorators, locale, dayViewAdapter);
                 monthView.setTag(R.id.day_view_adapter_class, dayViewAdapter.getClass());
             } else {
                 monthView.setDecorators(decorators);
@@ -938,7 +943,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 position = months.size() - position - 1;
             }
             monthView.init(months.get(position), cells.getValueAtIndex(position), displayOnly,
-                titleTypeface, dateTypeface);
+                    titleTypeface, dateTypeface);
             return monthView;
         }
     }
@@ -959,7 +964,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         Calendar maxSelectedCal = maxDate(selectedCals);
 
         while ((cal.get(MONTH) < month.getMonth() + 1 || cal.get(YEAR) < month.getYear()) //
-            && cal.get(YEAR) <= month.getYear()) {
+                && cal.get(YEAR) <= month.getYear()) {
             Logr.d("Building week row starting at %s", cal.getTime());
             List<MonthCellDescriptor> weekCells = new ArrayList<>();
             cells.add(weekCells);
@@ -968,7 +973,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 boolean isCurrentMonth = cal.get(MONTH) == month.getMonth();
                 boolean isSelected = isCurrentMonth && containsDate(selectedCals, cal);
                 boolean isSelectable =
-                    isCurrentMonth && betweenDates(cal, minCal, maxCal) && isDateSelectable(date);
+                        isCurrentMonth && betweenDates(cal, minCal, maxCal) && isDateSelectable(date);
                 boolean isToday = sameDate(cal, today);
                 boolean isHighlighted = containsDate(highlightedCals, cal);
                 int value = cal.get(DAY_OF_MONTH);
@@ -985,8 +990,8 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 }
 
                 weekCells.add(
-                    new MonthCellDescriptor(date, isCurrentMonth, isSelectable, isSelected, isToday,
-                        isHighlighted, value, rangeState));
+                        new MonthCellDescriptor(date, isCurrentMonth, isSelectable, isSelected, isToday,
+                                isHighlighted, value, rangeState));
                 cal.add(DATE, 1);
             }
         }
@@ -1026,8 +1031,8 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
 
     private static boolean sameDate(Calendar cal, Calendar selectedDate) {
         return cal.get(MONTH) == selectedDate.get(MONTH)
-            && cal.get(YEAR) == selectedDate.get(YEAR)
-            && cal.get(DAY_OF_MONTH) == selectedDate.get(DAY_OF_MONTH);
+                && cal.get(YEAR) == selectedDate.get(YEAR)
+                && cal.get(DAY_OF_MONTH) == selectedDate.get(DAY_OF_MONTH);
     }
 
     private static boolean betweenDates(Calendar cal, Calendar minCal, Calendar maxCal) {
@@ -1038,7 +1043,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
     static boolean betweenDates(Date date, Calendar minCal, Calendar maxCal) {
         final Date min = minCal.getTime();
         return (date.equals(min) || date.after(min)) // >= minCal
-            && date.before(maxCal.getTime()); // && < maxCal
+                && date.before(maxCal.getTime()); // && < maxCal
     }
 
     private static boolean sameMonth(Calendar cal, MonthDescriptor month) {
@@ -1108,6 +1113,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         void onDateSelected(Date date);
 
         void onDateUnselected(Date date);
+
     }
 
     /**
@@ -1151,6 +1157,8 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         void onMinDateResolved(Date date);
 
         void onMaxDateResolved(Date date);
+
+        void onDblclickResolved(Date date);
     }
 
     private class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener {
