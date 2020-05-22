@@ -29,6 +29,19 @@ import java.lang.reflect.Field;
  * @Copyright: 2019
  */
 public class SystemUtil {
+    private volatile static SystemUtil _instance;
+    private SystemUtil(){}
+    public static SystemUtil get_Instance(){
+            if (_instance == null) {
+                synchronized (SystemUtil.class) {
+                    if (_instance == null) {
+                        _instance = new SystemUtil();
+                    }
+                }
+            }
+            return _instance;
+     }
+
     /**
      * 获取通知栏高度
      *
