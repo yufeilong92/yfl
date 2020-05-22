@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.example.UtilsLibrary.R;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CountdownUtil {
@@ -110,7 +111,7 @@ public class CountdownUtil {
     }
 
     public void stop() {
-        isStop = true;
+//        isStop = true;
 //        handler.postDelayed(null, 1000);
     }
 
@@ -120,11 +121,28 @@ public class CountdownUtil {
         handler.removeCallbacks(runnable);
 //        handler.postDelayed(null, 1000);
     }
+    /**
+     * 设置监听
+     */
+    private OnNullRestartClickListener onNullRestartClickListener;
+
+    public interface OnNullRestartClickListener {
+        public void onNullRestartClickItem();
+    }
+
+    public void setOnNullRestartClickListener(OnNullRestartClickListener onNullRestartClickListener) {
+        this.onNullRestartClickListener = onNullRestartClickListener;
+    }
 
     public void restart() {
-        if (button == null) return;
-        isStop = false;
-        handler.postDelayed(runnable, 1000);
+        if (button == null) {
+            if (onNullRestartClickListener != null) {
+                onNullRestartClickListener.onNullRestartClickItem();
+            }
+            return;
+        }
+//        isStop = false;
+//        handler.postDelayed(runnable, 1000);
     }
 
     /***
