@@ -523,6 +523,26 @@ public class TimeUtil {
         }
         return week;
     }
+    public static String getWeek() {
+        int mydate = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        String week = "";
+        if (mydate == 1) {
+            week = "星期日";
+        } else if (mydate == 2) {
+            week = "星期一";
+        } else if (mydate == 3) {
+            week = "星期二";
+        } else if (mydate == 4) {
+            week = "星期三";
+        } else if (mydate == 5) {
+            week = "星期四";
+        } else if (mydate == 6) {
+            week = "星期五";
+        } else if (mydate == 7) {
+            week = "星期六";
+        }
+        return week;
+    }
 
     public static String getFormatTime(String time, DateFormatUtil type) {
         if (JavaStringUtil.isEmpty(time)) {
