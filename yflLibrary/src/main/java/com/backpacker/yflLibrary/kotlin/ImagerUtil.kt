@@ -3,10 +3,7 @@ package com.backpacker.yflLibrary.kotlin
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 
 /**
  * @Title:  kotlin_androidone
@@ -126,5 +123,105 @@ object ImagerUtil {
         }
         return path
     }
+    /***
+     * 对图片质量进行压缩
+     * @param bitmap
+     * @return
+     */
+    fun compressImage(bitmap: Bitmap): Bitmap? {
+        val baos = ByteArrayOutputStream()
+        //质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        var options = 100
+        //循环判断如果压缩后图片是否大于50kb,大于继续压缩
+        while (baos.toByteArray().size / 1024 > 50) {
+            //清空baos
+            baos.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos)
+            options -= 10 //每次都减少10
+        }
+        //把压缩后的数据baos存放到ByteArrayInputStream中
+        val isBm = ByteArrayInputStream(baos.toByteArray())
+        //把ByteArrayInputStream数据生成图片
+        return BitmapFactory.decodeStream(isBm, null, null)
+    }
+
+    /**
+     * 按图片尺寸压缩 参数是bitmap
+     * @param bitmap
+     * @param pixelW
+     * @param pixelH
+     * @return
+     */
+    fun compressImageFromBitmap(bitmap: Bitmap, pixelW: Int, pixelH: Int): Bitmap? {
+        val os = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
+        if (os.toByteArray().size / 1024 > 512) { //判断如果图片大于0.5M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
+            os.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, os) //这里压缩50%，把压缩后的数据存放到baos中
+        }
+        var `is` = ByteArrayInputStream(os.toByteArray())
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        options.inPreferredConfig = Bitmap.Config.RGB_565
+        BitmapFactory.decodeStream(`is`, null, options)
+        options.inJustDecodeBounds = false
+        options.inSampleSize =
+            computeSampleSize(options, if (pixelH > pixelW) pixelW else pixelH, pixelW * pixelH)
+        `is` = ByteArrayInputStream(os.toByteArray())
+        return BitmapFactory.decodeStream(`is`, null, options)
+    }
+
+
+    /**
+     * 动态计算出图片的inSampleSize
+     * @param options
+     * @param minSideLength
+     * @param maxNumOfPixels
+     * @return
+     */
+    fun computeSampleSize(
+        options: BitmapFactory.Options,
+        minSideLength: Int,
+        maxNumOfPixels: Int
+    ): Int {
+        val initialSize = computeInitialSampleSize(options, minSideLength, maxNumOfPixels)
+        var roundedSize: Int
+        if (initialSize <= 8) {
+            roundedSize = 1
+            while (roundedSize < initialSize) {
+                roundedSize = roundedSize shl 1
+            }
+        } else {
+            roundedSize = (initialSize + 7) / 8 * 8
+        }
+        return roundedSize
+    }
+
+    private fun computeInitialSampleSize(
+        options: BitmapFactory.Options,
+        minSideLength: Int,
+        maxNumOfPixels: Int
+    ): Int {
+        val w = options.outWidth.toDouble()
+        val h = options.outHeight.toDouble()
+        val lowerBound =
+            if (maxNumOfPixels == -1) 1 else Math.ceil(Math.sqrt(w * h / maxNumOfPixels)).toInt()
+        val upperBound = if (minSideLength == -1) 128 else Math.min(
+            Math.floor(w / minSideLength),
+            Math.floor(h / minSideLength)
+        ).toInt()
+        if (upperBound < lowerBound) {
+            return lowerBound
+        }
+        return if (maxNumOfPixels == -1 && minSideLength == -1) {
+            1
+        } else if (minSideLength == -1) {
+            lowerBound
+        } else {
+            upperBound
+        }
+    }
+
 
 }

@@ -100,4 +100,31 @@ object KotlinStringUtil {
             tv.visibility = View.VISIBLE
         }
     }
+    fun setMoneyDian(data: String) :String{
+        var s:CharSequence = data
+        val digits = 2
+        //删除“.”后面超过2位后的数据
+        if (s.toString().contains(".")) {
+            if (s.length - 1 - s.indexOf(".") > digits) {
+                s = s.subSequence(0, s.indexOf(".") + digits + 1)
+            }
+        }
+        //如果"."在起始位置,则起始位置自动补0
+        //如果"."在起始位置,则起始位置自动补0
+        if (s.toString().trim({ it <= ' ' }).substring(0) == ".") {
+            s = "0$s"
+        }
+
+        //如果起始位置为0,且第二位跟的不是".",则无法后续输入
+
+        //如果起始位置为0,且第二位跟的不是".",则无法后续输入
+        if (s.toString().startsWith("0")
+            && s.toString().trim({ it <= ' ' }).length > 1
+        ) {
+            if (s.toString().substring(1, 2) != ".") {
+                return ""
+            }
+        }
+        return s.toString()
+    }
 }
