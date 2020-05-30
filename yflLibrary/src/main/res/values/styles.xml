@@ -98,6 +98,11 @@
         <item name="android:gravity">center</item>
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
     </style>
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:background">#00000000</item> <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
+    </style>
 
     <style name="CalendarCell.DayHeader">
         <item name="android:textSize">@dimen/calendar_text_14sp</item>
