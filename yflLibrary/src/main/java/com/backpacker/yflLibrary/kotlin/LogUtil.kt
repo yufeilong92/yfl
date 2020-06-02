@@ -1,7 +1,10 @@
 package com.backpacker.yflLibrary.kotlin
 
+import android.content.Context
 import android.text.TextUtils
 import android.util.Log
+import java.io.File
+import java.io.RandomAccessFile
 
 
 /**
@@ -159,5 +162,24 @@ object LogUtil {
         logInfoStringBuilder.append("lineNumber=$lineNumber")
         logInfoStringBuilder.append(" ] ")
         return logInfoStringBuilder.toString()
+    }
+    /***
+     * @param con  保存log 日志
+     * @param com  保存内容
+     * @return
+     */
+    fun saveLog(con: Context, com: String) {
+        val path = "${con.externalCacheDir}/log.txt"
+        val file = File(path)
+        var raf: RandomAccessFile? = null
+        try {
+            raf = RandomAccessFile(file, "rw")
+            raf.seek(file.length())
+            raf.write(com.toByteArray())
+            raf.close()
+
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
     }
 }
