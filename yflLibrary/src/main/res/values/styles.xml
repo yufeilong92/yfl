@@ -48,6 +48,25 @@
         <item name="android:windowEnterAnimation">@anim/push_buttom_in</item>
         <item name="android:windowExitAnimation">@anim/popup_bottom_out</item>
     </style>
+
+    <style name="popup_animation_translate" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_translate_in</item>
+        <item name="android:windowExitAnimation">@anim/push_translate_out</item>
+    </style>
+    <style name="popup_animation_scale" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/push_scale_out</item>
+    </style>
+    <style name="popup_animation_alpha" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/push_alpha_out</item>
+    </style>
+
+    <style name="popup_animation_rotate" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_rotate_in</item>
+        <item name="android:windowExitAnimation">@anim/push_rotate_out</item>
+    </style>
+
     <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
