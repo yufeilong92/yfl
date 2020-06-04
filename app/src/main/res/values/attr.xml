@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleCustomBar">
+        <attr name="custombarBg" format="color" />
+        <attr name="custombgDrawable" format="reference" />
+
+        <attr name="customIvLifeRes" format="reference" />
+
+        <attr name="customIvRightRes" format="reference" />
+
+        <attr name="customRightText" format="string" />
+        <attr name="customRightColor" format="color" />
+        <attr name="customRightSize" format="dimension" />
+
+        <attr name="customContentText" format="string" />
+        <attr name="customContentColor" format="color" />
+        <attr name="customContentSize" format="dimension" />
+        <attr name="customtextStyle"  format="integer" />
+        <attr name="showTvRight" format="boolean" />
+
+    </declare-styleable>
+</resources>

@@ -2,7 +2,7 @@ package com.backpacker.yflLibrary.view.calendar;
 
 import android.util.Log;
 
-import com.bumptech.glide.BuildConfig;
+import com.example.UtilsLibrary.BuildConfig;
 
 
 /** Log utility class to handle the log tag and DEBUG-only logging. */
