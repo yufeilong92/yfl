@@ -75,7 +75,7 @@ class TitleCustomBar : ConstraintLayout {
             val content_Size = a.getDimension(R.styleable.TitleCustomBar_customContentSize, 14F)
             val content_Color =
                 a.getColor(R.styleable.TitleCustomBar_customContentColor, Color.BLACK)
-            val typeface = a.getInt(R.styleable.TitleCustomBar_customtextStyle, 0)
+            val typeface = a.getInt( R.styleable.TitleCustomBar_customtextStyle,0)
             tv_Content.text = contentComstring
             tv_Content.textSize = content_Size
             tv_Content.setTextColor(content_Color)

@@ -192,8 +192,19 @@
         <attr name="customContentText" format="string" />
         <attr name="customContentColor" format="color" />
         <attr name="customContentSize" format="dimension" />
-        <attr name="customtextStyle"  format="integer" />
+        <attr name="customtextStyle"  format="integer" >
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
         <attr name="showTvRight" format="boolean" />
 
+    </declare-styleable>
+    <declare-styleable name="CustomMarqueeView">
+        <attr name="customScrollSpeed">
+            <enum name="fast" value="9" />
+            <enum name="medium" value="6" />
+            <enum name="slow" value="3" />
+        </attr>
     </declare-styleable>
 </resources>
