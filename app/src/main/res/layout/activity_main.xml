@@ -15,7 +15,7 @@
         android:id="@+id/title_bar"
         app:showTvRight="true"
         app:customRightText="右"
-        app:customtextStyle="0"
+        app:customtextStyle="bold"
         app:customIvRightRes="@mipmap/ok"
         app:customIvLifeRes="@mipmap/ic_back"
         app:customContentColor="@color/colorPrimary"

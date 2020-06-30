@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="500dp"
+    android:orientation="vertical"
+    android:minWidth="300dp"
+    android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_30"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#dedede"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:padding="20dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@id/guideline_30"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/history_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textColor="#888888"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:id="@+id/result_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="40sp"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <View
+            android:id="@+id/horizontal_divider_44"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.44" />
+
+        <View
+            android:id="@+id/horizontal_divider_58"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.58" />
+
+        <View
+            android:id="@+id/horizontal_divider_72"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.72" />
+
+        <View
+            android:id="@+id/horizontal_divider_86"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.86" />
+
+        <View
+            android:id="@+id/horizontal_divider_100"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/vertical_divider_25"
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30" />
+
+        <View
+            android:id="@+id/vertical_divider_50"
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30" />
+
+        <View
+            android:id="@+id/vertical_divider_75"
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:background="#dedede"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30" />
+
+        <TextView
+            android:id="@+id/text_clear"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="C"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_44"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_back"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="←"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_44"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_50"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_25"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_divide"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="÷"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_44"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_75"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_50"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_multiply"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="×"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_44"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_75"
+            app:layout_constraintTop_toBottomOf="@id/guideline_30"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_7"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_58"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_44"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_8"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_58"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_50"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_25"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_44"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_9"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="9"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_58"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_75"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_50"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_44"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_minus"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_58"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_75"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_44"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_4"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="4"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_72"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_58"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_5"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_72"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_50"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_25"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_58"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_6"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="6"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_72"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_75"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_50"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_58"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_add"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_72"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_75"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_58"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_1"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_86"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_72"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_2"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_86"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_50"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_25"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_72"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_3"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_86"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_75"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_50"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_72"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_equal"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/text_equal_bg"
+            android:gravity="center"
+            android:text="="
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_75"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_72"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_percent"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="%"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_100"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_86"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_0"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_100"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_50"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_25"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_86"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_dot"
+            style="@style/buttonTheme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="."
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/horizontal_divider_100"
+            app:layout_constraintEnd_toStartOf="@id/vertical_divider_75"
+            app:layout_constraintStart_toEndOf="@id/vertical_divider_50"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider_86"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:text="关闭"
+        android:id="@+id/tv_colose"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_height="@dimen/dp_40"/>
+</LinearLayout>

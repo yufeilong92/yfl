@@ -15,7 +15,11 @@
         <attr name="customContentText" format="string" />
         <attr name="customContentColor" format="color" />
         <attr name="customContentSize" format="dimension" />
-        <attr name="customtextStyle"  format="integer" />
+        <attr name="customtextStyle"  format="integer" >
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
         <attr name="showTvRight" format="boolean" />
 
     </declare-styleable>

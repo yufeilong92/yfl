@@ -122,7 +122,11 @@
         <item name="android:background">#00000000</item> <!-- 背景透明 -->
         <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
     </style>
-
+    <style name="buttonTheme">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@color/white</item>
+    </style>
     <style name="CalendarCell.DayHeader">
         <item name="android:textSize">@dimen/calendar_text_14sp</item>
     </style>
