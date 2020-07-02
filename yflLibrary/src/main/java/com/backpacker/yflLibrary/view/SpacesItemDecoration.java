@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @Package com.example.myapplication
  * @Email : yufeilong92@163.com
  * @Time :2020/7/2 15:40
- * @Purpose :
+ * @Purpose :增加分割线，可设置去除首尾分割线个数
  */
 public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
