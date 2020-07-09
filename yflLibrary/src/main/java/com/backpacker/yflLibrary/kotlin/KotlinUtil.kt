@@ -19,11 +19,8 @@ import java.io.InputStreamReader
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import com.backpacker.yflLibrary.java.ArithUtil
+import com.backpacker.yflLibrary.java.JavaArithUtil
 import com.backpacker.yflLibrary.java.JavaStringUtil
-import com.backpacker.yflLibrary.java.LocaUtil.getExternalCacheDir
-import com.backpacker.yflLibrary.java.LocaUtil.isMethodsCompat
-import java.io.File
 
 
 /**
@@ -380,7 +377,7 @@ object KotlinUtil {
      */
     fun tShow(mContext: Context, str: String?, con: String): Boolean {
         if (KotlinStringUtil.isEmpty(str)) {
-            T.showToast(mContext, con)
+            KotlinT.showToast(mContext, con)
             return true
         }
         return false
@@ -448,7 +445,7 @@ object KotlinUtil {
         // 将文本内容放到系统剪贴板里。
         //        val newPlainText = ClipData.newPlainText("Label", com)
         cm.setPrimaryClip(ClipData.newPlainText("Label", com));
-        T.showToast(mContext, "复制成功")
+        KotlinT.showToast(mContext, "复制成功")
     }
 
     /***
@@ -471,7 +468,7 @@ object KotlinUtil {
 
 
     fun getStarNumer(int: Float): Float {
-        val i = ArithUtil.divF(int.toDouble(), 20.0, 1)
+        val i = JavaArithUtil.divF(int.toDouble(), 20.0, 1)
         return i.toFloat()
     }
 

@@ -3,7 +3,7 @@ package com.backpacker.yflLibrary.demo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.backpacker.yflLibrary.java.SerializableUtil;
+import com.backpacker.yflLibrary.java.JavaSerializableUtil;
 
 import java.io.IOException;
 import java.io.StreamCorruptedException;
@@ -47,7 +47,7 @@ public class SaveUUidUtilJave {
         SharedPreferences.Editor editor = msp.edit();
         String str="";
         try {
-            str = SerializableUtil.obj2Str(vo);
+            str = JavaSerializableUtil.obj2Str(vo);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class SaveUUidUtilJave {
             //获取序列化的数据
             String str = msp.getString(SaveUUidUtilJave.KEY_NAME, "");
             try {
-                Object obj = SerializableUtil.str2Obj(str);
+                Object obj = JavaSerializableUtil.str2Obj(str);
                 if(obj != null){
                     s_User = (String) obj;
                 }

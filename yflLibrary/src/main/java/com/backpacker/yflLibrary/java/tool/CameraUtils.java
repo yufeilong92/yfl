@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
-import com.backpacker.yflLibrary.kotlin.TextUtil;
-
 import java.io.File;
 import java.io.IOException;
 

@@ -1,7 +1,7 @@
 package com.backpacker.yflLibrary.demo
 
 import android.content.SharedPreferences
-import com.backpacker.yflLibrary.kotlin.SerializableUtil
+import com.backpacker.yflLibrary.kotlin.KotlinSerializableUtil
 import android.annotation.SuppressLint
 import android.content.Context
 import java.io.IOException
@@ -55,7 +55,7 @@ class SaveUUidUtil {
         val editor = msp.edit()
         var str = ""
         try {
-            str = SerializableUtil.obj2Str(vo)
+            str = KotlinSerializableUtil.obj2Str(vo)
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -72,7 +72,7 @@ class SaveUUidUtil {
             //获取序列化的数据
             val str = msp.getString(KEY_NAME, "")
             try {
-                val obj = SerializableUtil.str2Obj(str!!)
+                val obj = KotlinSerializableUtil.str2Obj(str!!)
                 if (obj != null) {
                     s_User = obj as String?
                 }

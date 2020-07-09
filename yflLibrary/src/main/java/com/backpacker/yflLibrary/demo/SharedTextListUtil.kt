@@ -1,7 +1,7 @@
 package com.backpacker.yflLibrary.demo
 
 import android.content.SharedPreferences
-import com.backpacker.yflLibrary.kotlin.SerializableUtil
+import com.backpacker.yflLibrary.kotlin.KotlinSerializableUtil
 import android.annotation.SuppressLint
 import android.content.Context
 import java.io.IOException
@@ -61,7 +61,7 @@ class SharedTextListUtil {
         val editor = msp!!.edit()
         var str = ""
         try {
-            str = SerializableUtil.list2String(user)
+            str = KotlinSerializableUtil.list2String(user)
         } catch (e: IOException) {
             // TODO Auto-generated catch block
             e.printStackTrace()
@@ -79,7 +79,7 @@ class SharedTextListUtil {
             //获取序列化的数据
             val str = msp!!.getString(KEY_NAME, "")
             try {
-                val list = SerializableUtil.string2List<String>(str!!)
+                val list = KotlinSerializableUtil.string2List<String>(str!!)
                 if (list != null) {
                     s_User = list
                 }

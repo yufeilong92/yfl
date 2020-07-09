@@ -1,7 +1,7 @@
 package cn.yfl.myapplication
 
 import android.app.Application
-import com.backpacker.yflLibrary.kotlin.AppBarUtil
+import com.backpacker.yflLibrary.kotlin.KotlinAppBarUtil
 
 /**
  * @Author : YFL  is Creating a porject in My Application
@@ -13,6 +13,6 @@ import com.backpacker.yflLibrary.kotlin.AppBarUtil
 class BaseApplcation:Application() {
     override fun onCreate() {
         super.onCreate()
-        AppBarUtil.obtainScreenWH(this)
+        KotlinAppBarUtil.obtainScreenWH(this)
     }
 }

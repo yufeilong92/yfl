@@ -1,7 +1,7 @@
 package com.backpacker.yflLibrary.kotlin
 
 
-import com.backpacker.yflLibrary.java.TimeUtil
+import com.backpacker.yflLibrary.java.JavaTimeUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -119,19 +119,19 @@ object KotlinTimeUtil {
 
     fun getNewAfaterLastDay(time: String): String? {
 
-        val oldTime = TimeUtil.getTimeWString(time,"yyyy-MM-dd")
+        val oldTime = JavaTimeUtil.getTimeWString(time,"yyyy-MM-dd")
         val instance = Calendar.getInstance()
         val s = "${instance.get(Calendar.YEAR)}-${instance.get(Calendar.MONTH)+1}-${instance.get(Calendar.DATE)}"
-        val now = TimeUtil.getTimeWString(
+        val now = JavaTimeUtil.getTimeWString(
             s,"yyyy-MM-dd"
         )
         if (oldTime == now) {
             return "今天"
         }
-        val after = now + TimeUtil.time
+        val after = now + JavaTimeUtil.time
         if (oldTime == after)
             return "明天"
-        val last = now + (2 * TimeUtil.time)
+        val last = now + (2 * JavaTimeUtil.time)
         if (oldTime==last)
             return "后天"
 

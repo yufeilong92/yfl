@@ -5,9 +5,8 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
-import com.backpacker.yflLibrary.kotlin.Constant
+import com.backpacker.yflLibrary.kotlin.KotlinConstant
 import com.example.UtilsLibrary.R
-import java.lang.ref.Reference
 
 
 class MyBarView : View {
@@ -28,8 +27,8 @@ class MyBarView : View {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(
-            Constant.screenWidth,
-            Constant.statusHeight
+            KotlinConstant.screenWidth,
+            KotlinConstant.statusHeight
         )
     }
 

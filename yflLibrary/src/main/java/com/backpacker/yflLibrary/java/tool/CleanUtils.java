@@ -2,7 +2,7 @@ package com.backpacker.yflLibrary.java.tool;
 
 import android.content.Context;
 
-import com.backpacker.yflLibrary.java.SDCardUtils;
+import com.backpacker.yflLibrary.java.JavaSDCardUtils;
 
 import java.io.File;
 
@@ -84,7 +84,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanExternalCache(Context context) {
-        return SDCardUtils.isSDCardEnable() && RxFileTool.deleteFilesInDir(context.getExternalCacheDir());
+        return JavaSDCardUtils.isSDCardEnable() && RxFileTool.deleteFilesInDir(context.getExternalCacheDir());
     }
 
     /**

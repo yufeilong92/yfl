@@ -3,7 +3,7 @@ package com.backpacker.yflLibrary.demo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.backpacker.yflLibrary.java.SerializableUtil;
+import com.backpacker.yflLibrary.java.JavaSerializableUtil;
 
 import java.io.IOException;
 import java.io.StreamCorruptedException;
@@ -59,7 +59,7 @@ public class SharedTextListJavaUtil {
         SharedPreferences.Editor editor = msp.edit();
         String str="";
         try {
-            str = SerializableUtil.list2String(user);
+            str = JavaSerializableUtil.list2String(user);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class SharedTextListJavaUtil {
             //获取序列化的数据
             String str = msp.getString(SharedTextListJavaUtil.KEY_NAME, "");
             try {
-                List<String> list =SerializableUtil.string2List(str);
+                List<String> list = JavaSerializableUtil.string2List(str);
                 if(list != null){
                     s_User = (List<String>) list;
                 }
