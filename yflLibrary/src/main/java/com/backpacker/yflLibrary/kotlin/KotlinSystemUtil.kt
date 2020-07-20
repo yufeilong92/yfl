@@ -19,7 +19,10 @@ import android.net.Uri
 import com.backpacker.yflLibrary.vo.Constants
 import android.util.DisplayMetrics
 import com.backpacker.yflLibrary.java.JavaLocaUtil
+import java.io.BufferedReader
 import java.io.File
+import java.io.IOException
+import java.io.InputStreamReader
 import java.math.BigDecimal
 
 
@@ -584,5 +587,21 @@ object KotlinSystemUtil {
         val result4 = BigDecimal.valueOf(teraBytes)
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
             .toString() + "TB"
+    }
+
+    @Throws(IOException::class)
+    private fun readTextFromUri(activity:Activity,uri: Uri): String {
+        val stringBuilder = StringBuilder()
+        activity.contentResolver.openInputStream(uri)?.use { inputStream ->
+            BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                var line: String? = reader.readLine()
+                while (line != null) {
+                    stringBuilder.append(line)
+                    stringBuilder.append(";")
+                    line = reader.readLine()
+                }
+            }
+        }
+        return stringBuilder.toString()
     }
 }

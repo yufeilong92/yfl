@@ -163,23 +163,5 @@ object KotlinLogUtil {
         logInfoStringBuilder.append(" ] ")
         return logInfoStringBuilder.toString()
     }
-    /***
-     * @param con  保存log 日志
-     * @param com  保存内容
-     * @return
-     */
-    fun saveLog(con: Context, com: String) {
-        val path = "${con.externalCacheDir}/log.txt"
-        val file = File(path)
-        var raf: RandomAccessFile? = null
-        try {
-            raf = RandomAccessFile(file, "rw")
-            raf.seek(file.length())
-            raf.write(com.toByteArray())
-            raf.close()
 
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-    }
 }
