@@ -252,16 +252,6 @@ object KotlinUtil {
         return lists
     }
 
-    fun getViewText(view: View?): String? {
-        if (view == null) return "";
-        return when (view) {
-            is TextView -> (view as TextView).text.toString().trim()
-            is Button -> (view as Button).text.toString().trim()
-            is EditText -> (view as EditText).text.toString().trim()
-            else -> ""
-        }
-    }
-
     /**
      * 验证身份证号是否符合规则
      * @param text 身份证号
@@ -284,8 +274,8 @@ object KotlinUtil {
                 if (line != null) {
                     stringBuilder.append(line)
                 } else {
-                    break
                     close()
+                    break
                 }
             } while (true)
             return stringBuilder.toString()
@@ -324,19 +314,6 @@ object KotlinUtil {
             return false
         }
         return true
-    }
-
-    /**
-     * 获取view 文字
-     */
-    fun getObjToStr(v: View): String {
-
-        return when (v) {
-            is TextView -> (v as TextView).text.toString().trim()
-            is Button -> (v as Button).text.toString().trim()
-            is EditText -> (v as EditText).text.toString().trim()
-            else -> ""
-        }
     }
 
     /**
@@ -472,62 +449,6 @@ object KotlinUtil {
         return i.toFloat()
     }
 
-    interface SpannableStringListener {
-        fun item()
-    }
-     /***
-      * 选中字体颜色
-      * @param tv 显示文字
-      * @param data 内容
-      * @param start 开始位置
-      * @param color 中间的颜色
-      * @param end  结束的位置
-      * @param listener  点击选中字体颜色
-      * @return
-      */
-    fun spangStringLintener(
-        tv: TextView,
-        data: String,
-        start: Int,
-        color: String,
-        end: Int,
-        listener: SpannableStringListener
-    ) {
-        val spannableString = SpannableString(data)
-        val clickableSpan = MyClickableSpan(listener)
-        spannableString.setSpan(
-            clickableSpan,
-            start,
-            end,
-            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-        )
-        var colorSpan: ForegroundColorSpan? = null
-        if (KotlinStringUtil.isEmpty(color)) {
-            colorSpan = ForegroundColorSpan(Color.parseColor("#0BC467"))
-        } else
-            colorSpan = ForegroundColorSpan(Color.parseColor(color))
-        spannableString.setSpan(
-            colorSpan, start,
-            end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-        )
-        tv.movementMethod = LinkMovementMethod.getInstance()
-        tv.text = spannableString
-
-    }
-
-    internal class MyClickableSpan(var listener: SpannableStringListener?) : ClickableSpan() {
-        override fun onClick(p0: View) {
-            if (listener != null) {
-                listener!!.item()
-            }
-        }
-
-        override fun updateDrawState(ds: TextPaint) {
-            ds.isUnderlineText = false
-        }
-
-
-    }
     fun getLatLng(string: String): MutableList<String> {
         if (JavaStringUtil.isEmpty(string)) {
             return mutableListOf()
@@ -542,5 +463,12 @@ object KotlinUtil {
      */
     fun showShopBoxNumber(count:Int,tv: TextView){
         tv.text=if (count>=100)"99+" else "$count"
+    }
+    fun showView(v:View,show:Boolean){
+        v.visibility=if (show)View.VISIBLE else View.GONE
+    }
+
+    fun showOrInvisibleView(v:View,show:Boolean){
+        v.visibility=if (show)View.VISIBLE else View.INVISIBLE
     }
 }

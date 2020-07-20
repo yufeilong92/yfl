@@ -28,7 +28,14 @@ object KotlinShopBoxUtil {
      * @param start 开始view
      * @param ent  结束view
      */
-    fun setShopAnim(activity: Activity, @DrawableRes  id: Int, start: View, ent: View,startListener:()->Unit,endListener:()->Unit) {
+    fun setShopAnim(
+        activity: Activity,
+        @DrawableRes id: Int,
+        start: View,
+        ent: View,
+        startListener: () -> Unit,
+        endListener: () -> Unit
+    ) {
         val start_location = IntArray(2)
         start.getLocationInWindow(start_location)
 
@@ -40,7 +47,7 @@ object KotlinShopBoxUtil {
         // 把动画小球添加到动画层
         anim_mask_layout.addView(img)
 
-        val view = addViewToAnimLayout( img, start_location)
+        val view = addViewToAnimLayout(img, start_location)
         // 这是用来存储动画结束位置的X、Y坐标
         val end_location = IntArray(2)
         // rl_gouwuche是小球运动的终点 一般是购物车图标
@@ -94,8 +101,8 @@ object KotlinShopBoxUtil {
 
     /**
      * 创建控件的背景
-      */
-   private fun convertViewToBitmap(view: View): Bitmap {
+     */
+    private fun convertViewToBitmap(view: View): Bitmap {
         view.measure(
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
@@ -127,7 +134,7 @@ object KotlinShopBoxUtil {
      * @param view  动画过程中的view
      * @param location  开始位置
      */
-    private fun addViewToAnimLayout( view: View, location: IntArray): View {
+    private fun addViewToAnimLayout(view: View, location: IntArray): View {
         val x = location[0]
         val y = location[1]
         val lp = LinearLayout.LayoutParams(
@@ -143,7 +150,7 @@ object KotlinShopBoxUtil {
     /**
      * 获取屏幕宽高
      */
-    fun getScreenSize(context: Context): Point? {
+    private fun getScreenSize(context: Context): Point? {
         val wm =
             context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
@@ -162,7 +169,7 @@ object KotlinShopBoxUtil {
      *  创建加载动画过程中的view
      *  @param id 动画背景id
      */
-    fun getAddDrawBitMap(con: Context,@DrawableRes id: Int): Bitmap {
+  private  fun getAddDrawBitMap(con: Context, @DrawableRes id: Int): Bitmap {
         val iv = ImageView(con)
         // 运动的控件，样式可以自定义
         iv.setImageResource(id)

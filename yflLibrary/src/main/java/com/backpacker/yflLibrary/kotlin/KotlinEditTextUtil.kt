@@ -24,7 +24,7 @@ import java.util.*
  * @verdescript  版本号 修改时间  修改人 修改的概要说明
  * @Copyright: 2019
  */
-object KotlinEditeTextUtil {
+object KotlinEditTextUtil {
     /**
      * EditText获取焦点并显示软键盘
      */

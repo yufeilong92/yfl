@@ -16,7 +16,7 @@ object KotlinPermissionUtils {
         permissionStr: Array<String>
         , onGrantedListener: () -> Unit
     ) {
-        AndPermission.with(mContext).runtime().permission(*permissionStr)
+        AndPermission.with(mContext).runtime().permission(permissionStr)
             .onGranted { permissions ->
                 onGrantedListener()
             }
@@ -46,7 +46,7 @@ object KotlinPermissionUtils {
         permissionStr: Array<String>
         , onGrantedListener: () -> Unit
     ) {
-        AndPermission.with(mContext).runtime().permission(*permissionStr)
+        AndPermission.with(mContext).runtime().permission(permissionStr)
             .onGranted { permissions ->
                 onGrantedListener()
             }

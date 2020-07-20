@@ -8,6 +8,9 @@ import android.provider.MediaStore
 import android.provider.Settings
 import androidx.annotation.RequiresPermission
 import com.example.UtilsLibrary.R
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 
 /**
  * @Author : YFL  is Creating a porject in basehttps
@@ -99,4 +102,32 @@ object KotlinIntentUtil {
         activity.startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE), requestCode)
     }
 
+    /***
+     * 跳转到选择文件
+     */
+    fun startSelectFile(mContext: Activity, reqeustCode: Int) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+        }
+        mContext.startActivityForResult(intent, reqeustCode)
+    }
+   /***
+    * 获取文件选择内容
+    */
+    @Throws(IOException::class)
+     fun readTextFromUri(mActivity: Activity, uri: Uri): String {
+        val stringBuilder = StringBuilder()
+        mActivity.contentResolver.openInputStream(uri)?.use { inputStream ->
+            BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                var line: String? = reader.readLine()
+                while (line != null) {
+                    stringBuilder.append(line)
+                    stringBuilder.append(";")
+                    line = reader.readLine()
+                }
+            }
+        }
+        return stringBuilder.toString()
+    }
 }

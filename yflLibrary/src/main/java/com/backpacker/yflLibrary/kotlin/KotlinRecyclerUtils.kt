@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.BaseAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * @Author : YFL  is Creating a porject in tsyc
@@ -19,25 +20,39 @@ import androidx.recyclerview.widget.RecyclerView
      * @param rlv
      */
 
-     fun setMangager(mContext:Context,rlv: RecyclerView) {
+    fun setMangager(mContext: Context, rlv: RecyclerView) {
         var layout = GridLayoutManager(mContext, 1)
-        layout.orientation=GridLayoutManager.VERTICAL
+        layout.orientation = GridLayoutManager.VERTICAL
         rlv.layoutManager = layout
     }
 
     /**
      * 设置横向管理器
      */
-     fun setHorizontalMangager(mContext:Context,rlv: RecyclerView) {
+    fun setHorizontalMangager(mContext: Context, rlv: RecyclerView) {
         var layout = GridLayoutManager(mContext, 1)
         layout.orientation = GridLayoutManager.HORIZONTAL
         rlv.layoutManager = layout
     }
 
     /**
+     * 设置横向管理器
+     */
+    fun setHorizontalMangager(
+        mContext: Context,
+        rlv: RecyclerView,
+        adapter: RecyclerView.Adapter<*>
+    ) {
+        var layout = GridLayoutManager(mContext, 1)
+        layout.orientation = GridLayoutManager.HORIZONTAL
+        rlv.layoutManager = layout
+        rlv.adapter = adapter
+    }
+
+    /**
      * 设置竖向管理器
      */
-     fun setMangager(mContext:Context,rlv: RecyclerView, number: Int, orientai: Int) {
+    fun setMangager(mContext: Context, rlv: RecyclerView, number: Int, orientai: Int) {
         var layout = GridLayoutManager(mContext, number)
         layout.orientation = orientai
         rlv.layoutManager = layout
@@ -61,19 +76,32 @@ import androidx.recyclerview.widget.RecyclerView
         rlv.layoutManager = manager
     }
 
+    fun setGridManageH(m: Context, rlv: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+        val manager = GridLayoutManager(m, 1)
+        manager.orientation = GridLayoutManager.HORIZONTAL
+        rlv.layoutManager = manager
+        rlv.adapter = adapter
+    }
+
     fun setGridManage(m: Context, rlv: RecyclerView, adapter: RecyclerView.Adapter<*>) {
         val manager = GridLayoutManager(m, 1)
         manager.orientation = GridLayoutManager.VERTICAL
         rlv.layoutManager = manager
         rlv.adapter = adapter
     }
+
     /**
      * 设置横向管理器
      */
-    fun setHorizontalMangager(mContext:Context,rlv: RecyclerView,postion:Int,adapter: RecyclerView.Adapter<*>) {
+    fun setHorizontalMangager(
+        mContext: Context,
+        rlv: RecyclerView,
+        postion: Int,
+        adapter: RecyclerView.Adapter<*>
+    ) {
         var layout = GridLayoutManager(mContext, postion)
         rlv.layoutManager = layout
-        rlv.adapter=adapter
+        rlv.adapter = adapter
     }
 
 
@@ -87,6 +115,23 @@ import androidx.recyclerview.widget.RecyclerView
     fun setGridManage(m: Context, rlv: RecyclerView, lin: Int, adapter: RecyclerView.Adapter<*>) {
         val manager = GridLayoutManager(m, lin)
         manager.orientation = GridLayoutManager.VERTICAL
+        rlv.layoutManager = manager
+        rlv.adapter = adapter
+    }
+
+   /***
+    * 瀑布流
+    * @param rlv
+    * @param lin
+    * @param adapter
+    * @return
+    */
+    fun setStaggeredGridManage(
+        rlv: RecyclerView,
+        lin: Int,
+        adapter: RecyclerView.Adapter<*>
+    ) {
+        val manager = StaggeredGridLayoutManager(lin, StaggeredGridLayoutManager.VERTICAL)
         rlv.layoutManager = manager
         rlv.adapter = adapter
     }
