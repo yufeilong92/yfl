@@ -1,10 +1,7 @@
 package com.backpacker.yflLibrary.kotlin
 
 import android.content.Context
-import java.io.BufferedReader
-import java.io.File
-import java.io.InputStreamReader
-import java.io.RandomAccessFile
+import java.io.*
 
 
 /**
@@ -94,5 +91,44 @@ object KotlinFileUtil {
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
+    }
+    /***
+     * 保存数据
+     * @param m 上下文
+     * @param fileName 文件名称
+     * @param str 内容
+     * @return
+     */
+    fun saveFile(m: Context,fileName:String,str: String) {
+        try {
+            val output =m.openFileOutput(fileName, Context.MODE_APPEND)
+            val writer = BufferedWriter(OutputStreamWriter(output))
+            writer.use {
+                it.write(str)
+            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+    /***
+     * 读取数据
+     * @param m  上下文
+     * @param fileName  文件名称
+     * @return
+     */
+    fun loadFile(m: Context,fileName:String):String{
+        val com= java.lang.StringBuilder()
+        try {
+            val input=m.openFileInput(fileName)
+            val reader=BufferedReader(InputStreamReader(input))
+            reader.use {
+                reader.forEachLine {
+                    com.append(it)
+                }
+            }
+        }catch (e : java.lang.Exception){
+            e.printStackTrace()
+        }
+        return com.toString()
     }
 }
