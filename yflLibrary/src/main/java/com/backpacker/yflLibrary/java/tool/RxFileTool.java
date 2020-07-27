@@ -595,7 +595,10 @@ public class RxFileTool {
         String cachePath = null;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
-            cachePath = context.getExternalCacheDir().getPath();
+            File dir=context.getExternalCacheDir();
+            if (null==dir)
+                dir=context.getCacheDir();
+            cachePath = dir.getAbsolutePath();
         } else {
             cachePath = context.getCacheDir().getPath();
         }

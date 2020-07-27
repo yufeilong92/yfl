@@ -79,7 +79,11 @@ object KotlinFileUtil {
      * @return
      */
     fun saveLog(con: Context, com: String) {
-        val path = "${con.externalCacheDir}/log.txt"
+        var dir=con.externalCacheDir
+        if (null==dir)
+            dir=con.cacheDir
+
+        val path = "${dir!!.absolutePath+File.separator}log.txt"
         val file = File(path)
         var raf: RandomAccessFile? = null
         try {

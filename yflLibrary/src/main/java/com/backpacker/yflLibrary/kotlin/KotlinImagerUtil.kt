@@ -18,7 +18,10 @@ import java.io.*
 object KotlinImagerUtil {
     fun saveImage(context: Context, inputstream: ByteArray): String {
         val bitmap = BitmapFactory.decodeByteArray(inputstream, 0, inputstream.size)
-        val path = context.cacheDir.absolutePath
+        var dir=context.externalCacheDir
+        if (null == dir)
+            dir = context.cacheDir
+        val path = dir!!.absolutePath
         val file = File(path)
         if (!file.exists()) {
             file.mkdirs();
@@ -43,11 +46,19 @@ object KotlinImagerUtil {
         var path = ""
         try {
             val baos = ByteArrayOutputStream()
-            image!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+            image!!.compress(
+                Bitmap.CompressFormat.JPEG,
+                100,
+                baos
+            )// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
             var options = 100
             while (baos.toByteArray().size / 1024 > 100) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
                 baos.reset()// 重置baos即清空baos
-                image.compress(Bitmap.CompressFormat.JPEG, options, baos)// 这里压缩options%，把压缩后的数据存放到baos中
+                image.compress(
+                    Bitmap.CompressFormat.JPEG,
+                    options,
+                    baos
+                )// 这里压缩options%，把压缩后的数据存放到baos中
                 options -= 10// 每次都减少10
             }
             path = saveImg(context, baos)
@@ -67,7 +78,10 @@ object KotlinImagerUtil {
         var fos: FileOutputStream? = null
 //        var path:String=""
 //        var path = getImgpath(context,System.currentTimeMillis().toString())
-        var path = context.externalCacheDir!!.absolutePath + File.separator + "/" + System.currentTimeMillis() + ".png"
+        var dir = context.externalCacheDir
+        if (null == dir)
+            dir = context.cacheDir
+        var path = dir!!.absolutePath + File.separator + "/" + System.currentTimeMillis() + ".png"
         val file = File(path)
         try {
 //            val filePath = context.externalCacheDir.absolutePath+File.separator+"image"
@@ -103,7 +117,10 @@ object KotlinImagerUtil {
     }
 
     fun getDefaultPath(context: Context): String {
-        var path = context.externalCacheDir!!.absolutePath + File.separator + "/"
+        var dir = context.externalCacheDir
+        if (null == dir)
+            dir = context.cacheDir
+        var path = dir!!.absolutePath + File.separator + "/"
         val file = File(path)
         try {
 //            val filePath = context.externalCacheDir.absolutePath+File.separator+"image"
@@ -118,11 +135,12 @@ object KotlinImagerUtil {
             if (!file.exists()) {
                 file.createNewFile()
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return path
     }
+
     /***
      * 对图片质量进行压缩
      * @param bitmap

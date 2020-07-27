@@ -307,7 +307,10 @@ public class JavaSystemUtil {
     public static File getExternalCacheDir(Context context) {
         // return context.getExternalCacheDir(); API level 8
         // e.g. "<sdcard>/Android/data/<package_name>/cache/"
-        return context.getExternalCacheDir();
+        File dir=context.getExternalCacheDir();
+        if (null==dir)
+            dir=context.getCacheDir();
+        return dir;
     }
 
     private static volatile JavaLocaUtil _singleton;

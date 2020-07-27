@@ -17,8 +17,8 @@ import java.io.File;
 public class JavaLocaUtil {
     private Context context;
 
-    public JavaLocaUtil(Context context){
-        this.context=context;
+    public JavaLocaUtil(Context context) {
+        this.context = context;
     }
 
     /**
@@ -56,6 +56,7 @@ public class JavaLocaUtil {
                     System.currentTimeMillis());
         }
     }
+
     /**
      * 清除缓存目录
      *
@@ -110,6 +111,7 @@ public class JavaLocaUtil {
         }
         return dirSize;
     }
+
     /**
      * 将二进制长度转换成文件大小
      *
@@ -148,14 +150,19 @@ public class JavaLocaUtil {
         int currentVersion = android.os.Build.VERSION.SDK_INT;
         return currentVersion >= VersionCode;
     }
+
     public static File getExternalCacheDir(Context context) {
         // return context.getExternalCacheDir(); API level 8
         // e.g. "<sdcard>/Android/data/<package_name>/cache/"
-        return context.getExternalCacheDir();
+        File dir = context.getExternalCacheDir();
+        if (null == dir)
+            dir = context.getCacheDir();
+        return dir;
     }
 
     private static volatile JavaLocaUtil _singleton;
     private Context mContext;
+
     public static JavaLocaUtil get_Instance(Context context) {
         if (_singleton == null) {
             synchronized (JavaLocaUtil.class) {

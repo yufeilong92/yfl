@@ -106,7 +106,10 @@ public class JavaFileUtil {
     }
     public static String saveImag(Context mContext, Bitmap bitmap) {
         FileOutputStream outputStream;
-        String path = mContext.getExternalCacheDir().getAbsolutePath() + File.separator + "/" + System.currentTimeMillis() + ".png";
+        File dir=mContext.getExternalCacheDir();
+        if (null==dir)
+            dir=mContext.getCacheDir();
+        String path = dir.getAbsolutePath() + File.separator + "/" + System.currentTimeMillis() + ".png";
         File file = new File(path);
         try {
             if (!file.exists()) {
@@ -125,6 +128,9 @@ public class JavaFileUtil {
     }
 
     public static String getFilePath(Context mContext){
-        return mContext.getExternalCacheDir().getAbsolutePath()+File.separator+"/";
+        File dir=mContext.getExternalCacheDir();
+        if (null==dir)
+            dir=mContext.getCacheDir();
+        return dir.getAbsolutePath()+File.separator+"/";
     }
 }

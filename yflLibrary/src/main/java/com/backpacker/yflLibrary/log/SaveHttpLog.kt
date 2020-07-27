@@ -194,7 +194,10 @@ class SaveHttpLog {
 
     private fun saveLog(com: String) {
         mLog.delete(0,com.length)
-        val path="${mContext!!.externalCacheDir}/log.txt"
+        var dir = mContext!!.externalCacheDir
+        if (null == dir)
+            dir = mContext!!.cacheDir
+        val path="${dir!!.absolutePath+File.separator}log.txt"
         val file=File(path)
         var raf:RandomAccessFile?=null
         try {
