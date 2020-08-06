@@ -2,6 +2,7 @@ package com.backpacker.yflLibrary.kotlin
 
 import com.backpacker.yflLibrary.java.JavaStringUtil
 import com.backpacker.yflLibrary.java.JavaTimeUtil
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -235,5 +236,24 @@ object KotlinDateUtil {
             return "后天"
 
         return ""
+    }
+
+    /**
+     * 比较当前时间和服务器返回时间大小
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    fun compareDate(start: String, end: String): Boolean {
+        val df = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        return try {
+            val now = df.parse(start)
+            val end = df.parse(end)
+            now.before(end)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            false
+        }
     }
 }
