@@ -13,10 +13,10 @@ import android.view.Gravity
  * @Purpose :选择狂
  */
 object KotlinSelectKeyUtil {
-  /*  fun showSelectKey(
+  /*     fun <T> showSelectKey(
         activity: Activity,
-        items: MutableList<String>,
-        selectClick: (postion: Int, com: String) -> Unit
+        items: MutableList<T>, item: T?,
+        selectClick: (postion: Int, com: T) -> Unit
     ) {
         val picker = SinglePicker(activity, items)
         picker.window.setGravity(Gravity.BOTTOM)
@@ -43,9 +43,72 @@ object KotlinSelectKeyUtil {
         picker.setBackgroundColor(-0x1e1e1f)
         //picker.setSelectedItem(isChinese ? "处女座" : "Virgo");
         //        picker.setSelectedIndex(7);
+        if (null != item && "" != item)
+            picker.setSelectedItem(item)
         picker.setOnItemPickListener { i, com ->
             selectClick(i, com)
         }
         picker.show()
-    }*/
+    }
+        /*
+    * 年月日选择
+    * */
+    fun onYearMonthDayPicker(
+        activity: Activity,
+        year: Int,
+        month: Int,
+        day: Int,
+        onSelectTime: (year: String, month: String, day: String) -> Unit
+    ) {
+        val data = Calendar.getInstance()
+        var mYear = year
+        var mMonth = month
+        var mDay = day
+        if (mYear == 0) {
+            mYear = data.get(Calendar.YEAR)
+            mMonth = data.get(Calendar.MONTH)+1
+            mDay = data.get(Calendar.DAY_OF_MONTH)
+        }
+
+        val picker = DatePicker(activity)
+        picker.window.setGravity(Gravity.BOTTOM)
+        picker.setTopPadding(15)
+        picker.setRangeStart(2016, 1, 1)
+        picker.setRangeEnd(2111, 1, 30)
+        picker.setSelectedItem(mYear, mMonth, mDay)
+        picker.setWeightEnable(true)
+        picker.setCanLoop(false)
+        picker.setCanLinkage(true)
+        picker.setLineColor(Color.BLACK)
+        picker.setOnDatePickListener(object : DatePicker.OnYearMonthDayPickListener {
+            override fun onDatePicked(
+                year: String,
+                month: String,
+                day: String
+            ) {
+                onSelectTime(year, month, day)
+            }
+        })
+        picker.setOnWheelListener(object : DatePicker.OnWheelListener {
+            override fun onYearWheeled(index: Int, year: String) {
+                picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay())
+            }
+
+            override fun onMonthWheeled(index: Int, month: String) {
+                picker.setTitleText(
+                    picker.getSelectedYear()
+                        .toString() + "-" + month + "-" + picker.getSelectedDay()
+                )
+            }
+
+            override fun onDayWheeled(index: Int, day: String) {
+                picker.setTitleText(
+                    picker.getSelectedYear()
+                        .toString() + "-" + picker.getSelectedMonth() + "-" + day
+                )
+            }
+        })
+        picker.show()
+    }
+    */
 }
