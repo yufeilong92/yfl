@@ -16,38 +16,48 @@ import androidx.core.app.NotificationCompat;
 import com.example.UtilsLibrary.R;
 
 /**
- * @author chaychan
- * @description: Service adaptation for Android 8.0 or above
- * @date 2019/7/29  10:36
+ * @Author : YFL  is Creating a porject in del
+ * @Package
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/7 16:08
+ * @Purpose :优化通知栏展示
  */
 public abstract class ServiceCompat extends Service {
+    //判断是否显示通知
+    private Boolean isShow = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        showNotification();
+    }
 
+    protected void showNotification() {
+        if (isShow) {
+            return;
+        }
+        isShow = true;
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //适配安卓8.0
             String channelId = getChannelId() + "";
             String channelName = getChannelName();
             NotificationChannel channel = new NotificationChannel(channelId, channelName,
                     NotificationManager.IMPORTANCE_MIN);
-            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
-
             startForeground(getChannelId(), getNotification());
+        } else {
+            manager.notify(getChannelId(), getNotification());
         }
     }
 
     /**
      * Notification channelName
-     *
      */
     protected abstract String getChannelName();
 
     /**
      * Notification channelId,must not be 0
-     *
      */
     protected abstract int getChannelId();
 
@@ -55,7 +65,7 @@ public abstract class ServiceCompat extends Service {
     /**
      * Default content for notification , subclasses can be overwritten and returned
      */
-    public String getNotificationContent(){
+    public String getNotificationContent() {
         return "";
     }
 
@@ -64,7 +74,25 @@ public abstract class ServiceCompat extends Service {
      * Displayed notifications, subclasses can be overwritten and returned
      */
     public Notification getNotification() {
-        return createNormalNotification(getNotificationContent());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return createNormalNotification(getNotificationContent());
+        } else {
+            return creteNormalNotificationSmall(getNotificationContent());
+        }
+
+    }
+
+    protected Notification creteNormalNotificationSmall(String content) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(getString(R.string.app_name))
+                .setContentText(content)
+                .setSmallIcon(getSmallIcon())
+                .setWhen(System.currentTimeMillis())
+                .setLargeIcon(getLargeIcon())
+                .setOngoing(true)
+                .build();
+
+        return builder.build();
     }
 
     protected Notification createNormalNotification(String content) {
@@ -77,10 +105,21 @@ public abstract class ServiceCompat extends Service {
                 .setContentText(content)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(getSmallIcon())
+                .setOngoing(true)
                 .setLargeIcon(getLargeIcon())
                 .build();
 
         return builder.build();
+    }
+
+    protected void clearNotifucation() {
+        isShow = false;
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            manager.deleteNotificationChannel(getChannelId() + "");
+        } else {
+            manager.cancel(getChannelId());
+        }
     }
 
     /**
@@ -98,11 +137,11 @@ public abstract class ServiceCompat extends Service {
     }
 
 
-    public static void startService(Context context, Intent intent){
+    public static void startService(Context context, Intent intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //适配安卓8.0
             context.startForegroundService(intent);
-        }else{
+        } else {
             context.startService(intent);
         }
     }
