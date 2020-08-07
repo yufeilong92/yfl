@@ -3,6 +3,7 @@ package com.backpacker.yflLibrary.serve;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +62,12 @@ public abstract class ServiceCompat extends Service {
      */
     protected abstract int getChannelId();
 
+    public Class<?> getStartClass() {
+        return null;
+    }
+
+    ;
+
 
     /**
      * Default content for notification , subclasses can be overwritten and returned
@@ -90,6 +97,7 @@ public abstract class ServiceCompat extends Service {
                 .setWhen(System.currentTimeMillis())
                 .setLargeIcon(getLargeIcon())
                 .setOngoing(true)
+                .setContentIntent(startIntentClass())
                 .build();
 
         return builder.build();
@@ -107,9 +115,23 @@ public abstract class ServiceCompat extends Service {
                 .setSmallIcon(getSmallIcon())
                 .setOngoing(true)
                 .setLargeIcon(getLargeIcon())
+                .setContentIntent(startIntentClass())
                 .build();
 
         return builder.build();
+    }
+
+    protected PendingIntent startIntentClass() {
+        // 通知行为（点击后能进入应用界面）
+        Intent intent;
+        if (null == getStartClass()) {
+            intent = this.getPackageManager().getLaunchIntentForPackage("cn.ruiye.worker");
+        } else
+            intent = new Intent(this, getStartClass());
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        return pendingIntent;
     }
 
     protected void clearNotifucation() {
