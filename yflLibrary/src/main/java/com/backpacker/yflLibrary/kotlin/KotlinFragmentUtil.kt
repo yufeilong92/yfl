@@ -26,19 +26,19 @@ object KotlinFragmentUtil {
         if (sfm == null) {
             throw NullPointerException("FragmentManager不能为空")
         }
-        val transaction = sfm!!.beginTransaction()
+        val transaction = sfm.beginTransaction()
         val fragment = list[id]
         if (!fragment.isVisible) {
             if (!fragment.isAdded) {
                 transaction.add(layout, fragment, fragment.javaClass.name)
             } else {
                 for (i in 0 until list.size) {
-                    sfm!!.beginTransaction().hide(list[i]).commit()
+                    sfm.beginTransaction().hide(list[i]).commitAllowingStateLoss()
                 }
                 transaction.show(fragment)
             }
         }
-        transaction.commit()
+        transaction.commitAllowingStateLoss()
     }
 
 }

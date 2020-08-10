@@ -256,4 +256,55 @@ object KotlinDateUtil {
             false
         }
     }
+
+    fun generateTime(time: Long): String {
+        val totalSeconds = (time / 1000).toInt()
+        val seconds = totalSeconds % 60
+        val minutes = totalSeconds / 60 % 60
+        val hours = totalSeconds / 3600
+        return if (hours > 0) String.format("%02d:%02d:%02d", hours, minutes, seconds) else String.format("%02d:%02d", minutes, seconds)
+    }
+
+    /**
+     * 根据long毫秒数，获得时分秒
+     */
+    fun getDateFormatByLong(time: Long): String {
+        val totalSeconds = (time / 1000).toInt()
+        val seconds = totalSeconds % 60
+        val minutes = totalSeconds / 60 % 60
+        val hours = totalSeconds / 3600
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+
+    /**
+     * 以友好的方式显示时间
+     * @param time
+     * *
+     * @return
+     */
+    fun getFriendlyTime(time: Date): String {
+        //获取time距离当前的秒数
+        val ct = ((System.currentTimeMillis() - time.time) / 1000).toInt()
+        if (ct == 0) {
+            return "刚刚"
+        }
+        if (ct in 1..59) {
+            return ct.toString() + "秒前"
+        }
+        if (ct in 60..3599) {
+            return Math.max(ct / 60, 1).toString() + "分钟前"
+        }
+        if (ct in 3600..86399)
+            return (ct / 3600).toString() + "小时前"
+        if (ct in 86400..2591999) { //86400 * 30
+            val day = ct / 86400
+            return day.toString() + "天前"
+        }
+        if (ct in 2592000..31103999) { //86400 * 30
+            return (ct / 2592000).toString() + "月前"
+        }
+        return (ct / 31104000).toString() + "年前"
+    }
+
 }
