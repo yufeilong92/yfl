@@ -2,10 +2,12 @@ package com.backpacker.yflLibrary.java;
 
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @version V 1.0 xxxxxxxx
@@ -818,4 +820,31 @@ public class JavaTimeUtil {
 
     }
 
+
+    /**
+     * 时间比较大小
+     *
+     * @param date1 date1
+     * @param date2 date2
+     * @param format "yyyy-MM-dd HH:mm:ss"
+     * @return 1:date1大于date2；
+     * -1:date1小于date2
+     */
+    public static int compareDate(String date1, String date2, String format) {
+        DateFormat df = new SimpleDateFormat(format, Locale.getDefault());
+        try {
+            Date dt1 = df.parse(date1);
+            Date dt2 = df.parse(date2);
+            if (dt1.getTime() > dt2.getTime()) {
+                return 1;
+            } else if (dt1.getTime() < dt2.getTime()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return 0;
+    }
 }

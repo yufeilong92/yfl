@@ -307,4 +307,30 @@ object KotlinDateUtil {
         return (ct / 31104000).toString() + "年前"
     }
 
+    /**
+     * 获取当前时间为本月的第几周
+     *
+     * @return WeekOfMonth
+     */
+    fun getWeekOfMonth(): Int {
+        val calendar = Calendar.getInstance()
+        val week = calendar[Calendar.WEEK_OF_MONTH]
+        return week - 1
+    }
+
+    /**
+     * 获取当前时间为本周的第几天
+     *
+     * @return DayOfWeek
+     */
+    fun getDayOfWeek(): Int {
+        val calendar = Calendar.getInstance()
+        var day = calendar[Calendar.DAY_OF_WEEK]
+        day = if (day == 1) {
+            7
+        } else {
+            day - 1
+        }
+        return day
+    }
 }

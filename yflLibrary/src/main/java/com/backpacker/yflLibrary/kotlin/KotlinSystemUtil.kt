@@ -1,29 +1,30 @@
 package com.backpacker.yflLibrary.kotlin
 
-import android.os.Environment
-import android.os.StatFs
-import android.content.pm.PackageManager
-import android.content.Context
-import android.app.Activity
-import android.view.View
-import android.view.Window
-import android.os.Build
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import java.net.Inet4Address
-import java.net.NetworkInterface
-import android.text.TextUtils
-import android.telephony.TelephonyManager
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
-import com.backpacker.yflLibrary.vo.Constants
+import android.os.Build
+import android.os.Environment
+import android.os.StatFs
+import android.telephony.TelephonyManager
+import android.text.TextUtils
 import android.util.DisplayMetrics
-import com.backpacker.yflLibrary.java.JavaLocaUtil
+import android.view.View
+import android.view.Window
+import com.backpacker.yflLibrary.vo.Constants
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 import java.math.BigDecimal
+import java.net.Inet4Address
+import java.net.NetworkInterface
 
 
 /**
@@ -37,7 +38,43 @@ import java.math.BigDecimal
  * @Copyright: 2019
  */
 object KotlinSystemUtil {
+    /**
+     * 获取版本号
+     * 也可使用 BuildConfig.VERSION_NAME 替换
+     *
+     * @param context 上下文
+     * @return 版本号
+     */
+    fun getVersionName(context: Context): String? {
+        val packageManager = context.packageManager
+        val packageName = context.packageName
+        try {
+            val packageInfo: PackageInfo = packageManager.getPackageInfo(packageName, 0)
+            return packageInfo.versionName
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        return "1.0.0"
+    }
 
+    /**
+     * 获取版本code
+     * 也可使用 BuildConfig.VERSION_CODE 替换
+     *
+     * @param context 上下文
+     * @return 版本code
+     */
+    fun getVersionCode(context: Context): Int {
+        val packageManager = context.packageManager
+        val packageName = context.packageName
+        try {
+            val packageInfo: PackageInfo = packageManager.getPackageInfo(packageName, 0)
+            return packageInfo.versionCode
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+        return 1
+    }
     /**
      * 获取系统内部可用空间大小
      *
@@ -438,6 +475,133 @@ object KotlinSystemUtil {
     }
 
     /**
+     * 但是当我们没在AndroidManifest.xml中设置其debug属性时:
+     * 使用Eclipse运行这种方式打包时其debug属性为true,使用Eclipse导出这种方式打包时其debug属性为法false.
+     * 在使用ant打包时，其值就取决于ant的打包参数是release还是debug.
+     * 因此在AndroidMainifest.xml中最好不设置android:debuggable属性置，而是由打包方式来决定其值.
+     *
+     * @param context
+     * @return
+     */
+    fun isApkDebugable(context: Context): Boolean {
+        try {
+            val info = context.applicationInfo
+            return info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+        } catch (e: java.lang.Exception) {
+        }
+        return false
+    }
+
+    /**
+     * 获取控件左上顶点Y坐标
+     *
+     * @param view
+     * @return
+     */
+    fun getCoordinateY(view: View): Int {
+        val coordinate = IntArray(2)
+        view.getLocationOnScreen(coordinate)
+        return coordinate[1]
+    }
+
+    /**
+     * 计算缓存的大小,
+     *
+     * @return
+     */
+    fun getCacheSize(context: Context): String? {
+        var fileSize: Long = 0
+        var cacheSize: String? = "0KB"
+        val filesDir =
+            context.applicationContext.filesDir // /data/data/package_name/files
+        val cacheDir = context.cacheDir // /data/data/package_name/cache
+        fileSize += getDirSize(filesDir)
+        fileSize += getDirSize(cacheDir)
+        // 2.2版本才有将应用缓存转移到sd卡的功能
+        if (isMethodsCompat(Build.VERSION_CODES.FROYO)) {
+            val externalCacheDir =
+                getExternalCacheDir(context) // "<sdcard>/Android/data/<package_name>/cache/"
+            fileSize += getDirSize(externalCacheDir)
+        }
+        if (fileSize > 0) cacheSize = formatFileSize(fileSize)
+        return cacheSize
+    }
+
+    /**
+     * 获取目录文件大小
+     *
+     * @param dir
+     * @return
+     */
+    fun getDirSize(dir: File?): Long {
+        if (dir == null) {
+            return 0
+        }
+        if (!dir.isDirectory) {
+            return 0
+        }
+        var dirSize: Long = 0
+        val files = dir.listFiles()
+        for (file in files) {
+            if (file.isFile) {
+                dirSize += file.length()
+            } else if (file.isDirectory) {
+                dirSize += file.length()
+                dirSize += getDirSize(file) // 递归调用继续统计
+            }
+        }
+        return dirSize
+    }
+
+    /**
+     * 将二进制长度转换成文件大小
+     *
+     * @param length
+     * @return
+     */
+    fun formatFileSize(length: Long): String? {
+        var result: String? = null
+        var sub_string = 0
+        if (length >= 1073741824) {
+            sub_string = (length.toFloat() / 1073741824).toString().indexOf(
+                "."
+            )
+            result = ((length.toFloat() / 1073741824).toString() + "000").substring(
+                0,
+                sub_string + 3
+            ) + "GB"
+        } else if (length >= 1048576) {
+            sub_string = (length.toFloat() / 1048576).toString().indexOf(".")
+            result = ((length.toFloat() / 1048576).toString() + "000").substring(
+                0,
+                sub_string + 3
+            ) + "MB"
+        } else if (length >= 1024) {
+            sub_string = (length.toFloat() / 1024).toString().indexOf(".")
+            result = ((length.toFloat()/1024).toString() + "000").substring(
+                0,
+                sub_string + 3
+            ) + "KB"
+        } else if (length < 1024) result = java.lang.Long.toString(length) + "B"
+        return result
+    }
+
+
+    /**
+     * 获取状态栏高度
+     * @return
+     */
+    fun getStatusBarsHeight(mContext: Context): Int {
+        var result = 0
+        val resourceId =
+            mContext.resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = mContext.resources.getDimensionPixelSize(resourceId)
+        }
+        return result
+    }
+
+    /**
      * 跳转到权限设置界面
      */
     fun getAppDetailSettingIntent(context: Activity) {
@@ -481,14 +645,30 @@ object KotlinSystemUtil {
         clearCacheFolder(context.filesDir, System.currentTimeMillis())
         clearCacheFolder(context.cacheDir, System.currentTimeMillis())
         // 2.2版本才有将应用缓存转移到sd卡的功能
-        if (JavaLocaUtil.isMethodsCompat(Build.VERSION_CODES.FROYO)) {
+        if (isMethodsCompat(Build.VERSION_CODES.FROYO)) {
             clearCacheFolder(
-                JavaLocaUtil.getExternalCacheDir(context),
+                getExternalCacheDir(context),
                 System.currentTimeMillis()
             )
         }
     }
-
+    fun getExternalCacheDir(context: Context): File? {
+        // return context.getExternalCacheDir(); API level 8
+        // e.g. "<sdcard>/Android/data/<package_name>/cache/"
+        var dir = context.externalCacheDir
+        if (null == dir) dir = context.cacheDir
+        return dir
+    }
+    /**
+     * 判断当前版本是否兼容目标版本的方法
+     *
+     * @param VersionCode
+     * @return
+     */
+    fun isMethodsCompat(VersionCode: Int): Boolean {
+        val currentVersion = Build.VERSION.SDK_INT
+        return currentVersion >= VersionCode
+    }
     /**
      * 清除缓存目录
      *
