@@ -45,6 +45,9 @@ public abstract class JavaBaseFragment extends Fragment {
             onFragmentVisibleChange(isFragmentVisible);//回调当前fragment不可见
         }
     }
+    public void onHomeBack(View v){
+
+    }
 
 
     @Override

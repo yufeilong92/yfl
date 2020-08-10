@@ -46,8 +46,7 @@ public class JavaArithUtil {
             return 0.0;
         }
         BigDecimal bd = new BigDecimal(com);
-        Double d = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        return d;
+        return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     /**

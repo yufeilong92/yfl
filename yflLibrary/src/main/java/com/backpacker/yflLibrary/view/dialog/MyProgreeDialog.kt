@@ -1,8 +1,6 @@
-package com.backpacker.yflLibrary.view
+package com.backpacker.yflLibrary.view.dialog
 
 import android.content.Context
-import android.content.DialogInterface
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gm_4_white"
+    android:padding="@dimen/dp_16"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_gm_dialog_item_title"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="@dimen/text_17"
+        android:textColor="@color/black"
+        android:minHeight="@dimen/dp_40"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_gm_dialog_item_content"
+        android:layout_width="0dp"
+        android:minHeight="@dimen/dp_40"
+        android:text="0"
+        android:textSize="@dimen/text_14"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_gm_dialog_item_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_gm_dialog_left"
+        android:layout_width="0dp"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/black"
+        android:text="0"
+
+        android:layout_marginRight="@dimen/dp_16"
+        android:background="@drawable/gm_line_gray_30"
+        android:layout_marginTop="@dimen/dp_16"
+        app:layout_constraintTop_toBottomOf="@id/tv_gm_dialog_item_content"
+        app:layout_constraintRight_toLeftOf="@id/view_gm_dialog_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:minHeight="@dimen/dp_40"
+        android:layout_height="wrap_content" />
+    <View android:layout_width="@dimen/dp_1"
+        android:id="@+id/view_gm_dialog_line"
+        app:layout_constraintRight_toLeftOf="@id/btn_gm_dialog_right"
+        app:layout_constraintLeft_toRightOf="@id/btn_gm_dialog_left"
+        app:layout_constraintBottom_toBottomOf="@id/btn_gm_dialog_left"
+        app:layout_constraintTop_toTopOf="@id/btn_gm_dialog_left"
+        android:background="@color/gray"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_height="0dp"/>
+
+    <Button
+        app:layout_constraintLeft_toRightOf="@id/view_gm_dialog_line"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/btn_gm_dialog_right"
+        android:layout_width="0dp"
+        android:text="0"
+        android:minHeight="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:background="@drawable/gm_30_green"
+        android:layout_marginTop="@dimen/dp_16"
+        app:layout_constraintTop_toBottomOf="@id/tv_gm_dialog_item_content"
+        android:textSize="@dimen/text_15"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

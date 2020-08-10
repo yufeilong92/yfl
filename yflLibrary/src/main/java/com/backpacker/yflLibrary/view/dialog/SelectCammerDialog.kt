@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view
+package com.backpacker.yflLibrary.view.dialog
 
 import android.content.Context
 import android.os.Bundle

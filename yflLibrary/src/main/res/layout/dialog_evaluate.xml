@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.backpacker.yflLibrary.view.SmartScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/transparent"
+    android:fillViewport="true"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gm_15_white_top"
+            android:orientation="vertical">
+            <com.backpacker.yflLibrary.view.ContentEditText
+                android:id="@+id/et_eva_input"
+                android:layout_width="match_parent"
+                android:lines="7"
+                android:hint="请填写您的精彩内容"
+                android:gravity="top|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_15"
+                android:padding="@dimen/dp_4"
+                android:layout_margin="@dimen/dp_16"
+                android:background="@drawable/gm_4_gray"
+                android:layout_height="match_parent"/>
+            <Button
+                android:id="@+id/btn_eva_submit"
+                android:layout_marginBottom="@dimen/dp_16"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_15"
+                android:layout_gravity="center"
+                android:background="@drawable/gm_30_green"
+                android:layout_width="@dimen/dp_160"
+                android:text="发布"
+                android:layout_height="@dimen/dp_40"/>
+        </LinearLayout>
+    </RelativeLayout>
+</com.backpacker.yflLibrary.view.SmartScrollView>
