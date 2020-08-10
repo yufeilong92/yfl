@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view;
+package com.backpacker.yflLibrary.view.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -14,16 +14,16 @@ import android.widget.GridView;
  * @verdescript 版本号 修改时间  修改人 修改的概要说明
  * @Copyright: 2019
  */
-public class CaseGridView extends GridView {
-    public CaseGridView(Context context) {
+public class DisplayGridView extends GridView {
+    public DisplayGridView(Context context) {
         super(context);
     }
 
-    public CaseGridView(Context context, AttributeSet attrs) {
+    public DisplayGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CaseGridView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DisplayGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

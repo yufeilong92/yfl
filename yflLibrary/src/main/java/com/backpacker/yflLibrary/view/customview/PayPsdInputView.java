@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view;
+package com.backpacker.yflLibrary.view.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,13 +13,14 @@ import android.widget.EditText;
 import com.example.UtilsLibrary.R;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
-
 /**
- * Created by Allen on 2017/5/7.
- * 自定义支付密码输入框
+ * @Author : YFL  is Creating a porject in del
+ * @Package
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/10 14:54
+ * @Purpose :自定义支付密码输入框
  */
-
-public class PayPsdInputView extends EditText {
+public class PayPsdInputView extends androidx.appcompat.widget.AppCompatEditText {
 
     private Context mContext;
     /**

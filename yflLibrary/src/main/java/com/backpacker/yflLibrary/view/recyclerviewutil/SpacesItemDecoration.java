@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view;
+package com.backpacker.yflLibrary.view.recyclerviewutil;
 
 import android.content.Context;
 import android.content.res.TypedArray;

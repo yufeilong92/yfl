@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view;
+package com.backpacker.yflLibrary.view.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,7 +16,7 @@ import com.example.UtilsLibrary.R;
  * Created by XIAS on 2018/9/17.
  */
 
-public class CEditText extends EditText {
+public class CEditText extends androidx.appcompat.widget.AppCompatEditText {
     private int height = 40;//view的高度
 
     private int count = 6;//矩形数目

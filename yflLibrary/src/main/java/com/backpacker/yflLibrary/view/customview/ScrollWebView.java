@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view;
+package com.backpacker.yflLibrary.view.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,7 +10,7 @@ import android.webkit.WebView;
  * @version V 1.0 xxxxxxxx
  * @Title: xcedu
  * @Package com.xuechuan.xcedu.weight
- * @Description: webview 滑动
+ * @Description: webview 滑动  监听
  * @author: L-BackPacker
  * @date: 2018.11.30 上午 9:34
  * @verdescript 版本号 修改时间  修改人 修改的概要说明

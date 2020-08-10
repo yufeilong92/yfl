@@ -1,4 +1,4 @@
-package cn.yfl.myapplication;
+package com.backpacker.yflLibrary.view.customview;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -20,7 +20,7 @@ import static java.lang.Math.PI;
  * @Package com.backpacker.yflLibrary.view
  * @Email : yufeilong92@163.com
  * @Time :2019/11/28 15:54
- * @Purpose :
+ * @Purpose :左右滑动球 ****
  */
 public class LoadingView extends View {
     private final static String TAG = "LoadingView";

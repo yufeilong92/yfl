@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.backpacker.yflLibrary.view.MyBarView;
 import com.example.UtilsLibrary.R;
 
 /**

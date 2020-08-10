@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view;
+package com.backpacker.yflLibrary.view.customview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,7 +15,7 @@ import android.view.View;
  * @Package com.liang.myapplication
  * @Email : yufeilong92@163.com
  * @Time :2020/5/28 17:02
- * @Purpose :
+ * @Purpose : 波浪 WaveView  (二级贝塞尔曲线)
  */
 public class WaveView3 extends View {
 
