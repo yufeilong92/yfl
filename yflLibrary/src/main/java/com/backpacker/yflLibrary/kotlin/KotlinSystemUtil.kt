@@ -264,7 +264,11 @@ object KotlinSystemUtil {
      * @return
      */
     fun getOsVersionInt(): Int {
-        return Build.VERSION.SDK_INT
+       return try {
+           Build.VERSION.SDK_INT
+        }catch (e:Exception){
+          0
+       }
 
     }
 
@@ -324,25 +328,40 @@ object KotlinSystemUtil {
      * @return 系统版本号
      */
     fun getMobileSystemVersion(): String {
-        return android.os.Build.VERSION.RELEASE
+      return  try {
+        Build.VERSION.RELEASE
+        }catch (e:Exception){
+          "0.0.0"
+      }
     }
+
 
     /**
      * 获取手机型号
      *
-     * @return 手机型号
+     * @param context  上下文
+     * @return   String
      */
-    fun getMobileSystemModel(): String {
-        return android.os.Build.MODEL
+    fun getMobileModel(context: Context?): String? {
+        return try {
+            Build.MODEL
+        } catch (e: java.lang.Exception) {
+            "未知"
+        }
     }
 
     /**
-     * 获取手机厂商
-     *
-     * @return 手机厂商
+     * 获取手机品牌
+     *获取手机厂商
+     * @param context  上下文
+     * @return  String
      */
-    fun getMobileDeviceBrand(): String {
-        return android.os.Build.BRAND
+    fun getMobileBrand(context: Context?): String? {
+        return try {
+            Build.BRAND
+        } catch (e: java.lang.Exception) {
+            "未知"
+        }
     }
 
     /**

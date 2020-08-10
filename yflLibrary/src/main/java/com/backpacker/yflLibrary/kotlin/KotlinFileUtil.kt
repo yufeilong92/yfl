@@ -1,8 +1,8 @@
 package com.backpacker.yflLibrary.kotlin
 
 import android.content.Context
+import android.content.res.AssetManager
 import java.io.*
-import java.math.BigDecimal
 
 
 /**
@@ -137,4 +137,33 @@ object KotlinFileUtil {
         return com.toString()
     }
 
+    /**
+     * 把Assets里的文件拷贝到sd卡上
+     *
+     * @param assetManager AssetManager
+     * @param fileName Asset文件名
+     * @param destinationPath 完整目标路径
+     * @return 拷贝成功
+     */
+    fun copyAssetToSDCard(
+        assetManager: AssetManager,
+        fileName: String?,
+        destinationPath: String?
+    ): Boolean {
+        if (KotlinStringUtil.isEmpty(fileName))return false
+        try {
+            val mInputStream: InputStream = assetManager.open(fileName!!)
+            val os = FileOutputStream(destinationPath)
+            val data = ByteArray(1024)
+            var len: Int
+            while (mInputStream.read(data).also { len = it } > 0) {
+                os.write(data, 0, len)
+            }
+            os.close()
+            mInputStream.close()
+        } catch (e: IOException) {
+            return false
+        }
+        return true
+    }
 }

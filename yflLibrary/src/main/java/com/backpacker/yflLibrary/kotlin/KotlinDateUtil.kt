@@ -6,6 +6,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 /**
  * @Title:  kotlin_androidone
  * @Package com.example.myutils
@@ -23,7 +24,9 @@ object KotlinDateUtil {
     private val PATTERN_YMDHMS_CHINESE: String = "yyyy年MM月dd日 HH时mm分ss秒"
     private val PATTERN_HMS_CHINESE: String = "yyyy年MM月dd日 HH时mm分ss秒"
     private val PATTERN_YMD_CHINESE: String = "yyyy年MM月dd日"
-
+    const val WEEKDAYS = 7
+    private var formatBuilder: SimpleDateFormat? = null
+    var WEEK = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
     /**
      * 获取年月日时分秒
      */
@@ -332,5 +335,124 @@ object KotlinDateUtil {
             day - 1
         }
         return day
+    }
+
+    /**
+     * UTM转换成日期描述，如三周前，上午，昨天等
+     *
+     * @param milliseconds milliseconds
+     * @param isShowWeek 是否采用周的形式显示  true 显示为3周前，false 则显示为时间格式mm-dd
+     * @return 如三周前，上午，昨天等
+     */
+    fun getTimeDesc(milliseconds: Long, isShowWeek: Boolean): String? {
+        val sb = StringBuffer()
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliseconds
+        val hour = calendar[Calendar.HOUR_OF_DAY].toLong()
+        calendar.timeInMillis = System.currentTimeMillis()
+        val hourNow = calendar[Calendar.HOUR_OF_DAY].toLong()
+        val datetime = System.currentTimeMillis() - milliseconds
+        val day =
+            Math.floor(datetime / 24 / 60 / 60 / 1000.0f.toDouble())
+                .toLong() + if (hourNow < hour) 1 else 0 // 天前
+        if (day <= 7) { // 一周内
+            if (day == 0L) { // 今天
+                if (hour <= 4) {
+                    sb.append(" 凌晨 ")
+                } else if (hour in 5..6) {
+                    sb.append(" 早上 ")
+                } else if (hour in 7..11) {
+                    sb.append(" 上午 ")
+                } else if (hour in 12..13) {
+                    sb.append(" 中午 ")
+                } else if (hour in 14..18) {
+                    sb.append(" 下午 ")
+                } else if (hour in 19..19) {
+                    sb.append(" 傍晚 ")
+                } else if (hour in 20..24) {
+                    sb.append(" 晚上 ")
+                } else {
+                    sb.append("今天 ")
+                }
+            } else if (day == 1L) { // 昨天
+                sb.append(" 昨天 ")
+            } else if (day == 2L) { // 前天
+                sb.append(" 前天 ")
+            } else {
+                sb.append(" " + DateToWeek(milliseconds).toString() + " ")
+            }
+        } else { // 一周之前
+            if (isShowWeek) {
+                sb.append((if (day % 7 == 0L) day / 7 else day / 7 + 1).toString() + "周前")
+            } else {
+                formatBuilder = SimpleDateFormat("MM-dd")
+                val time: String = formatBuilder!!.format(milliseconds)
+                sb.append(time)
+            }
+        }
+        return sb.toString()
+    }
+
+
+    /**
+     * UTM转换成带描述的日期
+     *
+     * @param milliseconds milliseconds
+     * @return UTM转换成带描述的日期
+     */
+    fun getDisplayTimeAndDesc(milliseconds: Long): String? {
+        formatBuilder = SimpleDateFormat("HH:mm")
+        val time = formatBuilder!!.format(milliseconds)
+        val sb = StringBuffer()
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliseconds
+        val hour = calendar[Calendar.HOUR_OF_DAY].toLong()
+        val datetime = System.currentTimeMillis() - milliseconds
+        val day =
+            Math.ceil(datetime / 24 / 60 / 60 / 1000.0f.toDouble()).toLong() // 天前
+        if (day <= 7) { // 一周内
+            if (day == 0L) { // 今天
+                if (hour <= 4) {
+                    sb.append(" 凌晨 $time")
+                } else if (hour in 5..6) {
+                    sb.append(" 早上 $time")
+                } else if (hour in 7..11) {
+                    sb.append(" 上午 $time")
+                } else if (hour in 12..13) {
+                    sb.append(" 中午 $time")
+                } else if (hour in 14..18) {
+                    sb.append(" 下午 $time")
+                } else if (hour in 19..19) {
+                    sb.append(" 傍晚 $time")
+                } else if (hour in 20..24) {
+                    sb.append(" 晚上 $time")
+                } else {
+                    sb.append("今天 $time")
+                }
+            } else if (day == 1L) { // 昨天
+                sb.append("昨天 $time")
+            } else if (day == 2L) { // 前天
+                sb.append("前天 $time")
+            } else {
+                sb.append(DateToWeek(milliseconds).toString() + time)
+            }
+        } else { // 一周之前
+            sb.append((day % 7).toString() + "周前")
+        }
+        return sb.toString()
+    }
+    /**
+     * 日期变量转成对应的星期字符串
+     *
+     * @param milliseconds data
+     * @return 日期变量转成对应的星期字符串
+     */
+    fun DateToWeek(milliseconds: Long): String? {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliseconds
+        val dayIndex = calendar[Calendar.DAY_OF_WEEK]
+        return if (dayIndex < 1 || dayIndex > WEEKDAYS) {
+            null
+        } else WEEK.get(dayIndex - 1)
     }
 }
