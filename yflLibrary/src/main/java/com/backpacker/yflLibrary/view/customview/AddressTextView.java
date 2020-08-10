@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView;
  * @version V 1.0 xxxxxxxx
  * @Title: TextVeiw.java
  * @Package com.xuechuan.xcedu.weight
- * @Description:位置显示四位
+ * @Description: 位置显示四位
  * @author: YFL
  * @date: 2018/4/14 22:06
  * @verdescript 版本号 修改时间  修改人 修改的概要说明
