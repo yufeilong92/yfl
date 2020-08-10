@@ -15,16 +15,16 @@ import androidx.appcompat.widget.AppCompatTextView;
  * @verdescript 版本号 修改时间  修改人 修改的概要说明
  * @Copyright: 2018/4/14 星期六
  */
-public class AddressTextView extends AppCompatTextView {
-    public AddressTextView(Context context) {
+public class TextFourLengthView extends AppCompatTextView {
+    public TextFourLengthView(Context context) {
         super(context);
     }
 
-    public AddressTextView(Context context, AttributeSet attrs) {
+    public TextFourLengthView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AddressTextView(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public TextFourLengthView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
