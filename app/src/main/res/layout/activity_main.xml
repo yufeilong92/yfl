@@ -40,7 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="cannle" />
-
+  <cn.yfl.myapplication.TimerTextView
+      android:layout_width="match_parent"
+      android:id="@+id/timer_tv"
+      android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rlv_content"

@@ -27,7 +27,9 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(MainActivity2.TITLE, "mainactivity2")
             startActivity(intent)
         }
-
+        timer_tv.setOnClickListener {
+            timer_tv.start()
+        }
         btn_show.setOnClickListener {
             getInstance.showLoading(this)
         }
