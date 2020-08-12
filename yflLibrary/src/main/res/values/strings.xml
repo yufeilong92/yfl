@@ -24,4 +24,5 @@
     <string name="btnEqu" translatable="false">=</string>
     <string name="btnSub" translatable="false">-</string>
     <string name="btnbackspace" translatable="false">backspace</string>
+    <string name="base_dialog_loading">加载中...</string>
 </resources>

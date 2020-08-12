@@ -8,19 +8,42 @@
     tools:context=".MainActivity">
 
     <cn.yfl.myapplication.TitleCustomBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:custombarBg="@color/blue"
-        app:customContentText="标题"
-        android:id="@+id/title_bar"
-        app:showTvRight="true"
-        app:customRightText="右"
-        app:customtextStyle="bold"
-        app:customIvRightRes="@mipmap/ok"
-        app:customIvLifeRes="@mipmap/ic_back"
         app:customContentColor="@color/colorPrimary"
+        app:customContentText="标题"
+        app:customIvLifeRes="@mipmap/ic_back"
+        app:customIvRightRes="@mipmap/ok"
+        app:customRightText="右"
+        app:custombarBg="@color/blue"
+        app:customtextStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:showTvRight="true" />
+
+    <Button
+        android:id="@+id/btn_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show" />
+
+    <Button
+        android:id="@+id/btn_showone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="showone" />
+
+    <Button
+        android:id="@+id/btncannler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cannle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rlv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
