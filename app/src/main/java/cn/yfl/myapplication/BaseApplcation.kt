@@ -1,6 +1,7 @@
 package cn.yfl.myapplication
 
 import android.app.Application
+import androidx.multidex.MultiDex
 import com.backpacker.yflLibrary.kotlin.KotlinAppBarUtil
 
 /**
@@ -13,6 +14,7 @@ import com.backpacker.yflLibrary.kotlin.KotlinAppBarUtil
 class BaseApplcation:Application() {
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this)
         KotlinAppBarUtil.obtainScreenWH(this)
     }
 }

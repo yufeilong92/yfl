@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
         val adapter = MainAdapter(this, list)
         val gl = GridLayoutManager(this, 1)
-        rlv_content.layoutManager=gl
+        rlv_content.layoutManager = gl
         rlv_content.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(this))
         rlv_content.adapter = adapter
     }
