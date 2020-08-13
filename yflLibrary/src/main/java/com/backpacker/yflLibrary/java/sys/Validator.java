@@ -6,12 +6,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
-
 /**
- * 校验器：利用正则表达式校验邮箱、手机号等
- * 
- * @author liujiduo
- * 
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:52
+ * @Purpose :校验器：利用正则表达式校验邮箱、手机号等
  */
 public class Validator {
 	/**

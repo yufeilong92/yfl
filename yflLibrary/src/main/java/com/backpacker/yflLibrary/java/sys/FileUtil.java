@@ -27,6 +27,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+/**
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:52
+ * @Purpose :文件管理
+ */
 
 public class FileUtil {
     private static final String TAG = "FileUtil";

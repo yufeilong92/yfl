@@ -29,13 +29,12 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
-
 /**
- * 获取手机系统相关的工具类
- * Created by zhangshixin on 2015/11/26.
- * Blog : http://blog.csdn.net/u011240877
- *
- * @description Codes there always can be better.
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:51
+ * @Purpose :获取手机系统相关的工具类
  */
 public class SystemUtils {
 	private static String TAG = SystemUtils.class.getSimpleName();

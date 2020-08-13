@@ -5,7 +5,13 @@ import android.text.TextUtils;
 
 import java.util.Locale;
 import java.util.UUID;
-
+/**
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:51
+ * @Purpose :字符串
+ */
 public class StringUtil {
 	
 	public static String getPercentString(float percent) {

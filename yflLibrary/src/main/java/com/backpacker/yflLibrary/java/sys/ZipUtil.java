@@ -9,9 +9,12 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-
 /**
- * 压缩文件的工具类
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:52
+ * @Purpose :压缩文件的工具类
  */
 public class ZipUtil {
     /**

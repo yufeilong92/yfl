@@ -3,13 +3,13 @@ package com.backpacker.yflLibrary.java.sys;
 import android.content.Context;
 
 import java.text.DecimalFormat;
-
 /**
- * Created by huangfangyi on 2016/12/24.
- * qq 84543217
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:51
+ * @Purpose :字符串格式化
  */
-
-
 public class TextFormater {
     private static final int GB_SP_DIFF = 160;
     private static final int[] secPosvalueList = new int[]{1601, 1637, 1833, 2078, 2274, 2302, 2433, 2594, 2787, 3106, 3212, 3472, 3635, 3722, 3730, 3858, 4027, 4086, 4390, 4558, 4684, 4925, 5249, 5600};

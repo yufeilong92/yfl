@@ -17,9 +17,12 @@ import android.view.View;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 /**
- * Created by huangjun on 2016/9/19.
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 14:52
+ * @Purpose :图片管理
  */
 public class BitmapUtil {
 
