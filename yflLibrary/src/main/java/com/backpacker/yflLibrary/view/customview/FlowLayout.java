@@ -11,7 +11,13 @@ import com.example.UtilsLibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.view.customview
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 11:33
+ * @Purpose :自定义换行
+ */
 public class FlowLayout extends ViewGroup {
     private static final String LOG_TAG = FlowLayout.class.getSimpleName();
 
