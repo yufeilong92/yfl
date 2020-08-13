@@ -24,12 +24,25 @@ public class PhotoViewPager extends ViewPager {
         super(context, attrs);
     }
 
+    //是否可以进行滑动
+    private boolean isSlide = false;
+
+    public void setSlide(boolean slide) {
+        this.isSlide = slide;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         try {
-            return super.onInterceptTouchEvent(ev);
+            return this.isSlide && super.onInterceptTouchEvent(ev);
         } catch (IllegalArgumentException e) {
-            return false ;
+            return false;
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return this.isSlide && super.onTouchEvent(event);
+    }
 }
+
