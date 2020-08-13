@@ -10,10 +10,12 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.EditText;
 import com.example.UtilsLibrary.R;
-
-
 /**
- * Created by XIAS on 2018/9/17.
+ * @Author : YFL  is Creating a porject in del
+ * @Package 
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 11:14
+ * @Purpose :密码键盘
  */
 
 public class CEditText extends androidx.appcompat.widget.AppCompatEditText {

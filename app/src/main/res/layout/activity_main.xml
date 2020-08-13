@@ -40,6 +40,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="cannle" />
+    <com.backpacker.yflLibrary.view.customview.CEditText
+        android:layout_width="match_parent"
+        android:text="00"
+        app:circleColor="@color/red_one"
+        app:circleRadius="@dimen/dp_4"
+        app:count="6"
+        android:inputType="number"
+        app:stokesColor="@color/red_one"
+        app:spaceWidth="@dimen/dp_1"
+        app:lineColor="@color/red_one"
+        app:focusStokeColor="@color/red_one"
+        app:focusLineColor="@color/text_green"
+        app:height="@dimen/dp_30"
+        android:layout_height="wrap_content"/>
   <cn.yfl.myapplication.TimerTextView
       android:layout_width="match_parent"
       android:id="@+id/timer_tv"
