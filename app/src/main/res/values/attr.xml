@@ -23,4 +23,5 @@
         <attr name="showTvRight" format="boolean" />
 
     </declare-styleable>
+
 </resources>

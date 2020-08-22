@@ -2,6 +2,13 @@ package com.backpacker.yflLibrary.java.sys;
 
 import java.io.IOException;
 import java.io.StringReader;
+/**
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.java.sys
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/13 16:40
+ * @Purpose :md5 辅助类
+ */
 
 public class HexDump {
 	class HexTablifier {
