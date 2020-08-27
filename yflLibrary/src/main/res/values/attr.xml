@@ -17,10 +17,11 @@
             <enum name="auto" value="-65536" />
             <enum name="align" value="-65537" />
         </attr>
-        <!--        排间距-->
+        <!--        上下间距-->
         <attr name="flRowSpacing" format="enum|dimension">
             <enum name="auto" value="-65536" />
         </attr>
+        <!--       数据排版 是否从右面开始-->
         <attr name="flRtl" format="boolean" />
         <!--        最大行数-->
         <attr name="flMaxRows" format="integer" />
@@ -31,6 +32,7 @@
             <enum name="center" value="0x10" />
             <enum name="bottom" value="0x50" />
         </attr>
+        <!--        item 位置-->
         <attr name="android:gravity" />
     </declare-styleable>
     <declare-styleable name="gridPasswordView">
