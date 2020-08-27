@@ -471,4 +471,18 @@ object KotlinUtil {
     fun showOrInvisibleView(v:View,show:Boolean){
         v.visibility=if (show)View.VISIBLE else View.INVISIBLE
     }
+
+    /**
+     * @param k 从右到左开始位置
+     * @param num 数据
+     * @param number 保留从右到左开始位置后几位数  1位 10 2位100 3位1000
+     */
+    fun getKNumber(k: Int, num: Int,number:Int): Int {
+        //如果k越界，则返回-1
+        return if (Math.pow(10.0, k - 1.toDouble()) > num) {
+            -1
+        } else {
+            num / Math.pow(10.0, k - 1.toDouble()).toInt() % number
+        }
+    }
 }
