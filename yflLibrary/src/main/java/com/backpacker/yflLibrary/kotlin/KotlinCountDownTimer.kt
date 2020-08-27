@@ -72,10 +72,10 @@ object KotlinCountDownTimer {
 
     /***
      * @param mContext
-     * @param finisColor 结束颜色
-     * @param mFinishBgColor 结束背景颜色
      * @param defaultColor 默认颜色
      * @param defaultBgColor 默认背景颜色
+     * @param finisColor 结束颜色
+     * @param mFinishBgColor 结束背景颜色
      * @param btn  按钮
      * @return
      */
