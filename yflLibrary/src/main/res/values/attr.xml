@@ -6,19 +6,25 @@
     </declare-styleable>
     <declare-styleable name="FlowLayout">
         <attr name="flFlow" format="boolean" />
+        <!--        每个item间隔-->
         <attr name="flChildSpacing" format="enum|dimension">
             <enum name="auto" value="-65536" />
         </attr>
+        <!--        最小间隔-->
         <attr name="flMinChildSpacing" format="dimension" />
+        <!--        最后一排的item间距-->
         <attr name="flChildSpacingForLastRow" format="enum|dimension">
             <enum name="auto" value="-65536" />
             <enum name="align" value="-65537" />
         </attr>
+        <!--        排间距-->
         <attr name="flRowSpacing" format="enum|dimension">
             <enum name="auto" value="-65536" />
         </attr>
         <attr name="flRtl" format="boolean" />
+        <!--        最大行数-->
         <attr name="flMaxRows" format="integer" />
+        <!--        垂直重力-->
         <attr name="flRowVerticalGravity" format="enum">
             <enum name="auto" value="-65536" />
             <enum name="top" value="0x30" />
@@ -178,25 +184,33 @@
 
 
     <declare-styleable name="TitleCustomBar">
+        <!--        自定义背景-->
         <attr name="custombarBg" format="color" />
+        <!--        自定义背景图片-->
         <attr name="custombgDrawable" format="reference" />
-
+        <!--         自定义左侧图片-->
         <attr name="customIvLifeRes" format="reference" />
-
+        <!--         自定义右侧图片-->
         <attr name="customIvRightRes" format="reference" />
-
+        <!--        右侧文字-->
         <attr name="customRightText" format="string" />
+        <!--        右侧文字颜色-->
         <attr name="customRightColor" format="color" />
+        <!--        右侧大小-->
         <attr name="customRightSize" format="dimension" />
-
+        <!--        中间文字-->
         <attr name="customContentText" format="string" />
+        <!--        中间颜色-->
         <attr name="customContentColor" format="color" />
+        <!--        中间大小-->
         <attr name="customContentSize" format="dimension" />
-        <attr name="customtextStyle"  format="integer" >
+        <!--        自定义大小格式-->
+        <attr name="customtextStyle" format="integer">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
         </attr>
+        <!--        是否显示右侧-->
         <attr name="showTvRight" format="boolean" />
 
     </declare-styleable>
@@ -209,25 +223,57 @@
     </declare-styleable>
 
     <declare-styleable name="SwipePanel">
+        <!--        颜色-->
         <attr name="leftSwipeColor" format="color" />
         <attr name="topSwipeColor" format="color" />
         <attr name="rightSwipeColor" format="color" />
         <attr name="bottomSwipeColor" format="color" />
+        <!--        触发阈值-->
         <attr name="leftEdgeSize" format="dimension" />
         <attr name="topEdgeSize" format="dimension" />
         <attr name="rightEdgeSize" format="dimension" />
         <attr name="bottomEdgeSize" format="dimension" />
+        <!--        icon-->
         <attr name="leftDrawable" format="reference" />
         <attr name="topDrawable" format="reference" />
         <attr name="rightDrawable" format="reference" />
         <attr name="bottomDrawable" format="reference" />
+        <!--        是否居中-->
         <attr name="isLeftCenter" format="boolean" />
         <attr name="isTopCenter" format="boolean" />
         <attr name="isRightCenter" format="boolean" />
         <attr name="isBottomCenter" format="boolean" />
+        <!--        是否可用-->
         <attr name="isLeftEnabled" format="boolean" />
         <attr name="isTopEnabled" format="boolean" />
         <attr name="isRightEnabled" format="boolean" />
         <attr name="isBottomEnabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="NiceImageView">
+        <!--       是否显示为圆形（默认为矩形）-->
+        <attr name="is_circle" format="boolean" />
+        <!--        border、inner_border是否覆盖图片内容-->
+        <attr name="is_cover_src" format="boolean" />
+        <!--        统一设置四个角的圆角半径-->
+        <attr name="corner_radius" format="dimension" />
+        <!--        左上角圆角半径-->
+        <attr name="corner_top_left_radius" format="dimension" />
+        <!--        右上角圆角半径-->
+        <attr name="corner_top_right_radius" format="dimension" />
+        <!--        左下角圆角半径-->
+        <attr name="corner_bottom_left_radius" format="dimension" />
+        <!--        右下角圆角半径-->
+        <attr name="corner_bottom_right_radius" format="dimension" />
+        <!--        边框宽度-->
+        <attr name="border_width" format="dimension" />
+        <!--        边框颜色-->
+        <attr name="border_color" format="color" />
+        <!--        相当于内层边框（is_circle为true时支持）-->
+        <attr name="inner_border_width" format="dimension" />
+        <!--        内边框颜色-->
+        <attr name="inner_border_color" format="color" />
+        <!--        图片上绘制的遮罩颜色-->
+        <attr name="mask_color" format="color" />
     </declare-styleable>
 </resources>
