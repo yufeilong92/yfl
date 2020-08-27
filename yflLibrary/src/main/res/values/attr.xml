@@ -161,15 +161,6 @@
         <attr name="headerTextColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="calendar_cell">
-        <attr name="state_selectable" format="boolean" />
-        <attr name="state_current_month" format="boolean" />
-        <attr name="state_today" format="boolean" />
-        <attr name="state_range_first" format="boolean" />
-        <attr name="state_range_middle" format="boolean" />
-        <attr name="state_range_last" format="boolean" />
-        <attr name="state_highlighted" format="boolean" />
-    </declare-styleable>
     <declare-styleable name="AttachButton">
         <!--是否需要自动吸边-->
         <attr name="customIsAttach" format="boolean" />
@@ -225,6 +216,7 @@
 
     </declare-styleable>
     <declare-styleable name="CustomMarqueeView">
+        <!--        跑马灯速度-->
         <attr name="customScrollSpeed">
             <enum name="fast" value="9" />
             <enum name="medium" value="6" />
