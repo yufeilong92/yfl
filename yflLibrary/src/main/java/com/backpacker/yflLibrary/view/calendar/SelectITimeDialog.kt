@@ -13,7 +13,13 @@ import kotlinx.android.synthetic.main.dialog_select_time.*
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import java.util.*
-
+/**
+ * @Author : YFL  is Creating a porject in del
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/8/27 15:40
+ * @Purpose :选择区域时间对话框
+ */
 abstract class SelectITimeDialog(var mContext: Context) : AlertDialog(mContext, R.style.dialog) {
 
     private var metrics: DisplayMetrics = context.resources.displayMetrics

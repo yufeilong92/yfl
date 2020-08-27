@@ -142,13 +142,21 @@
 
     <declare-styleable name="CalendarPickerView">
         <attr name="android:background" />
+        <!--        间隔线颜色-->
         <attr name="dividerColor" format="color" />
+        <!--        每个日期背景-->
         <attr name="dayBackground" format="reference" />
+        <!--        每个日期字体颜色-->
         <attr name="dayTextColor" format="color" />
+        <!--        星期几颜色-->
         <attr name="dayHeaderTextColor" format="color" />
+        <!--        字体类型-->
         <attr name="titleTextStyle" format="reference" />
+        <!--        是否显示头部-->
         <attr name="displayHeader" format="boolean" />
+        <!--        显示日头部-->
         <attr name="displayDayNamesHeaderRow" format="boolean" />
+        <!--        总是数字数字-->
         <attr name="displayAlwaysDigitNumbers" format="boolean" />
         <attr name="headerTextColor" format="color" />
     </declare-styleable>
