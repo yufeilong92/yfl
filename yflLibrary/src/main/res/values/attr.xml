@@ -286,4 +286,91 @@
         <!--        图片上绘制的遮罩颜色-->
         <attr name="mask_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="labels_view">
+<!--        //设置标签的选择类型，有NONE、SINGLE、SINGLE_IRREVOCABLY和MULTI四种类型。-->
+        <attr name="selectType" format="enum">
+            <enum name="NONE" value="1" />
+            <enum name="SINGLE" value="2" />
+            <enum name="SINGLE_IRREVOCABLY" value="3" />
+            <enum name="MULTI" value="4" />
+        </attr>
+<!--        // 设置标签文本显示方向-->
+        <attr name="labelGravity">
+            <!-- Push object to the top of its container, not changing its size. -->
+            <flag name="top" value="0x30" />
+            <!-- Push object to the bottom of its container, not changing its size. -->
+            <flag name="bottom" value="0x50" />
+            <!-- Push object to the left of its container, not changing its size. -->
+            <flag name="left" value="0x03" />
+            <!-- Push object to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05" />
+            <!-- Place object in the vertical center of its container, not changing its size. -->
+            <flag name="center_vertical" value="0x10" />
+            <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill_vertical" value="0x70" />
+            <!-- Place object in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01" />
+            <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
+            <flag name="fill_horizontal" value="0x07" />
+            <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+            <flag name="center" value="0x11" />
+            <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill" value="0x77" />
+            <!-- Additional option that can be set to have the top and/or bottom edges of
+                 the child clipped to its container's bounds.
+                 The clip will be based on the vertical gravity: a top gravity will clip the bottom
+                 edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
+            <flag name="clip_vertical" value="0x80" />
+            <!-- Additional option that can be set to have the left and/or right edges of
+                 the child clipped to its container's bounds.
+                 The clip will be based on the horizontal gravity: a left gravity will clip the right
+                 edge, a right gravity will clip the left edge, and neither will clip both edges. -->
+            <flag name="clip_horizontal" value="0x08" />
+            <!-- Push object to the beginning of its container, not changing its size. -->
+            <flag name="start" value="0x00800003" />
+            <!-- Push object to the end of its container, not changing its size. -->
+            <flag name="end" value="0x00800005" />
+        </attr>
+<!--        //设置最大的选择数量，只有selectType等于MULTI时有效-->
+        <attr name="maxSelect" format="integer" />
+<!--        //设置最少的选择数量，只有selectType等于MULTI时有效。
+        //注意：minSelect只限制用户手动点击取消选中时的效果。调用setSelects()、clearAllSelect()等方法改变标签的选中状态时，不受minSelect影响。-->
+        <attr name="minSelect" format="integer" />
+<!--        // 设置是否单行显示-->
+        <attr name="maxLines" format="integer" />
+<!--        //设置为指示器模式，只能看，不能手动操作。这种模式下，用户不能通过手动点击改变标签的选中状态。-->
+<!--        //但是仍然可以通过调用setSelects()、clearAllSelect()等方法改变标签的选中状态。-->
+        <attr name="isIndicator" format="boolean" />
+<!--        //设置标签的文字颜色-->
+        <attr name="labelTextColor" format="reference|color" />
+<!--        //设置标签的文字大小（单位是px）-->
+        <attr name="labelTextSize" format="dimension" />
+        <!--        //设置标签的文字宽度（单位是px）-->
+        <attr name="labelTextWidth" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <!--        //设置标签的文字高度（单位是px）-->
+        <attr name="labelTextHeight" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+<!--        //设置标签内边距-->
+        <attr name="labelTextPadding" format="dimension" />
+        <attr name="labelTextPaddingLeft" format="dimension" />
+        <attr name="labelTextPaddingTop" format="dimension" />
+        <attr name="labelTextPaddingRight" format="dimension" />
+        <attr name="labelTextPaddingBottom" format="dimension" />
+<!--        //设置行间隔-->
+        <attr name="lineMargin" format="dimension" />
+<!--        //设置标签的间隔-->
+        <attr name="wordMargin" format="dimension" />
+<!--        //设置标签背景-->
+        <attr name="labelBackground" format="reference|color" />
+<!--        // 设置是否单行显示-->
+        <attr name="singleLine" format="boolean" />
+    </declare-styleable>
 </resources>

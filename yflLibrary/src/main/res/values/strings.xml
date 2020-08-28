@@ -25,4 +25,7 @@
     <string name="btnSub" translatable="false">-</string>
     <string name="btnbackspace" translatable="false">backspace</string>
     <string name="base_dialog_loading">加载中...</string>
+    <!--    多选-->
+    <item name="tag_key_data" type="id" />
+    <item name="tag_key_position" type="id" />
 </resources>
