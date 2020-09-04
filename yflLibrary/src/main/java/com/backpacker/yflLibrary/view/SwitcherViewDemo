@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <com.maning.library.SwitcherView
+        android:id="@+id/switcherView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="#fff58c"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:switcherRollingTime="3000"
+        app:switcherTextColor="#2fb3f1"
+        app:switcherTextSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnStop"
+            android:text="暂停" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnStart"
+            android:text="开始" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnUpdate"
+        android:text="修改数据源" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnNext"
+        android:text="滚动到下一个" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnAnim01"
+            android:text="动画：从上到下" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnAnim02"
+            android:text="动画：从下到上" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnAnim03"
+            android:text="动画：从左到右" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnAnim04"
+            android:text="动画：从右到左" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnCustomAnmi"
+        android:text="自定义以切换动画" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnUpdateTime01"
+            android:text="修改时间1S" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnUpdateTime02"
+            android:text="修改时间3S" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnUpdateTime03"
+            android:text="修改时间6S" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+public class MainActivity extends AppCompatActivity {
+  private static final String TAG = "------";
+    private SwitcherView switcherView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        switcherView = (SwitcherView) findViewById(R.id.switcherView);
+
+
+        ArrayList<String> strs = new ArrayList<>();
+        strs.add("双十一购物节");
+        strs.add("双十二购物节");
+        strs.add("京东购物节");
+        strs.add("买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买买");
+        switcherView.setResource(strs);
+        switcherView.startRolling();
+
+        switcherView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, switcherView.getCurrentItem(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void btnStart(View view) {
+        switcherView.startRolling();
+    }
+
+    public void btnStop(View view) {
+        switcherView.stopRolling();
+    }
+
+    public void btnUpdate(View view) {
+        ArrayList<String> strs = new ArrayList<>();
+        strs.add("双十二购物节1");
+        strs.add("双十二购物节2");
+        strs.add("双十二购物节3");
+        strs.add("双十二购物节4");
+        strs.add("双十二购物节5双十二购物节5双十二购物节5双十二购物节5双十二购物节5双十二购物节5");
+        switcherView.setResource(strs);
+    }
+
+    public void btnNext(View view) {
+        switcherView.rollingToNext();
+    }
+
+    public void btnAnim01(View view) {
+        switcherView.setAnimationTop2Bottom();
+    }
+
+    public void btnAnim02(View view) {
+        switcherView.setAnimationBottom2Top();
+    }
+
+    public void btnAnim03(View view) {
+        switcherView.setAnimationLeft2Right();
+    }
+
+    public void btnAnim04(View view) {
+        switcherView.setAnimationRight2Left();
+    }
+
+    public void btnCustomAnmi(View view) {
+        switcherView.setInAnimation(R.anim.anim_custom_in);
+        switcherView.setOutAnimation(R.anim.anim_custom_out);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        switcherView.startRolling();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        switcherView.stopRolling();
+    }
+
+    @Override
+    protected void onDestroy() {
+        switcherView.destroySwitcher();
+        super.onDestroy();
+    }
+
+    public void btnUpdateTime01(View view) {
+        switcherView.setTime(1 * 1000);
+    }
+    public void btnUpdateTime02(View view) {
+        switcherView.setTime(3 * 1000);
+    }
+    public void btnUpdateTime03(View view) {
+        switcherView.setTime(6 * 1000);
+    }
