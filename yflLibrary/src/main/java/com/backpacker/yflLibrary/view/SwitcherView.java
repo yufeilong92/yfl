@@ -23,10 +23,12 @@ import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 /**
- * Created by maning on 16/7/17.
- * 垂直滚动的广告栏
+ * @Author : YFL  is Creating a porject in del
+ * @Package : com.backpacker.yflLibrary.view
+ * @Email : yufeilong92@163.com
+ * @Time :2020/9/4 17:33
+ * @Purpose :垂直滚动的广告栏
  */
 public class SwitcherView extends TextSwitcher implements ViewSwitcher.ViewFactory, View.OnTouchListener {
 
