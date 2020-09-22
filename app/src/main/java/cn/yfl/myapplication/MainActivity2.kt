@@ -25,6 +25,13 @@ class MainActivity2 : AppCompatActivity() {
                 Toast.makeText(this, "结束", Toast.LENGTH_SHORT).show();
             }
         }
+        img.setOnClickListener {
+            if (vertical.isDrawerOpen()) {
+                vertical.closeDrawer()
+            } else {
+                vertical.openDrawerView()
+            }
+        }
 
     }
 }
