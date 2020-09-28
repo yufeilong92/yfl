@@ -41,7 +41,7 @@
         <TextView
             android:id="@+id/gm_tv_custom_life_title"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:minWidth="@dimen/dp_48"
             android:visibility="gone"
