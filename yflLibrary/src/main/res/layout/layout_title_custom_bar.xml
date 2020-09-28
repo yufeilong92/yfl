@@ -36,8 +36,7 @@
             android:layout_height="@dimen/dp_48"
             android:padding="@dimen/dp_12"
             android:scaleType="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_custom_bar" />
+            />
 
         <TextView
             android:id="@+id/gm_tv_custom_life_title"
@@ -46,9 +45,7 @@
             android:gravity="center"
             android:minWidth="@dimen/dp_48"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/gm_view_my_title_bg"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg" />
+           />
     </LinearLayout>
 
     <TextView
@@ -83,7 +80,7 @@
         android:paddingRight="@dimen/dp_16"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/gm_view_my_title_bg"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toRightOf="@id/gm_view_my_title_bg"
         app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg" />
 
 
