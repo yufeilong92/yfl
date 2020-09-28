@@ -69,8 +69,8 @@
         android:padding="@dimen/dp_12"
         android:visibility="gone"
         android:scaleType="center"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="@id/gm_view_my_title_bg"
+        app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg" />
 
     <TextView
         android:id="@+id/gm_tv_custom_right_title"
