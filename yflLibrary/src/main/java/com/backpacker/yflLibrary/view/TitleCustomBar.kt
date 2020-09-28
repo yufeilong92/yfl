@@ -101,21 +101,25 @@ class TitleCustomBar : ConstraintLayout {
             tv_Content.setTextColor(content_Color)
             tv_Content.setTypeface(Typeface.defaultFromStyle(typeface))
 
-            val show = a.getBoolean(R.styleable.TitleCustomBar_showTvOrIvRight, false)
-            tv_right.visibility = if (show) View.VISIBLE else View.GONE
-            iv_right.visibility = if (!show) View.VISIBLE else View.GONE
+            val showLife = a.getBoolean(R.styleable.TitleCustomBar_showLife, true)
+            val showRight = a.getBoolean(R.styleable.TitleCustomBar_showRight, true)
 
             val lifeshow = a.getBoolean(R.styleable.TitleCustomBar_showTvOrIvLife, false)
-            tv_life.visibility = if (lifeshow) View.VISIBLE else View.GONE
-            iv_life.visibility = if (!lifeshow) View.VISIBLE else View.GONE
-
-            val showLife = a.getBoolean(R.styleable.TitleCustomBar_showLife, true)
-            tv_life.visibility=if (showLife)View.VISIBLE else View.GONE
-            iv_life.visibility=if (showLife)View.VISIBLE else View.GONE
-
-            val showRight = a.getBoolean(R.styleable.TitleCustomBar_showRight, true)
-            tv_right.visibility=if (showRight)View.VISIBLE else View.GONE
-            iv_right.visibility=if (showRight)View.VISIBLE else View.GONE
+            if (showLife){
+                tv_life.visibility = if (lifeshow) View.VISIBLE else View.GONE
+                iv_life.visibility = if (!lifeshow) View.VISIBLE else View.GONE
+            }else {
+                tv_life.visibility = View.GONE
+                iv_life.visibility = View.GONE
+            }
+            val show = a.getBoolean(R.styleable.TitleCustomBar_showTvOrIvRight, false)
+            if (showRight){
+                tv_right.visibility = if (show) View.VISIBLE else View.GONE
+                iv_right.visibility = if (!show) View.VISIBLE else View.GONE
+            }else{
+                tv_right.visibility = View.GONE
+                iv_right.visibility =  View.GONE
+            }
 
             a.recycle()
             iv_right.setOnClickListener {
