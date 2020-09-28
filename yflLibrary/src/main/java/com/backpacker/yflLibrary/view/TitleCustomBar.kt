@@ -40,12 +40,12 @@ class TitleCustomBar : ConstraintLayout {
 
     private fun init(context: Context, attributeSet: AttributeSet) {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_title_custom_bar, this)
-        val iv_life = view.findViewById<ImageView>(R.id.iv_title_custom_back)
-        val tv_life = view.findViewById<TextView>(R.id.tv_custom_life_title)
-        val viewtitlebg = view.findViewById<View>(R.id.view_my_title_bg)
+        val iv_life = view.findViewById<ImageView>(R.id.gm_iv_title_custom_back)
+        val tv_life = view.findViewById<TextView>(R.id.gm_tv_custom_life_title)
+        val viewtitlebg = view.findViewById<View>(R.id.gm_view_my_title_bg)
         val tv_Content = view.findViewById<TextView>(R.id.activityid)
-        val iv_right = view.findViewById<ImageView>(R.id.iv_custom_title_righit)
-        val tv_right = view.findViewById<TextView>(R.id.tv_custom_right_title)
+        val iv_right = view.findViewById<ImageView>(R.id.gm_iv_custom_title_righit)
+        val tv_right = view.findViewById<TextView>(R.id.gm_tv_custom_right_title)
         val mybar = view.findViewById<MyBarView>(R.id.my_custom_bar)
 
         attributeSet.let {
@@ -90,12 +90,11 @@ class TitleCustomBar : ConstraintLayout {
             tv_right.textSize = right_Size
             tv_right.setTextColor(right_Color)
 
-
             val contentComstring = a.getString(R.styleable.TitleCustomBar_customContentText)
             val content_Size = a.getDimension(R.styleable.TitleCustomBar_customContentSize, 16F)
             val content_Color =
                 a.getColor(R.styleable.TitleCustomBar_customContentColor, Color.BLACK)
-            val typeface = a.getInt( R.styleable.TitleCustomBar_customtextStyle,0)
+            val typeface = a.getInt(R.styleable.TitleCustomBar_customtextStyle, 0)
             tv_Content.text = contentComstring
             tv_Content.textSize = content_Size
             tv_Content.setTextColor(content_Color)
@@ -120,7 +119,6 @@ class TitleCustomBar : ConstraintLayout {
                 tv_right.visibility = View.GONE
                 iv_right.visibility =  View.GONE
             }
-
             a.recycle()
             iv_right.setOnClickListener {
                 if (::ivRightlistener.isInitialized) {
@@ -141,12 +139,13 @@ class TitleCustomBar : ConstraintLayout {
 
             }
             tv_life.setOnClickListener {
-                if (::tvlifelistener.isInitialized){
+                if (::tvlifelistener.isInitialized) {
                     tvlifelistener.invoke()
                 }
             }
         }
     }
+
 
 
 }

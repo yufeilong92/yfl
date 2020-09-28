@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view_my_title_bg"
+        android:id="@+id/gm_view_my_title_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,61 +21,70 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/my_custom_bar" />
 
-    <ImageView
-        android:id="@+id/iv_title_custom_back"
-        android:layout_width="@dimen/dp_48"
-        android:layout_height="@dimen/dp_48"
-        android:onClick="onHomeBack"
-        android:scaleType="center"
-        android:padding="@dimen/dp_12"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_custom_bar" />
-
-    <TextView
-        android:id="@+id/tv_custom_life_title"
+    <LinearLayout
+        android:id="@+id/gm_ll_custom_bg"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:minWidth="@dimen/dp_48"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/view_my_title_bg"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/gm_view_my_title_bg"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/view_my_title_bg" />
+        app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg">
+
+        <ImageView
+            android:id="@+id/gm_iv_title_custom_back"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:padding="@dimen/dp_12"
+            android:scaleType="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_custom_bar" />
+
+        <TextView
+            android:id="@+id/gm_tv_custom_life_title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:minWidth="@dimen/dp_48"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/gm_view_my_title_bg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/activityid"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_title_custom_back"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/iv_title_custom_back"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_title_custom_back" />
+        app:layout_constraintBottom_toBottomOf="@id/gm_view_my_title_bg"
+        app:layout_constraintLeft_toRightOf="@id/gm_ll_custom_bg"
+        app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg" />
 
     <ImageView
-        android:id="@+id/iv_custom_title_righit"
+        android:id="@+id/gm_iv_custom_title_righit"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:padding="@dimen/dp_12"
         android:visibility="gone"
+        android:scaleType="center"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_title_custom_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_custom_right_title"
+        android:id="@+id/gm_tv_custom_right_title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
         android:minWidth="@dimen/dp_48"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:paddingRight="@dimen/dp_16"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/iv_title_custom_back"
+        app:layout_constraintBottom_toBottomOf="@id/gm_view_my_title_bg"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_title_custom_back" />
+        app:layout_constraintTop_toTopOf="@id/gm_view_my_title_bg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
