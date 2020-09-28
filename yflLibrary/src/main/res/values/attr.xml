@@ -192,15 +192,27 @@
     </declare-styleable>
 
 
+
     <declare-styleable name="TitleCustomBar">
+        <!--        自定义标题栏背景-->
+        <attr name="customTopbarBg" format="color" />
         <!--        自定义背景-->
         <attr name="custombarBg" format="color" />
         <!--        自定义背景图片-->
         <attr name="custombgDrawable" format="reference" />
+        <!--        自定义标题栏背景图片-->
+        <attr name="custombgTopDrawable" format="reference" />
         <!--         自定义左侧图片-->
         <attr name="customIvLifeRes" format="reference" />
         <!--         自定义右侧图片-->
         <attr name="customIvRightRes" format="reference" />
+
+        <!--        左侧文字-->
+        <attr name="customLifeText" format="string" />
+        <!--        左侧文字颜色-->
+        <attr name="customLifeColor" format="color" />
+        <!--        左侧大小-->
+        <attr name="customLifeSize" format="dimension" />
         <!--        右侧文字-->
         <attr name="customRightText" format="string" />
         <!--        右侧文字颜色-->
@@ -219,8 +231,14 @@
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
         </attr>
+        <!--        是否图片文字显示右侧-->
+        <attr name="showTvOrIvRight" format="boolean" />
+        <!--        是否图片文字显示左侧-->
+        <attr name="showTvOrIvLife" format="boolean" />
         <!--        是否显示右侧-->
-        <attr name="showTvRight" format="boolean" />
+        <attr name="showRight" format="boolean"/>
+        <!--        是否显示左侧-->
+        <attr name="showLife" format="boolean"/>
 
     </declare-styleable>
     <declare-styleable name="CustomMarqueeView">

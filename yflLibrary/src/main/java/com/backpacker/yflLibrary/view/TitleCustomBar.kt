@@ -21,13 +21,14 @@ import com.example.UtilsLibrary.R
 class TitleCustomBar : ConstraintLayout {
 
 
-     lateinit var lifelistener: () -> Unit
+    lateinit var ivlifelistener: () -> Unit
+    lateinit var tvlifelistener: () -> Unit
 
 
-     lateinit var tvRightlistener: () -> Unit
+    lateinit var tvRightlistener: () -> Unit
 
 
-     lateinit var ivRightlistener: () -> Unit
+    lateinit var ivRightlistener: () -> Unit
 
 
     constructor(
@@ -40,7 +41,9 @@ class TitleCustomBar : ConstraintLayout {
     private fun init(context: Context, attributeSet: AttributeSet) {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_title_custom_bar, this)
         val iv_life = view.findViewById<ImageView>(R.id.iv_title_custom_back)
-        val tv_Content = view.findViewById<TextView>(R.id.tv_custom_title)
+        val tv_life = view.findViewById<TextView>(R.id.tv_custom_life_title)
+        val viewtitlebg = view.findViewById<View>(R.id.view_my_title_bg)
+        val tv_Content = view.findViewById<TextView>(R.id.activityid)
         val iv_right = view.findViewById<ImageView>(R.id.iv_custom_title_righit)
         val tv_right = view.findViewById<TextView>(R.id.tv_custom_right_title)
         val mybar = view.findViewById<MyBarView>(R.id.my_custom_bar)
@@ -48,21 +51,37 @@ class TitleCustomBar : ConstraintLayout {
         attributeSet.let {
             val a = context.obtainStyledAttributes(attributeSet, R.styleable.TitleCustomBar)
             val barbg = a.getColor(R.styleable.TitleCustomBar_custombarBg, Color.TRANSPARENT)
+            val topbarbg = a.getColor(R.styleable.TitleCustomBar_customTopbarBg, Color.TRANSPARENT)
             val drawable = a.getResourceId(R.styleable.TitleCustomBar_custombgDrawable, 0)
+            val topdrawable = a.getResourceId(R.styleable.TitleCustomBar_custombgTopDrawable, 0)
             if (drawable == 0) {
-                mybar.setBackgroundColor(barbg)
+                viewtitlebg.setBackgroundColor(barbg)
             } else {
-                mybar.setBackgroundResource(drawable)
+                viewtitlebg.setBackgroundResource(drawable)
             }
+            if (topdrawable == 0) {
+                mybar.setBackgroundColor(topbarbg)
+            } else {
+                mybar.setBackgroundResource(topdrawable)
+            }
+
 
             val life = a.getResourceId(R.styleable.TitleCustomBar_customIvLifeRes, 0)
             if (life != 0) {
                 iv_life.setImageResource(life)
             }
+
             val right = a.getResourceId(R.styleable.TitleCustomBar_customIvRightRes, 0)
             if (right != 0) {
                 iv_right.setImageResource(right)
             }
+
+            val lifeComstring = a.getString(R.styleable.TitleCustomBar_customLifeText)
+            val life_Size = a.getDimension(R.styleable.TitleCustomBar_customLifeSize, 14F)
+            val life_Color = a.getColor(R.styleable.TitleCustomBar_customLifeColor, Color.BLACK)
+            tv_life.text = lifeComstring
+            tv_life.textSize = life_Size
+            tv_life.setTextColor(life_Color)
 
             val rightComstring = a.getString(R.styleable.TitleCustomBar_customRightText)
             val right_Size = a.getDimension(R.styleable.TitleCustomBar_customRightSize, 14F)
@@ -71,8 +90,9 @@ class TitleCustomBar : ConstraintLayout {
             tv_right.textSize = right_Size
             tv_right.setTextColor(right_Color)
 
+
             val contentComstring = a.getString(R.styleable.TitleCustomBar_customContentText)
-            val content_Size = a.getDimension(R.styleable.TitleCustomBar_customContentSize, 14F)
+            val content_Size = a.getDimension(R.styleable.TitleCustomBar_customContentSize, 16F)
             val content_Color =
                 a.getColor(R.styleable.TitleCustomBar_customContentColor, Color.BLACK)
             val typeface = a.getInt( R.styleable.TitleCustomBar_customtextStyle,0)
@@ -81,9 +101,22 @@ class TitleCustomBar : ConstraintLayout {
             tv_Content.setTextColor(content_Color)
             tv_Content.setTypeface(Typeface.defaultFromStyle(typeface))
 
-            val show = a.getBoolean(R.styleable.TitleCustomBar_showTvRight, false)
+            val show = a.getBoolean(R.styleable.TitleCustomBar_showTvOrIvRight, false)
             tv_right.visibility = if (show) View.VISIBLE else View.GONE
             iv_right.visibility = if (!show) View.VISIBLE else View.GONE
+
+            val lifeshow = a.getBoolean(R.styleable.TitleCustomBar_showTvOrIvLife, false)
+            tv_life.visibility = if (lifeshow) View.VISIBLE else View.GONE
+            iv_life.visibility = if (!lifeshow) View.VISIBLE else View.GONE
+
+            val showLife = a.getBoolean(R.styleable.TitleCustomBar_showLife, true)
+            tv_life.visibility=if (showLife)View.VISIBLE else View.GONE
+            iv_life.visibility=if (showLife)View.VISIBLE else View.GONE
+
+            val showRight = a.getBoolean(R.styleable.TitleCustomBar_showRight, true)
+            tv_right.visibility=if (showRight)View.VISIBLE else View.GONE
+            iv_right.visibility=if (showRight)View.VISIBLE else View.GONE
+
             a.recycle()
             iv_right.setOnClickListener {
                 if (::ivRightlistener.isInitialized) {
@@ -98,10 +131,15 @@ class TitleCustomBar : ConstraintLayout {
 
             }
             iv_life.setOnClickListener {
-                if (::lifelistener.isInitialized) {
-                    lifelistener.invoke()
+                if (::ivlifelistener.isInitialized) {
+                    ivlifelistener.invoke()
                 }
 
+            }
+            tv_life.setOnClickListener {
+                if (::tvlifelistener.isInitialized){
+                    tvlifelistener.invoke()
+                }
             }
         }
     }
