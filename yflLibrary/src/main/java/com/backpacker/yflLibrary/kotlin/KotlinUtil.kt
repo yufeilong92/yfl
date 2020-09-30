@@ -300,16 +300,15 @@ object KotlinUtil {
     }
 
 
-    private val MIN_CLICK_DELAY_TIME_ONE = 1000
     private var lastClickTime_ONE: Long = 0
 
     /***
-     * 处理多次点击问题
+     * 处理多次点击问题  true 多次 false  不是
      * @return
      */
-    fun handleOnDoubleClick_ONE(): Boolean {
+    fun handleOnDoubleClick_ONE(douTime:Int): Boolean {
         val l = System.currentTimeMillis()
-        if (l - lastClickTime_ONE > MIN_CLICK_DELAY_TIME_ONE) {
+        if (l - lastClickTime_ONE > douTime) {
             lastClickTime_ONE = l
             return false
         }
