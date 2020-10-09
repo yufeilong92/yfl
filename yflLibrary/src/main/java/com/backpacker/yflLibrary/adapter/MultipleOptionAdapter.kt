@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.backpacker.yflLibrary.view.dialog.MultipleOptionsBuildeDialog
 import com.example.UtilsLibrary.R
 
 /**
@@ -17,10 +18,22 @@ import com.example.UtilsLibrary.R
  * @Time :2020/9/30 17:52
  * @Purpose :多选对话框适配器
  */
-class MultipleOptionAdapter(var mContext: Context, var mData: MutableList<SelectRlv>) :
+class MultipleOptionAdapter(var mContext: Context, var mData: MutableList<MultipleOptionsBuildeDialog.SelectRlv>) :
     RecyclerView.Adapter<MultipleOptionAdapter.ViewHodle>() {
+    //选择图片
+    private var mSelectIcon: Int = R.mipmap.ic_gm_select_s
 
+    //没有选中图片
+    private var mNoSelectIcon: Int = R.mipmap.ic_gm_select_n
 
+    //是否显示图片
+    private var mShowIcon: Boolean = true
+
+    private var mSelectColor: Int = Color.RED
+
+    private var mNoSelectColor: Int = Color.BLACK
+
+    private var mTextGravity: Int = -1
 
     interface RecyclerItemListener {
         fun itemClickListener(position: Int)
@@ -44,25 +57,42 @@ class MultipleOptionAdapter(var mContext: Context, var mData: MutableList<Select
 
     override fun onBindViewHolder(holder: ViewHodle, position: Int) {
         val selectRlv = mData[position]
-        holder.mIv.setImageResource(if (selectRlv.check) R.mipmap.ic_gm_select_s else R.mipmap.ic_gm_select_n)
+        if (mShowIcon) {
+            holder.mIv.setImageResource(if (selectRlv.check) mSelectIcon else mNoSelectIcon)
+        } else {
+            holder.mIv.visibility = View.GONE
+        }
+        if (mTextGravity != -1) {
+            holder.mTv.gravity = mTextGravity
+        }
         holder.mTv.setText(selectRlv.name)
-        holder.mTv.setTextColor((if (selectRlv.check) Color.GREEN else Color.BLACK))
+        holder.mTv.setTextColor((if (selectRlv.check) mSelectColor else mNoSelectColor))
         holder.view.setOnClickListener {
             listener?.itemClickListener(position)
         }
     }
 
+    fun setSelectIcom(noSelect: Int, select: Int) {
+        mSelectIcon = select
+        mNoSelectIcon = noSelect
+    }
+
+    fun setShowIcon(show: Boolean) {
+        mShowIcon = show
+    }
+
+    fun setSelectColor(noSelect: Int, select: Int) {
+        mSelectColor = select
+        mNoSelectColor = noSelect
+    }
+
     override fun getItemCount(): Int {
         return mData.size
     }
-    data  class SelectRlv(
-        var name: String = "",
-        var id: String = "",
-        var check: Boolean
-    ) {
-        override fun toString(): String {
-            return "SelectRlv(name='$name', id='$id', check=$check)"
-        }
+
+    fun setTextGravity(gravity: Int) {
+        mTextGravity = gravity
+
     }
 
 }

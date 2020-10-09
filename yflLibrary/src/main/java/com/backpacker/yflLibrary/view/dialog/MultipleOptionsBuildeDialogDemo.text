@@ -1,0 +1,28 @@
+package com.backpacker.yflLibrary.view.dialog
+
+/**
+ * @Author : YFL  is Creating a porject in My Application
+ * @Package com.backpacker.yflLibrary.view.dialog
+ * @Email : yufeilong92@163.com
+ * @Time :2020/10/9 9:03
+ * @Purpose :
+ */
+/*
+MultipleOptionsBuildeDialog.builde(this@MainActivity)
+.setData(mArray!!)
+.setGravityButtom(false)
+.setIsFilter(false)
+.setSelectColor(R.mipmap.ic_gm_select_s,R.mipmap.ic_gm_select_n)
+.setSelectColor(Color.RED,Color.GRAY)
+.setSelectType(MultipleOptionsBuildeDialog.SelectType.SINGLE)
+.setShowIcon(false)
+.setTvGravity(Gravity.CENTER)
+.setSingleDataListener {
+    Toast.makeText(this@MainActivity, "${it.toString()}", Toast.LENGTH_SHORT)
+        .show();
+}
+.setMultipleDataListener {
+    Toast.makeText(this@MainActivity, "${it.toString()}", Toast.LENGTH_SHORT)
+        .show();
+}
+.show()*/
