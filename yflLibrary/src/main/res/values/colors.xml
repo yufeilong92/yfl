@@ -85,6 +85,4 @@
     <color name="weixin_title_color">#efefef</color>
     <color name="text_money_green">#079a50</color>
 
-    <color name="btn_cancel_color">#999999</color>
-    <color name="btn_confirm_color">#303F9F</color>
 </resources>
