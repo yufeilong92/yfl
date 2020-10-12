@@ -322,6 +322,12 @@ class MultipleOptionsBuildeDialog(
             window?.setGravity(Gravity.CENTER)
             showTopButtom(false, true, false)
         }
+        val windowManager = mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val defaultDisplay = windowManager.defaultDisplay
+        val height = defaultDisplay.height
+        val layoutParams = rlv_dialog_multiple_content.layoutParams
+        layoutParams.height = (height * 0.4).toInt()
+        rlv_dialog_multiple_content.layoutParams= layoutParams
     }
 
     private fun showTopButtom(showTop: Boolean, buttom: Boolean, line: Boolean) {
