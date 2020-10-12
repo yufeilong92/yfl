@@ -3,6 +3,8 @@ package com.backpacker.yflLibrary.view.dialog
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Point
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
@@ -324,10 +326,19 @@ class MultipleOptionsBuildeDialog(
         }
         val windowManager = mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val defaultDisplay = windowManager.defaultDisplay
-        val height = defaultDisplay.height
-        val layoutParams = rlv_dialog_multiple_content.layoutParams
-        layoutParams.height = (height * 0.4).toInt()
-        rlv_dialog_multiple_content.layoutParams= layoutParams
+        var height: Int
+        if (Build.VERSION.SDK_INT < 17) {
+            height = defaultDisplay.height
+        } else {
+            val size = Point()
+            defaultDisplay.getRealSize(size)
+            height = size.y
+        }
+        if (height != 0) {
+            val layoutParams = rlv_dialog_multiple_content.layoutParams
+            layoutParams.height = (height * 0.4).toInt()
+            rlv_dialog_multiple_content.layoutParams = layoutParams
+        }
     }
 
     private fun showTopButtom(showTop: Boolean, buttom: Boolean, line: Boolean) {
@@ -344,7 +355,7 @@ class MultipleOptionsBuildeDialog(
         SINGLE, MULTIPLE
     }
 
-    data class SelectRlv (
+    data class SelectRlv(
         var name: String = "",
         var id: String = "",
         var check: Boolean

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Point
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
@@ -17,6 +18,7 @@ import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import com.backpacker.yflLibrary.vo.Constants
 import java.io.BufferedReader
 import java.io.File
@@ -38,6 +40,30 @@ import java.net.NetworkInterface
  * @Copyright: 2019
  */
 object KotlinSystemUtil {
+    /***
+     * @param mContext
+     * @return
+     */
+    data class WithHeight(val with: Int, val height: Int)
+
+    fun getPhoneScreenWithHeight(mContext: Context): WithHeight {
+        val windowManager = mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val defaultDisplay = windowManager.defaultDisplay
+        var height: Int
+        var with: Int
+        if (Build.VERSION.SDK_INT < 17) {
+            height = defaultDisplay.height
+            with = defaultDisplay.width
+        } else {
+            val size = Point()
+            defaultDisplay.getRealSize(size)
+            height = size.y
+            with = size.x
+        }
+        return WithHeight(with, height)
+    }
+
+
     /**
      * 获取版本号
      * 也可使用 BuildConfig.VERSION_NAME 替换
@@ -75,6 +101,7 @@ object KotlinSystemUtil {
         }
         return 1
     }
+
     /**
      * 获取系统内部可用空间大小
      *
@@ -264,11 +291,11 @@ object KotlinSystemUtil {
      * @return
      */
     fun getOsVersionInt(): Int {
-       return try {
-           Build.VERSION.SDK_INT
-        }catch (e:Exception){
-          0
-       }
+        return try {
+            Build.VERSION.SDK_INT
+        } catch (e: Exception) {
+            0
+        }
 
     }
 
@@ -314,8 +341,9 @@ object KotlinSystemUtil {
     fun getPhoneImei(context: Context): String {
         val mTelephonyMgr = context
             .applicationContext.getSystemService(
-            Context.TELEPHONY_SERVICE
-        ) as TelephonyManager
+                Context.TELEPHONY_SERVICE
+            ) as TelephonyManager
+
         @SuppressLint("MissingPermission")
         val phoneImei = mTelephonyMgr.deviceId
         println("IMEI is : $phoneImei")
@@ -328,11 +356,11 @@ object KotlinSystemUtil {
      * @return 系统版本号
      */
     fun getMobileSystemVersion(): String {
-      return  try {
-        Build.VERSION.RELEASE
-        }catch (e:Exception){
-          "0.0.0"
-      }
+        return try {
+            Build.VERSION.RELEASE
+        } catch (e: Exception) {
+            "0.0.0"
+        }
     }
 
 
@@ -597,7 +625,7 @@ object KotlinSystemUtil {
             ) + "MB"
         } else if (length >= 1024) {
             sub_string = (length.toFloat() / 1024).toString().indexOf(".")
-            result = ((length.toFloat()/1024).toString() + "000").substring(
+            result = ((length.toFloat() / 1024).toString() + "000").substring(
                 0,
                 sub_string + 3
             ) + "KB"
@@ -671,6 +699,7 @@ object KotlinSystemUtil {
             )
         }
     }
+
     fun getExternalCacheDir(context: Context): File? {
         // return context.getExternalCacheDir(); API level 8
         // e.g. "<sdcard>/Android/data/<package_name>/cache/"
@@ -678,6 +707,7 @@ object KotlinSystemUtil {
         if (null == dir) dir = context.cacheDir
         return dir
     }
+
     /**
      * 判断当前版本是否兼容目标版本的方法
      *
@@ -688,6 +718,7 @@ object KotlinSystemUtil {
         val currentVersion = Build.VERSION.SDK_INT
         return currentVersion >= VersionCode
     }
+
     /**
      * 清除缓存目录
      *
@@ -725,7 +756,7 @@ object KotlinSystemUtil {
      */
     @Throws(java.lang.Exception::class)
     fun getTotalCacheSize(context: Context): String? {
-        var cacheSize= getFolderSize(context.cacheDir)
+        var cacheSize = getFolderSize(context.cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             cacheSize += getFolderSize(context.externalCacheDir!!)
         }
@@ -789,7 +820,7 @@ object KotlinSystemUtil {
     }
 
     @Throws(IOException::class)
-    private fun readTextFromUri(activity:Activity,uri: Uri): String {
+    private fun readTextFromUri(activity: Activity, uri: Uri): String {
         val stringBuilder = StringBuilder()
         activity.contentResolver.openInputStream(uri)?.use { inputStream ->
             BufferedReader(InputStreamReader(inputStream)).use { reader ->
