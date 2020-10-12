@@ -4,15 +4,17 @@ package com.backpacker.yflLibrary.view.dialog
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.DisplayMetrics
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.GridLayoutManager
 import com.backpacker.yflLibrary.adapter.MultipleOptionAdapter
-import com.backpacker.yflLibrary.view.customview.LabelsView
 import com.example.UtilsLibrary.R
 import kotlinx.android.synthetic.main.dialog_multiple_options.*
 
@@ -175,56 +177,66 @@ class MultipleOptionsBuildeDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSizeMode()
         setContentView(R.layout.dialog_multiple_options)
+        setSizeMode()
         initView()
         initListener()
     }
 
 
     private fun initListener() {
+        tv_dialog_multiple_cancle.setOnClickListener {
+            dismiss()
+        }
         btn_dialog_multiple_life.setOnClickListener {
             dismiss()
         }
+        tv_dialog_multiple_sure.setOnClickListener {
+            sureItem()
+        }
         btn_dialog_multiple_right.setOnClickListener {
-            when (mSelectType) {
-                SelectType.MULTIPLE -> {
-                    if (mData.isNullOrEmpty()) {
-                        if (::onMultipeDataListener.isInitialized) {
-                            onMultipeDataListener.invoke(null)
-                        }
-                        return@setOnClickListener
-                    }
-                    if (mIsFilter) {
-                        val filter = mData?.filter { it.check } as MutableList
-                        if (::onMultipeDataListener.isInitialized) {
-                            onMultipeDataListener.invoke(filter)
-                        }
-                        return@setOnClickListener
-                    }
-                    if (::onMultipeDataListener.isInitialized) {
-                        onMultipeDataListener.invoke(mData)
-                    }
-                }
-                else -> {
-                    if (mData.isNullOrEmpty()) {
-                        if (::onSingleDataListener.isInitialized) {
-                            onSingleDataListener.invoke(null)
-                        }
-                        return@setOnClickListener
-                    }
-                    val list = mData.filter { it.check }
-                    if (list.isNullOrEmpty()) {
-                        if (::onSingleDataListener.isInitialized) {
-                            onSingleDataListener.invoke(null)
-                        }
-                        return@setOnClickListener
-                    }
-                    if (::onSingleDataListener.isInitialized) {
-                        onSingleDataListener.invoke(list[0])
-                    }
+            sureItem()
+        }
+    }
 
+    private fun sureItem() {
+        when (mSelectType) {
+            SelectType.MULTIPLE -> {
+                if (mData.isNullOrEmpty()) {
+                    if (::onMultipeDataListener.isInitialized) {
+                        onMultipeDataListener.invoke(null)
+                    }
+                    return
                 }
+                if (mIsFilter) {
+                    val filter = mData?.filter { it.check } as MutableList
+                    if (::onMultipeDataListener.isInitialized) {
+                        onMultipeDataListener.invoke(filter)
+                    }
+                    return
+                }
+                if (::onMultipeDataListener.isInitialized) {
+                    onMultipeDataListener.invoke(mData)
+                }
+            }
+            else -> {
+                if (mData.isNullOrEmpty()) {
+                    if (::onSingleDataListener.isInitialized) {
+                        onSingleDataListener.invoke(null)
+                    }
+                    return
+                }
+                val list = mData.filter { it.check }
+                if (list.isNullOrEmpty()) {
+                    if (::onSingleDataListener.isInitialized) {
+                        onSingleDataListener.invoke(null)
+                    }
+                    return
+                }
+                if (::onSingleDataListener.isInitialized) {
+                    onSingleDataListener.invoke(list[0])
+                }
+
             }
         }
     }
@@ -262,6 +274,22 @@ class MultipleOptionsBuildeDialog(
                 }
             }
         })
+
+        if (!mData.isNullOrEmpty()) {
+            var first = 0
+            for ((index, child) in mData.withIndex()) {
+                if (child.check) {
+                    first = index
+                    break
+                }
+            }
+            if (first != 0) {
+                Handler().postDelayed({
+                    rlv_dialog_multiple_content.scrollToPosition(first)
+                }, 300)
+            }
+
+        }
     }
 
 
@@ -282,11 +310,27 @@ class MultipleOptionsBuildeDialog(
         params.width = metrics.widthPixels
         params.height = WindowManager.LayoutParams.WRAP_CONTENT
         window!!.attributes = params
+        val lp = rootview.layoutParams as FrameLayout.LayoutParams
         if (mIsGravityButtom) {
+            lp.setMargins(0, 0, 0, 0)
+            rootview.layoutParams = lp
             window!!.setGravity(Gravity.BOTTOM)
+            showTopButtom(true, false, true)
         } else {
+            lp.setMargins(30, 0, 30, 0)
+            rootview.layoutParams = lp
             window?.setGravity(Gravity.CENTER)
+            showTopButtom(false, true, false)
         }
+    }
+
+    private fun showTopButtom(showTop: Boolean, buttom: Boolean, line: Boolean) {
+        tv_dialog_multiple_cancle.visibility = if (showTop) View.VISIBLE else View.GONE
+        tv_dialog_multiple_sure.visibility = if (showTop) View.VISIBLE else View.GONE
+        btn_dialog_multiple_life.visibility = if (buttom) View.VISIBLE else View.GONE
+        btn_dialog_multiple_right.visibility = if (buttom) View.VISIBLE else View.GONE
+        view_line_one.visibility = if (line) View.VISIBLE else View.GONE
+
     }
 
 
@@ -294,7 +338,7 @@ class MultipleOptionsBuildeDialog(
         SINGLE, MULTIPLE
     }
 
-    data class SelectRlv(
+    data class SelectRlv (
         var name: String = "",
         var id: String = "",
         var check: Boolean
@@ -303,4 +347,5 @@ class MultipleOptionsBuildeDialog(
             return "SelectRlv(name='$name', id='$id', check=$check)"
         }
     }
+
 }
