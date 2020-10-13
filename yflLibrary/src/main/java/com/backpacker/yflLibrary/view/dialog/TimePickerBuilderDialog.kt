@@ -42,9 +42,9 @@ public class TimePickerBuilderDialog(var mContext: Context) :
     private var mDayList: MutableList<String>? = null
     private var mHourList: MutableList<String>? = null
     private var mMinuteList: MutableList<String>? = null
-
+    //中间字体格式
     private var mContentTvTypeface: Typeface? = null
-
+    //其它字体格式
     private var mOutContentTvTypeface: Typeface? = null
 
     //是否显示时分
