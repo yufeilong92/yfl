@@ -14,9 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
 import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
 import com.example.UtilsLibrary.R
-import kotlinx.android.synthetic.main.dialog_date_time_picker.*
 import kotlinx.android.synthetic.main.dialog_time_picker.*
-import java.lang.NumberFormatException
 import java.util.ArrayList
 
 /**
@@ -74,6 +72,10 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
     //是否循环
     private var isLoop: Boolean = true
 
+    //设置item 字体大小
+    private var mTextItemSize = 0.0F
+
+
     private var mSelectHour: Int = 0
     private var mSelectMin: Int = 0
 
@@ -101,6 +103,11 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
 
         fun setSelectContentColor(@ColorInt color: Int): Builder {
             timePicker.mContentColor = color
+            return this
+        }
+
+        fun setContentSize(size: Float): Builder {
+            timePicker.mTextItemSize=size
             return this
         }
 
@@ -187,6 +194,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         gmSetViewData(3, loop_h_hour, mSelectHour)
         gmSetViewData(4, loop_h_min, mSelectMin)
         setTvTypeface()
+        setTvSize()
         setContentColor()
         setOutContentColor()
         setLineColor()
@@ -195,6 +203,13 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         setShowline()
         setIsLoop()
         initLinkAge()
+    }
+
+    private fun setTvSize() {
+        if (mTextItemSize == 0.0F) return
+        loop_h_hour.setTextSize(mTextItemSize)
+        loop_h_min.setTextSize(mTextItemSize)
+
     }
 
     private fun setTopShow() {

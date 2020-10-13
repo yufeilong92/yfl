@@ -76,6 +76,9 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     //顶层line 颜色
     private var mTopLineColor: Int = 0
 
+    //设置item 字体大小
+    private var mTextItemSize = 0.0F
+
     class Builder(var mContext: Context) {
         val mRadioPicker = RadioPickerDialog(mContext)
 
@@ -122,6 +125,10 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
 
         fun showLine(show: Boolean): Builder {
             mRadioPicker.isShowLine = show
+            return this
+        }
+        fun setContentSize(size: Float): Builder {
+            mRadioPicker.mTextItemSize=size
             return this
         }
 
@@ -171,11 +178,18 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
         setLoopNumber()
         bindViewData()
         setTvTypeface()
+        setTvSize()
         setContentColor()
         setOutContentColor()
         setLineColor()
         setShowline()
         setIsLoop()
+    }
+
+    private fun setTvSize() {
+        if (mTextItemSize == 0.0f) return
+        loop_item_view.setTextSize(mTextItemSize)
+
     }
 
     private fun setTopShow() {

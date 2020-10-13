@@ -88,7 +88,8 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
 
     //显示数量
     private var mNumber: Int = 0
-
+    //设置item 字体大小
+    private var mTextItemSize = 0.0F
     //回现数据
     private var mSelectYear: Int = 0
     private var mSelectMonth: Int = 0
@@ -158,6 +159,10 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
 
         fun setSelectOutColor(@ColorInt color: Int): Builder {
             timePicker.mOutContentColor = color
+            return this
+        }
+        fun setContentSize(size: Float): Builder {
+            timePicker.mTextItemSize=size
             return this
         }
 
@@ -259,6 +264,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         setTvShow(tv_dialog_time_picker_hour, isShowHourMin)
         setTvShow(tv_dialog_time_picker_min, isShowHourMin)
         setTvTypeface()
+        setTvSize()
         setLoopNumber()
         setContentColor()
         setOutContentColor()
@@ -269,7 +275,16 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         setIsLoop()
         initLinkAge()
     }
+    private fun setTvSize() {
+        if (mTextItemSize == 0.0F) return
+        loop_year.setTextSize(mTextItemSize)
+        loop_month.setTextSize(mTextItemSize)
+        loop_day.setTextSize(mTextItemSize)
+        if (!isShowHourMin) return
+        loop_hour.setTextSize(mTextItemSize)
+        loop_min.setTextSize(mTextItemSize)
 
+    }
     private fun setTopShow() {
        view_line_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
     }
