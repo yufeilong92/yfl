@@ -2,6 +2,7 @@ package com.backpacker.yflLibrary.view.dialog
 
 import android.content.Context
 import android.graphics.Point
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -25,7 +26,8 @@ import java.util.ArrayList
  * @Time :2020/10/12 16:09
  * @Purpose :对话框
  */
-public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mContext, R.style.my_dialog) {
+public class TimePickerBuilderDialog(var mContext: Context) :
+    AlertDialog(mContext, R.style.my_dialog) {
     private var metrics: DisplayMetrics = context.resources.displayMetrics
 
     init {
@@ -40,6 +42,10 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
     private var mDayList: MutableList<String>? = null
     private var mHourList: MutableList<String>? = null
     private var mMinuteList: MutableList<String>? = null
+
+    private var mContentTvTypeface: Typeface? = null
+
+    private var mOutContentTvTypeface: Typeface? = null
 
     //是否显示时分
     private var isShowHourMin = false
@@ -75,7 +81,7 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
     private var mLaberColor: Int = 0
 
     //单位大小
-    private var mLablerSize: Float = 13.0f
+    private var mLablerSize: Float = 0.0f
 
     //显示数量
     private var mNumber: Int = 0
@@ -156,10 +162,12 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
             timePicker.isShowLine = show
             return this
         }
+
         fun setShowNumber(number: Int): Builder {
             timePicker.mNumber = number
             return this
         }
+
         fun setLablerSize(size: Float): Builder {
             timePicker.mLablerSize = size
             return this
@@ -191,7 +199,17 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
         }
 
         fun setOnTimePickerListener(onSelectTImePickerHourMin: (year: String, month: String, day: String, hour: String, min: String) -> Unit): Builder {
-            timePicker.onSelectTImePickerHourMin=onSelectTImePickerHourMin
+            timePicker.onSelectTImePickerHourMin = onSelectTImePickerHourMin
+            return this
+        }
+
+        fun setOutTvTypeface(type: Typeface): Builder {
+            timePicker.mOutContentTvTypeface = type
+            return this
+        }
+
+        fun setContentTvTypeface(type: Typeface): Builder {
+            timePicker.mContentTvTypeface = type
             return this
         }
 
@@ -222,7 +240,8 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
         setLoopViewShow(loop_min, isShowHourMin)
         setTvShow(tv_dialog_time_picker_hour, isShowHourMin)
         setTvShow(tv_dialog_time_picker_min, isShowHourMin)
-
+        setTvTypeface()
+        setLoopNumber()
         setContentColor()
         setOutContentColor()
         setLineColor()
@@ -231,6 +250,27 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
         setShowline()
         setIsLoop()
         initLinkAge()
+    }
+
+    private fun setTvTypeface() {
+        mOutContentTvTypeface?.let {
+            loop_year.setOutContentTypeface(it)
+            loop_month.setOutContentTypeface(it)
+            loop_day.setOutContentTypeface(it)
+            if (!isShowHourMin) return
+            loop_hour.setOutContentTypeface(it)
+            loop_min.setOutContentTypeface(it)
+        }
+
+        mContentTvTypeface?.let {
+            loop_year.setOutContentTypeface(it)
+            loop_month.setOutContentTypeface(it)
+            loop_day.setOutContentTypeface(it)
+            if (!isShowHourMin) return
+            loop_hour.setOutContentTypeface(it)
+            loop_min.setOutContentTypeface(it)
+        }
+
     }
 
     private fun setLoopViewShow(loopView: LoopView, show: Boolean) {
@@ -243,6 +283,7 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
     }
 
     private fun setLablerUnitColor() {
+        if (mLaberColor == 0) return
         tv_dialog_time_picker_year.setTextColor(mLaberColor)
         tv_dialog_time_picker_month.setTextColor(mLaberColor)
         tv_dialog_time_picker_day.setTextColor(mLaberColor)
@@ -252,6 +293,7 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
     }
 
     private fun setLablerUnitSize() {
+        if (mLablerSize == 0.0f) return
         tv_dialog_time_picker_year.textSize = mLablerSize
         tv_dialog_time_picker_month.textSize = mLablerSize
         tv_dialog_time_picker_day.textSize = mLablerSize
@@ -259,6 +301,7 @@ public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mConte
         tv_dialog_time_picker_hour.textSize = mLablerSize
         tv_dialog_time_picker_min.textSize = mLablerSize
     }
+
     private fun setLoopNumber() {
         if (mNumber == 0) return
         loop_year.setItemsVisibleCount(mNumber)
