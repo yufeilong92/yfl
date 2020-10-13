@@ -452,11 +452,11 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
                     throw NumberFormatException("开始时间$mStartYear 大于 结束$mEndYear")
                 }
                 for (i in mStartYear..mEndYear) {
-                    mYearList?.add("$i")
+                    mYearList?.add("${fillZero(i)}")
                 }
                 if (!mYearList.isNullOrEmpty()) {
                     for ((index, child) in mYearList!!.withIndex()) {
-                        if (child == "$select") {
+                        if (child == "${fillZero(select)}") {
                             postion = index
                             break
                         }
@@ -471,11 +471,11 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
                     mMonthList?.clear()
 
                 for (i in 1..12) {
-                    mMonthList?.add("$i")
+                    mMonthList?.add("${fillZero(i)}")
                 }
                 if (!mMonthList.isNullOrEmpty()) {
                     for ((index, child) in mMonthList!!.withIndex()) {
-                        if (child == "$select") {
+                        if (child == "${fillZero(select)}") {
                             postion = index
                             break
                         }
@@ -490,11 +490,11 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
                 } else
                     mDayList?.clear()
                 for (i in 1..31) {
-                    mDayList?.add("$i")
+                    mDayList?.add("${fillZero(i)}")
                 }
                 if (!mDayList.isNullOrEmpty()) {
                     for ((index, child) in mDayList!!.withIndex()) {
-                        if (child == "$select") {
+                        if (child == "${fillZero(select)}") {
                             postion = index
                             break
                         }
@@ -511,11 +511,11 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
                     mHourList?.clear()
                 }
                 for (i in 0..23) {
-                    mHourList?.add("$i")
+                    mHourList?.add("${fillZero(i)}")
                 }
                 if (!mHourList.isNullOrEmpty()) {
                     for ((index, child) in mHourList!!.withIndex()) {
-                        if (child == "$select") {
+                        if (child == "${fillZero(select)}") {
                             postion = index
                             break
                         }
@@ -530,11 +530,11 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
                 } else
                     mMinuteList?.clear()
                 for (i in 0..59) {
-                    mMinuteList?.add("$i")
+                    mMinuteList?.add("${fillZero(i)}")
                 }
                 if (!mMinuteList.isNullOrEmpty()) {
                     for ((index, child) in mMinuteList!!.withIndex()) {
-                        if (child == "$select") {
+                        if (child == "${fillZero(select)}") {
                             postion = index
                             break
                         }
@@ -686,5 +686,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         rootviewtimepicek.layoutParams = layoutParams
     }
 
-
+    private fun fillZero(number: Int): String {
+        return if (number < 10) "0$number" else "" + number
+    }
 }
