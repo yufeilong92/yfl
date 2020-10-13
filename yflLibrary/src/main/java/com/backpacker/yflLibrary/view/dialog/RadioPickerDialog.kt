@@ -82,76 +82,130 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     class Builder(var mContext: Context) {
         val mRadioPicker = RadioPickerDialog(mContext)
 
-        fun setInitData(data: MutableList<String>): Builder {
+        /***
+         * @param data 初始化数据
+         * @return
+         */
+        fun setInitData(data: MutableList<String>?): Builder {
             mRadioPicker.mItemLists = data
             return this
         }
 
-        fun setSelectItem(com: String): Builder {
+        /***
+         * @param com 选中数据
+         * @return
+         */
+
+        fun setSelectItem(com: String?): Builder {
             mRadioPicker.mSelectItem = com
             return this
         }
-
-
+        /***
+         * @param color 选中中间的颜色
+         * @return
+         */
         fun setSelectContentColor(@ColorInt color: Int): Builder {
             mRadioPicker.mContentColor = color
             return this
         }
+        /***
+         * @param color 其它颜色
+         * @return
+         */
 
         fun setSelectOutColor(@ColorInt color: Int): Builder {
             mRadioPicker.mOutContentColor = color
             return this
         }
+        /***
+         * @param color 中间上下颜色
+         * @return
+         */
 
         fun setLineColor(@ColorInt color: Int): Builder {
             mRadioPicker.mLineColor = color
             return this
         }
-
+        /***
+         * @param mPercentage 布局占整个屏幕的百分比
+         * @return
+         */
         fun setViewPhoneHeightPercentage(mPercentage: Double): Builder {
             mRadioPicker.mPercentage = mPercentage
             return this
         }
-
+        /***
+         * @param isLoop 是否循环
+         * @return
+         */
         fun setIsLoop(isLoop: Boolean): Builder {
             mRadioPicker.isLoop = isLoop
             return this
         }
-
+        /***
+         * @param onSelectTImePickerHourMin 监听回到
+         * @return
+         */
         fun setOnRadioPickerListener(onSelectTImePickerHourMin: (postion: Int, item: String) -> Unit): Builder {
             mRadioPicker.onRadioPickerListener = onSelectTImePickerHourMin
             return this
         }
-
+        /***
+         * @param show 中间上下颜色是否显示
+         * @return
+         */
         fun showLine(show: Boolean): Builder {
             mRadioPicker.isShowLine = show
             return this
         }
-        fun setContentSize(size: Float): Builder {
-            mRadioPicker.mTextItemSize=size
+        /***
+         * @param size item字体大小
+         * @return
+         */
+        fun setItemSize(size: Float): Builder {
+            mRadioPicker.mTextItemSize = size
             return this
         }
 
+        /***
+         * @param show 是否显示顶层线
+         * @return
+         */
         fun showTopLine(show: Boolean): Builder {
             mRadioPicker.mShowTopLine = show
             return this
         }
-
+        /***
+         * @param color 顶层线颜色
+         * @return
+         */
         fun setTopLineColor(@ColorInt color: Int): Builder {
             mRadioPicker.mTopLineColor = color
             return this
         }
 
+
+        /***
+         * @param type 其它字体类型
+         * @return
+         */
+
         fun setOutTvTypeface(type: Typeface): Builder {
             mRadioPicker.mOutContentTvTypeface = type
             return this
         }
-
+        /***
+         * @param type 中间字体类型
+         * @return
+         */
         fun setContentTvTypeface(type: Typeface): Builder {
             mRadioPicker.mContentTvTypeface = type
             return this
         }
-
+        /***
+         * @param number 每行显示数量
+         * @return
+         */
         fun setShowNumber(number: Int): Builder {
             mRadioPicker.mNumber = number
             return this

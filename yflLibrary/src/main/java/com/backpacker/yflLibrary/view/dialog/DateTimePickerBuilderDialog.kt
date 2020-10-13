@@ -88,8 +88,10 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
 
     //显示数量
     private var mNumber: Int = 0
+
     //设置item 字体大小
     private var mTextItemSize = 0.0F
+
     //回现数据
     private var mSelectYear: Int = 0
     private var mSelectMonth: Int = 0
@@ -106,6 +108,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
 
     //是否显示头顶颜色
     private var mShowTopLine = true
+
     //颜色
     private var mTopLineColor = 0
 
@@ -118,16 +121,32 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
     class Builder(var mContext: Context) {
         val timePicker = DateTimePickerBuilderDialog(mContext)
 
+        /***
+         * @param year  开始时间年限
+         * @return
+         */
         fun setStartTime(year: Int): Builder {
             timePicker.mStartYear = year
             return this
         }
 
+        /***
+         * @param year  结束时间年限
+         * @return
+         */
         fun setEndTime(year: Int): Builder {
             timePicker.mEndYear = year
             return this
         }
 
+        /***
+         * @param year 选中年
+         * @param month 选中月
+         * @param day 选中日
+         * @param hour 选中小时
+         * @param min 选中分钟
+         * @return
+         */
         fun setSelectTime(year: Int, month: Int, day: Int, hour: Int, min: Int): Builder {
             timePicker.mSelectYear = year
             timePicker.mSelectMonth = month
@@ -137,6 +156,12 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
             return this
         }
 
+        /***
+         * @param year 选中年
+         * @param month 选中月
+         * @param day 选中日
+         * @return
+         */
         fun setSelectTime(year: Int, month: Int, day: Int): Builder {
             timePicker.mSelectYear = year
             timePicker.mSelectMonth = month
@@ -146,94 +171,172 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
             return this
         }
 
-
+        /***
+         * @param show 是否显示时分布局
+         * @return
+         */
         fun setIsShowHourMin(show: Boolean): Builder {
             timePicker.isShowHourMin = show
             return this
         }
 
+        /***
+         * @param color 选中中间的颜色
+         * @return
+         */
         fun setSelectContentColor(@ColorInt color: Int): Builder {
             timePicker.mContentColor = color
             return this
         }
 
+        /***
+         * @param color 其它颜色
+         * @return
+         */
+
         fun setSelectOutColor(@ColorInt color: Int): Builder {
             timePicker.mOutContentColor = color
             return this
         }
-        fun setContentSize(size: Float): Builder {
-            timePicker.mTextItemSize=size
+
+        /***
+         * @param size item字体大小
+         * @return
+         */
+        fun setItemSize(size: Float): Builder {
+            timePicker.mTextItemSize = size
             return this
         }
+
+        /***
+         * @param color 中间上下颜色
+         * @return
+         */
 
         fun setLineColor(@ColorInt color: Int): Builder {
             timePicker.mLineColor = color
             return this
         }
 
+        /***
+         * @param show 中间上下颜色是否显示
+         * @return
+         */
         fun showLine(show: Boolean): Builder {
             timePicker.isShowLine = show
             return this
         }
+
+        /***
+         * @param number 每行显示数量
+         * @return
+         */
 
         fun setShowNumber(number: Int): Builder {
             timePicker.mNumber = number
             return this
         }
 
+        /***
+         * @param size 单位大小
+         * @return
+         */
         fun setLablerSize(size: Float): Builder {
             timePicker.mLablerSize = size
             return this
         }
 
+        /***
+         * @param color 单位颜色
+         * @return
+         */
         fun setLablerColor(@ColorInt color: Int): Builder {
             timePicker.mLaberColor = color
             return this
         }
 
+        /***
+         * @param mPercentage 布局占整个屏幕的百分比
+         * @return
+         */
         fun setViewPhoneHeightPercentage(mPercentage: Double): Builder {
             timePicker.mPercentage = mPercentage
             return this
         }
 
+        /***
+         * @param isLoop 是否循环
+         * @return
+         */
         fun setIsLoop(isLoop: Boolean): Builder {
             timePicker.isLoop = isLoop
             return this
         }
 
+        /***
+         * @param isLinkage 是否联动
+         * @return
+         */
         fun setLinkage(isLinkage: Boolean): Builder {
             timePicker.mIsLinkAge = isLinkage
             return this
         }
 
+        /***
+         * @param onSelectTImePickerNoHourMin 监听回到
+         * @return
+         */
         fun setOnTimePickerListener(onSelectTImePickerNoHourMin: (year: String, month: String, day: String) -> Unit): Builder {
             timePicker.onSelectTImePickerNoHourMin = onSelectTImePickerNoHourMin
             return this
         }
 
+        /***
+         * @param onSelectTImePickerNoHourMin 监听回到
+         * @return
+         */
         fun setOnTimePickerListener(onSelectTImePickerHourMin: (year: String, month: String, day: String, hour: String, min: String) -> Unit): Builder {
             timePicker.onSelectTImePickerHourMin = onSelectTImePickerHourMin
             return this
         }
+
+        /***
+         * @param type 其它字体类型
+         * @return
+         */
 
         fun setOutTvTypeface(type: Typeface): Builder {
             timePicker.mOutContentTvTypeface = type
             return this
         }
 
+        /***
+         * @param type 中间字体类型
+         * @return
+         */
         fun setContentTvTypeface(type: Typeface): Builder {
             timePicker.mContentTvTypeface = type
             return this
         }
+
+        /***
+         * @param show 是否显示顶层线
+         * @return
+         */
         fun showTopLine(show: Boolean): Builder {
             timePicker.mShowTopLine = show
             return this
         }
 
+        /***
+         * @param color 顶层线颜色
+         * @return
+         */
         fun setTopLineColor(@ColorInt color: Int): Builder {
             timePicker.mTopLineColor = color
             return this
         }
+
         fun show() {
             timePicker.show()
         }
@@ -275,6 +378,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         setIsLoop()
         initLinkAge()
     }
+
     private fun setTvSize() {
         if (mTextItemSize == 0.0F) return
         loop_year.setTextSize(mTextItemSize)
@@ -285,13 +389,14 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         loop_min.setTextSize(mTextItemSize)
 
     }
+
     private fun setTopShow() {
-       view_line_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
+        view_line_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
     }
 
     private fun setTopLineColor() {
         if (mTopLineColor == 0) return
-       view_line_one.setBackgroundColor(mTopLineColor)
+        view_line_one.setBackgroundColor(mTopLineColor)
     }
 
     private fun setTvTypeface() {

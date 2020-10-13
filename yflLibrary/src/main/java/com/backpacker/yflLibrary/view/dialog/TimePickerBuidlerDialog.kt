@@ -95,77 +95,136 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
 
     class Builder(var mContext: Context) {
         val timePicker = TimePickerBuidlerDialog(mContext)
+        /***
+         * @param hour 时
+         * @param min  分
+         * @return
+         */
         fun setSelectTime(hour: Int, min: Int): Builder {
             timePicker.mSelectHour = hour
             timePicker.mSelectMin = min
             return this
         }
-
+        /***
+         * @param color 选中中间的颜色
+         * @return
+         */
         fun setSelectContentColor(@ColorInt color: Int): Builder {
             timePicker.mContentColor = color
             return this
         }
-
-        fun setContentSize(size: Float): Builder {
-            timePicker.mTextItemSize=size
+        /***
+         * @param size item字体大小
+         * @return
+         */
+        fun setItemSize(size: Float): Builder {
+            timePicker.mTextItemSize = size
             return this
         }
-
+        /***
+         * @param color 其它颜色
+         * @return
+         */
         fun setSelectOutColor(@ColorInt color: Int): Builder {
             timePicker.mOutContentColor = color
             return this
         }
+
+        /***
+         * @param color 中间上下颜色
+         * @return
+         */
 
         fun setLineColor(@ColorInt color: Int): Builder {
             timePicker.mLineColor = color
             return this
         }
 
+        /***
+         * @param size 单位大小
+         * @return
+         */
         fun setLablerSize(size: Float): Builder {
             timePicker.mLablerSize = size
             return this
         }
 
+        /***
+         * @param color 单位颜色
+         * @return
+         */
         fun setLablerColor(@ColorInt color: Int): Builder {
             timePicker.mLaberColor = color
             return this
         }
 
+        /***
+         * @param mPercentage 布局占整个屏幕的百分比
+         * @return
+         */
         fun setViewPhoneHeightPercentage(mPercentage: Double): Builder {
             timePicker.mPercentage = mPercentage
             return this
         }
 
+        /***
+         * @param isLoop 是否循环
+         * @return
+         */
         fun setIsLoop(isLoop: Boolean): Builder {
             timePicker.isLoop = isLoop
             return this
         }
 
+        /***
+         * @param isLinkage 是否联动
+         * @return
+         */
         fun setLinkage(isLinkage: Boolean): Builder {
             timePicker.mIsLinkAge = isLinkage
             return this
         }
 
+        /***
+         * @param onSelectTImePickerHourMin 监听回到
+         * @return
+         */
         fun setOnTimePickerListener(onSelectTImePickerHourMin: (hour: String, min: String) -> Unit): Builder {
             timePicker.onSelectTImePickerNoHourMin = onSelectTImePickerHourMin
             return this
         }
 
+        /***
+         * @param show 中间上下颜色是否显示
+         * @return
+         */
         fun showLine(show: Boolean): Builder {
             timePicker.isShowLine = show
             return this
         }
 
+        /***
+         * @param number 每行显示数量
+         * @return
+         */
         fun setShowNumber(number: Int): Builder {
             timePicker.mNumber = number
             return this
         }
 
+        /***
+         * @param show 是否显示顶层线
+         * @return
+         */
         fun showTopLine(show: Boolean): Builder {
             timePicker.mShowTopLine = show
             return this
         }
 
+        /***
+         * @param color 顶层线颜色
+         * @return
+         */
         fun setTopLineColor(@ColorInt color: Int): Builder {
             timePicker.mTopLineColor = color
             return this
