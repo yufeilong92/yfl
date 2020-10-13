@@ -263,12 +263,12 @@ public class TimePickerBuilderDialog(var mContext: Context) :
         }
 
         mContentTvTypeface?.let {
-            loop_year.setOutContentTypeface(it)
-            loop_month.setOutContentTypeface(it)
-            loop_day.setOutContentTypeface(it)
+            loop_year.setContentTypeface(it)
+            loop_month.setContentTypeface(it)
+            loop_day.setContentTypeface(it)
             if (!isShowHourMin) return
-            loop_hour.setOutContentTypeface(it)
-            loop_min.setOutContentTypeface(it)
+            loop_hour.setContentTypeface(it)
+            loop_min.setContentTypeface(it)
         }
 
     }
