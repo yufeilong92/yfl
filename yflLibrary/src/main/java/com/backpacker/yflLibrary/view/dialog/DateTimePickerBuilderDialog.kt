@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
 import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
 import com.example.UtilsLibrary.R
-import kotlinx.android.synthetic.main.dialog_time_picker.*
+import kotlinx.android.synthetic.main.dialog_date_time_picker.*
 import java.lang.NumberFormatException
 import java.util.ArrayList
 
@@ -26,7 +26,7 @@ import java.util.ArrayList
  * @Time :2020/10/12 16:09
  * @Purpose :对话框
  */
-public class TimePickerBuilderDialog(var mContext: Context) :
+public class DateTimePickerBuilderDialog(var mContext: Context) :
     AlertDialog(mContext, R.style.my_dialog) {
     private var metrics: DisplayMetrics = context.resources.displayMetrics
 
@@ -107,7 +107,7 @@ public class TimePickerBuilderDialog(var mContext: Context) :
     }
 
     class Builder(var mContext: Context) {
-        val timePicker = TimePickerBuilderDialog(mContext)
+        val timePicker = DateTimePickerBuilderDialog(mContext)
 
         fun setStartTime(year: Int): Builder {
             timePicker.mStartYear = year
@@ -221,7 +221,7 @@ public class TimePickerBuilderDialog(var mContext: Context) :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_time_picker)
+        setContentView(R.layout.dialog_date_time_picker)
         setSizeMode()
         initEvent()
         initListener()
@@ -367,12 +367,12 @@ public class TimePickerBuilderDialog(var mContext: Context) :
 
     private fun setLineColor() {
         if (mLineColor == 0) return
-        loop_year.setDividerColor(mContentColor)
-        loop_month.setDividerColor(mContentColor)
-        loop_day.setDividerColor(mContentColor)
+        loop_year.setDividerColor(mLineColor)
+        loop_month.setDividerColor(mLineColor)
+        loop_day.setDividerColor(mLineColor)
         if (!isShowHourMin) return
-        loop_hour.setDividerColor(mContentColor)
-        loop_min.setDividerColor(mContentColor)
+        loop_hour.setDividerColor(mLineColor)
+        loop_min.setDividerColor(mLineColor)
     }
 
     private fun setIsLoop() {

@@ -156,9 +156,6 @@ public class LoopView extends View {
      */
     public void setDividerColor(int dividerColor) {
         this.dividerColor = dividerColor;
-        if (paintIndicator != null) {
-            paintIndicator.setColor(dividerColor);
-        }
     }
 
     /**
@@ -168,15 +165,8 @@ public class LoopView extends View {
      */
     public void setShowDividerLine(Boolean show) {
         this.showDividerColor = show;
-        if (paintIndicator != null) {
-            if (show) {
-                paintIndicator.setColor(dividerColor);
-            } else {
-                dividerColor = Color.TRANSPARENT;
-                paintIndicator.setColor(dividerColor);
-            }
-        }
     }
+
 
     /**
      * set text typeface
@@ -184,8 +174,9 @@ public class LoopView extends View {
      * @param typeface
      */
     public void setContentTypeface(Typeface typeface) {
-        this.contenttypeface=typeface;
+        this.contenttypeface = typeface;
     }
+
     public void setOutContentTypeface(Typeface typeface) {
         this.outtypeface = typeface;
     }
@@ -265,10 +256,10 @@ public class LoopView extends View {
             paintCenterText.setAntiAlias(true);
             paintCenterText.setTextScaleX(scaleX);
             paintCenterText.setTypeface(contenttypeface);
-            paintCenterText.setTextSize(textSize+2);
+            paintCenterText.setTextSize(textSize + 2);
         }
 
-        if (paintIndicator == null) {
+        if (paintIndicator == null&& showDividerColor) {
             paintIndicator = new Paint();
             paintIndicator.setColor(dividerColor);
             paintIndicator.setAntiAlias(true);
@@ -530,8 +521,10 @@ public class LoopView extends View {
             }
             k1++;
         }
-        canvas.drawLine(paddingLeft, firstLineY, measuredWidth, firstLineY, paintIndicator);
-        canvas.drawLine(paddingLeft, secondLineY, measuredWidth, secondLineY, paintIndicator);
+        if (showDividerColor) {
+            canvas.drawLine(paddingLeft, firstLineY, measuredWidth, firstLineY, paintIndicator);
+            canvas.drawLine(paddingLeft, secondLineY, measuredWidth, secondLineY, paintIndicator);
+        }
 
         int i = 0;
         while (i < itemsVisibleCount) {
