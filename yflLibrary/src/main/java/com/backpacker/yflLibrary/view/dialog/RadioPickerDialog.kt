@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.ColorInt
@@ -15,6 +16,7 @@ import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
 import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
 import com.example.UtilsLibrary.R
 import kotlinx.android.synthetic.main.dialog_radio_picker.*
+import kotlinx.android.synthetic.main.dialog_time_picker.*
 
 /**
  * @Author : YFL  is Creating a porject in My Application
@@ -68,6 +70,11 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
 
     private var mItemLists: MutableList<String>? = null
 
+    //是否显示顶层line
+    private var mShowTopLine = true
+
+    //顶层line 颜色
+    private var mTopLineColor: Int = 0
 
     class Builder(var mContext: Context) {
         val mRadioPicker = RadioPickerDialog(mContext)
@@ -118,6 +125,16 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
             return this
         }
 
+        fun showTopLine(show: Boolean): Builder {
+            mRadioPicker.mShowTopLine = show
+            return this
+        }
+
+        fun setTopLineColor(@ColorInt color: Int): Builder {
+            mRadioPicker.mTopLineColor = color
+            return this
+        }
+
         fun setOutTvTypeface(type: Typeface): Builder {
             mRadioPicker.mOutContentTvTypeface = type
             return this
@@ -149,6 +166,8 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
 
     private fun initEvent() {
         tv_dialog_radio_picker_time.text = "请选择"
+        setTopShow()
+        setTopLineColor()
         setLoopNumber()
         bindViewData()
         setTvTypeface()
@@ -157,6 +176,15 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
         setLineColor()
         setShowline()
         setIsLoop()
+    }
+
+    private fun setTopShow() {
+        view_line_radio_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
+    }
+
+    private fun setTopLineColor() {
+        if (mTopLineColor == 0) return
+        view_line_radio_one.setBackgroundColor(mTopLineColor)
     }
 
     private fun setLoopNumber() {
@@ -197,10 +225,10 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
             }
 
             override fun onItemScrolling(
-                    loopView: LoopView?,
-                    currentPassItem: Int,
-                    scrollState: Int,
-                    totalScrollY: Int
+                loopView: LoopView?,
+                currentPassItem: Int,
+                scrollState: Int,
+                totalScrollY: Int
             ) {
             }
 
@@ -221,12 +249,12 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     }
 
     private fun setContentColor() {
-        if (mContentColor==0)return
+        if (mContentColor == 0) return
         loop_item_view.setCenterTextColor(mContentColor)
     }
 
     private fun setOutContentColor() {
-        if (mOutContentColor==0)return
+        if (mOutContentColor == 0) return
         loop_item_view.setOuterTextColor(mOutContentColor)
     }
 
@@ -235,7 +263,7 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     }
 
     private fun setShowline() {
-        if (mLineColor==0)return
+        if (mLineColor == 0) return
         loop_item_view.setDividerColor(mLineColor)
     }
 

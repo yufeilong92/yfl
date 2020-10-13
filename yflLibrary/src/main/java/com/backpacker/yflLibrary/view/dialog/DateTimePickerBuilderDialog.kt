@@ -16,6 +16,7 @@ import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
 import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
 import com.example.UtilsLibrary.R
 import kotlinx.android.synthetic.main.dialog_date_time_picker.*
+import kotlinx.android.synthetic.main.dialog_time_picker.*
 import java.lang.NumberFormatException
 import java.util.ArrayList
 
@@ -42,8 +43,10 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
     private var mDayList: MutableList<String>? = null
     private var mHourList: MutableList<String>? = null
     private var mMinuteList: MutableList<String>? = null
+
     //中间字体格式
     private var mContentTvTypeface: Typeface? = null
+
     //其它字体格式
     private var mOutContentTvTypeface: Typeface? = null
 
@@ -99,6 +102,11 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
     private var mLinkageDay: String? = null
     private var mLinkageHour: String? = null
     private var mLinkageMin: String? = null
+
+    //是否显示头顶颜色
+    private var mShowTopLine = true
+    //颜色
+    private var mTopLineColor = 0
 
     companion object {
         fun buidler(mContext: Context): Builder {
@@ -212,7 +220,15 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
             timePicker.mContentTvTypeface = type
             return this
         }
+        fun showTopLine(show: Boolean): Builder {
+            timePicker.mShowTopLine = show
+            return this
+        }
 
+        fun setTopLineColor(@ColorInt color: Int): Builder {
+            timePicker.mTopLineColor = color
+            return this
+        }
         fun show() {
             timePicker.show()
         }
@@ -229,6 +245,8 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
 
     private fun initEvent() {
         tv_dialog_time_picker_time.text = "请选择"
+        setTopLineColor()
+        setTopShow()
         gmSetViewData(0, loop_year, mSelectYear)
         gmSetViewData(1, loop_month, mSelectMonth)
         gmSetViewData(2, loop_day, mSelectDay)
@@ -250,6 +268,15 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         setShowline()
         setIsLoop()
         initLinkAge()
+    }
+
+    private fun setTopShow() {
+       view_line_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
+    }
+
+    private fun setTopLineColor() {
+        if (mTopLineColor == 0) return
+       view_line_one.setBackgroundColor(mTopLineColor)
     }
 
     private fun setTvTypeface() {

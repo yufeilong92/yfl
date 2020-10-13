@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
@@ -66,8 +67,10 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
 
     //线颜色
     private var mLineColor: Int = 0
+
     //是否显示线
     private var isShowLine: Boolean = true
+
     //是否循环
     private var isLoop: Boolean = true
 
@@ -80,6 +83,13 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
     private var mContentTvTypeface: Typeface? = null
 
     private var mOutContentTvTypeface: Typeface? = null
+
+    //是否显示顶层line
+    private var mShowTopLine = true
+
+    //顶层line 颜色
+    private var mTopLineColor: Int = 0
+
 
     class Builder(var mContext: Context) {
         val timePicker = TimePickerBuidlerDialog(mContext)
@@ -133,12 +143,24 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
             timePicker.onSelectTImePickerNoHourMin = onSelectTImePickerHourMin
             return this
         }
+
         fun showLine(show: Boolean): Builder {
             timePicker.isShowLine = show
             return this
         }
+
         fun setShowNumber(number: Int): Builder {
             timePicker.mNumber = number
+            return this
+        }
+
+        fun showTopLine(show: Boolean): Builder {
+            timePicker.mShowTopLine = show
+            return this
+        }
+
+        fun setTopLineColor(@ColorInt color: Int): Builder {
+            timePicker.mTopLineColor = color
             return this
         }
 
@@ -160,10 +182,11 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
     private fun initEvent() {
         tv_dialog_time_picker_h_time.text = "请选择"
         setLoopNumber()
+        setTopLineColor()
+        setTopShow()
         gmSetViewData(3, loop_h_hour, mSelectHour)
         gmSetViewData(4, loop_h_min, mSelectMin)
         setTvTypeface()
-
         setContentColor()
         setOutContentColor()
         setLineColor()
@@ -173,15 +196,27 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         setIsLoop()
         initLinkAge()
     }
+
+    private fun setTopShow() {
+        view_line_h_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
+    }
+
+    private fun setTopLineColor() {
+        if (mTopLineColor == 0) return
+        view_line_h_one.setBackgroundColor(mTopLineColor)
+    }
+
     private fun setShowline() {
         loop_h_hour.setShowDividerLine(isShowLine)
         loop_h_min.setShowDividerLine(isShowLine)
     }
+
     private fun setLoopNumber() {
         if (mNumber == 0) return
         loop_h_hour.setItemsVisibleCount(mNumber)
         loop_h_min.setItemsVisibleCount(mNumber)
     }
+
     private fun setTvTypeface() {
         mOutContentTvTypeface?.let {
 
@@ -221,6 +256,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         loop_h_hour.setOuterTextColor(mOutContentColor)
         loop_h_min.setOuterTextColor(mOutContentColor)
     }
+
     private fun setLineColor() {
         if (mLineColor == 0) return
         loop_h_hour.setDividerColor(mLineColor)
@@ -259,8 +295,8 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         val selectedItem4 = loop_h_min.selectedItem
         if (::onSelectTImePickerNoHourMin.isInitialized) {
             onSelectTImePickerNoHourMin(
-                    mHourList!![selectedItem3],
-                    mMinuteList!![selectedItem4]
+                mHourList!![selectedItem3],
+                mMinuteList!![selectedItem4]
             )
             dismiss()
         }
@@ -321,11 +357,11 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         loopView.setInitPosition(postion)
         loopView.setOnItemScrollListener(object : OnItemScrollListener {
             override fun onItemScrollStateChanged(
-                    loopView: LoopView?,
-                    currentPassItem: Int,
-                    oldScrollState: Int,
-                    scrollState: Int,
-                    totalScrollY: Int
+                loopView: LoopView?,
+                currentPassItem: Int,
+                oldScrollState: Int,
+                scrollState: Int,
+                totalScrollY: Int
             ) {
                 //滑动停止
                 if (scrollState == LoopView.SCROLL_STATE_IDLE) {
@@ -336,10 +372,10 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
             }
 
             override fun onItemScrolling(
-                    loopView: LoopView?,
-                    currentPassItem: Int,
-                    scrollState: Int,
-                    totalScrollY: Int
+                loopView: LoopView?,
+                currentPassItem: Int,
+                scrollState: Int,
+                totalScrollY: Int
             ) {
             }
 
@@ -352,7 +388,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         val selectedItem3 = loop_h_hour.selectedItem
         val selectedItem4 = loop_h_min.selectedItem
         tv_dialog_time_picker_h_time.text =
-                "${mHourList!![selectedItem3]}:${mMinuteList!![selectedItem4]}"
+            "${mHourList!![selectedItem3]}:${mMinuteList!![selectedItem4]}"
     }
 
     /***
@@ -384,8 +420,9 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
      * @return
      */
     private fun setCustiomPostion(
-            min: Int,
-            isChangerMin: Boolean) {
+        min: Int,
+        isChangerMin: Boolean
+    ) {
 
         if (isChangerMin)
             loop_h_min.setCurrentPosition(min)
@@ -413,6 +450,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         layoutParams.height = (height * mPercentage).toInt()
         rootviewtimepicek_h.layoutParams = layoutParams
     }
+
     private fun fillZero(number: Int): String {
         return if (number < 10) "0$number" else "" + number
     }
