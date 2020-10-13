@@ -25,7 +25,7 @@ import java.util.ArrayList
  * @Time :2020/10/12 16:09
  * @Purpose :对话框
  */
-public class TimePickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.my_dialog) {
+public class TimePickerBuilderDialog(var mContext: Context) : AlertDialog(mContext, R.style.my_dialog) {
     private var metrics: DisplayMetrics = context.resources.displayMetrics
 
     init {
@@ -101,7 +101,7 @@ public class TimePickerDialog(var mContext: Context) : AlertDialog(mContext, R.s
     }
 
     class Builder(var mContext: Context) {
-        val timePicker = TimePickerDialog(mContext)
+        val timePicker = TimePickerBuilderDialog(mContext)
 
         fun setStartTime(year: Int): Builder {
             timePicker.mStartYear = year
