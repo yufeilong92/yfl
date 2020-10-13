@@ -1,0 +1,647 @@
+package com.backpacker.yflLibrary.view.dialog
+
+import android.content.Context
+import android.graphics.Point
+import android.os.Build
+import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Gravity
+import android.view.View
+import android.view.WindowManager
+import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AlertDialog
+import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
+import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
+import com.example.UtilsLibrary.R
+import kotlinx.android.synthetic.main.dialog_time_picker.*
+import java.lang.NumberFormatException
+import java.util.ArrayList
+
+/**
+ * @Author : YFL  is Creating a porject in My Application
+ * @Package com.example.myapplication.loopview
+ * @Email : yufeilong92@163.com
+ * @Time :2020/10/12 16:09
+ * @Purpose :对话框
+ */
+public class TimePickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.my_dialog) {
+    private var metrics: DisplayMetrics = context.resources.displayMetrics
+
+    init {
+        window!!.setWindowAnimations(R.style.popup_animation)
+    }
+
+    public lateinit var onSelectTImePickerNoHourMin: (year: String, month: String, day: String) -> Unit
+    public lateinit var onSelectTImePickerHourMin: (year: String, month: String, day: String, hour: String, min: String) -> Unit
+
+    private var mYearList: MutableList<String>? = null
+    private var mMonthList: MutableList<String>? = null
+    private var mDayList: MutableList<String>? = null
+    private var mHourList: MutableList<String>? = null
+    private var mMinuteList: MutableList<String>? = null
+
+    //是否显示时分
+    private var isShowHourMin = false
+
+    //中间文字颜色
+    private var mContentColor: Int = 0
+
+    //其他颜色
+    private var mOutContentColor: Int = 0
+
+    //线颜色
+    private var mLineColor: Int = 0
+
+    //是否显示线
+    private var isShowLine: Boolean = true
+
+    //是否循环
+    private var isLoop: Boolean = true
+
+    //开始时间
+    private var mStartYear: Int = 0
+
+    //结束时间
+    private var mEndYear: Int = 0
+
+    //百分比
+    private var mPercentage: Double = 0.40
+
+    //是否联动
+    private var mIsLinkAge: Boolean = false
+
+    //单位颜色
+    private var mLaberColor: Int = 0
+
+    //单位大小
+    private var mLablerSize: Float = 13.0f
+
+    //显示数量
+    private var mNumber: Int = 0
+
+    //回现数据
+    private var mSelectYear: Int = 0
+    private var mSelectMonth: Int = 0
+    private var mSelectDay: Int = 0
+    private var mSelectHour: Int = 0
+    private var mSelectMin: Int = 0
+
+    //联动数据
+    private var mLinkageYear: String? = null
+    private var mLinkageMonth: String? = null
+    private var mLinkageDay: String? = null
+    private var mLinkageHour: String? = null
+    private var mLinkageMin: String? = null
+
+    companion object {
+        fun buidler(mContext: Context): Builder {
+            return Builder(mContext)
+        }
+    }
+
+    class Builder(var mContext: Context) {
+        val timePicker = TimePickerDialog(mContext)
+
+        fun setStartTime(year: Int): Builder {
+            timePicker.mStartYear = year
+            return this
+        }
+
+        fun setEndTime(year: Int): Builder {
+            timePicker.mEndYear = year
+            return this
+        }
+
+        fun setSelectTime(year: Int, month: Int, day: Int, hour: Int, min: Int): Builder {
+            timePicker.mSelectYear = year
+            timePicker.mSelectMonth = month
+            timePicker.mSelectDay = day
+            timePicker.mSelectHour = hour
+            timePicker.mSelectMin = min
+            return this
+        }
+
+        fun setSelectTime(year: Int, month: Int, day: Int): Builder {
+            timePicker.mSelectYear = year
+            timePicker.mSelectMonth = month
+            timePicker.mSelectDay = day
+            timePicker.mSelectHour = 0
+            timePicker.mSelectMin = 0
+            return this
+        }
+
+
+        fun setIsShowHourMin(show: Boolean): Builder {
+            timePicker.isShowHourMin = show
+            return this
+        }
+
+        fun setSelectContentColor(@ColorInt color: Int): Builder {
+            timePicker.mContentColor = color
+            return this
+        }
+
+        fun setSelectOutColor(@ColorInt color: Int): Builder {
+            timePicker.mOutContentColor = color
+            return this
+        }
+
+        fun setLineColor(@ColorInt color: Int): Builder {
+            timePicker.mLineColor = color
+            return this
+        }
+
+        fun showLine(show: Boolean): Builder {
+            timePicker.isShowLine = show
+            return this
+        }
+        fun setShowNumber(number: Int): Builder {
+            timePicker.mNumber = number
+            return this
+        }
+        fun setLablerSize(size: Float): Builder {
+            timePicker.mLablerSize = size
+            return this
+        }
+
+        fun setLablerColor(@ColorInt color: Int): Builder {
+            timePicker.mLaberColor = color
+            return this
+        }
+
+        fun setViewPhoneHeightPercentage(mPercentage: Double): Builder {
+            timePicker.mPercentage = mPercentage
+            return this
+        }
+
+        fun setIsLoop(isLoop: Boolean): Builder {
+            timePicker.isLoop = isLoop
+            return this
+        }
+
+        fun setLinkage(isLinkage: Boolean): Builder {
+            timePicker.mIsLinkAge = isLinkage
+            return this
+        }
+
+        fun setOnTimePickerListener(onSelectTImePickerNoHourMin: (year: String, month: String, day: String) -> Unit): Builder {
+            timePicker.onSelectTImePickerNoHourMin = onSelectTImePickerNoHourMin
+            return this
+        }
+
+        fun setOnTimePickerListener(onSelectTImePickerHourMin: (year: String, month: String, day: String, hour: String, min: String) -> Unit): Builder {
+            timePicker.onSelectTImePickerHourMin=onSelectTImePickerHourMin
+            return this
+        }
+
+        fun show() {
+            timePicker.show()
+        }
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.dialog_time_picker)
+        setSizeMode()
+        initEvent()
+        initListener()
+    }
+
+    private fun initEvent() {
+        tv_dialog_time_picker_time.text = "请选择"
+        gmSetViewData(0, loop_year, mSelectYear)
+        gmSetViewData(1, loop_month, mSelectMonth)
+        gmSetViewData(2, loop_day, mSelectDay)
+        if (isShowHourMin) {
+            gmSetViewData(3, loop_hour, mSelectHour)
+            gmSetViewData(4, loop_min, mSelectMin)
+        }
+        setLoopViewShow(loop_hour, isShowHourMin)
+        setLoopViewShow(loop_min, isShowHourMin)
+        setTvShow(tv_dialog_time_picker_hour, isShowHourMin)
+        setTvShow(tv_dialog_time_picker_min, isShowHourMin)
+
+        setContentColor()
+        setOutContentColor()
+        setLineColor()
+        setLablerUnitColor()
+        setLablerUnitSize()
+        setShowline()
+        setIsLoop()
+        initLinkAge()
+    }
+
+    private fun setLoopViewShow(loopView: LoopView, show: Boolean) {
+        loopView.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun setTvShow(tv: TextView, show: Boolean) {
+        tv.visibility = if (show) View.VISIBLE else View.GONE
+
+    }
+
+    private fun setLablerUnitColor() {
+        tv_dialog_time_picker_year.setTextColor(mLaberColor)
+        tv_dialog_time_picker_month.setTextColor(mLaberColor)
+        tv_dialog_time_picker_day.setTextColor(mLaberColor)
+        if (!isShowHourMin) return
+        tv_dialog_time_picker_hour.setTextColor(mLaberColor)
+        tv_dialog_time_picker_min.setTextColor(mLaberColor)
+    }
+
+    private fun setLablerUnitSize() {
+        tv_dialog_time_picker_year.textSize = mLablerSize
+        tv_dialog_time_picker_month.textSize = mLablerSize
+        tv_dialog_time_picker_day.textSize = mLablerSize
+        if (!isShowHourMin) return
+        tv_dialog_time_picker_hour.textSize = mLablerSize
+        tv_dialog_time_picker_min.textSize = mLablerSize
+    }
+    private fun setLoopNumber() {
+        if (mNumber == 0) return
+        loop_year.setItemsVisibleCount(mNumber)
+        loop_month.setItemsVisibleCount(mNumber)
+        loop_day.setItemsVisibleCount(mNumber)
+        if (!isShowHourMin) return
+        loop_hour.setItemsVisibleCount(mNumber)
+        loop_min.setItemsVisibleCount(mNumber)
+    }
+
+    private fun initLinkAge() {
+        if (!mYearList.isNullOrEmpty()) {
+            val selectedItem = loop_year.selectedItem
+            mLinkageYear = mYearList!![selectedItem]
+        }
+        if (!mMonthList.isNullOrEmpty()) {
+            val selectedItem = loop_month.selectedItem
+            mLinkageMonth = mMonthList!![selectedItem]
+        }
+
+        if (!mDayList.isNullOrEmpty()) {
+            val selectedItem = loop_day.selectedItem
+            mLinkageDay = mDayList!![selectedItem]
+        }
+        if (!mHourList.isNullOrEmpty()) {
+            val selectedItem = loop_hour.selectedItem
+            mLinkageHour = mHourList!![selectedItem]
+        }
+        if (!mMinuteList.isNullOrEmpty()) {
+            val selectedItem = loop_min.selectedItem
+            mLinkageMin = mMinuteList!![selectedItem]
+        }
+    }
+
+    private fun setContentColor() {
+        if (mContentColor == 0) return
+        loop_year.setCenterTextColor(mContentColor)
+        loop_month.setCenterTextColor(mContentColor)
+        loop_day.setCenterTextColor(mContentColor)
+        if (!isShowHourMin) return
+        loop_hour.setCenterTextColor(mContentColor)
+        loop_min.setCenterTextColor(mContentColor)
+    }
+
+    private fun setOutContentColor() {
+        if (mOutContentColor == 0) return
+        loop_year.setOuterTextColor(mOutContentColor)
+        loop_month.setOuterTextColor(mOutContentColor)
+        loop_day.setOuterTextColor(mOutContentColor)
+        if (!isShowHourMin) return
+        loop_hour.setOuterTextColor(mOutContentColor)
+        loop_min.setOuterTextColor(mOutContentColor)
+    }
+
+    private fun setShowline() {
+        loop_year.setShowDividerLine(isShowLine)
+        loop_month.setShowDividerLine(isShowLine)
+        loop_day.setShowDividerLine(isShowLine)
+        if (!isShowHourMin) return
+        loop_hour.setShowDividerLine(isShowLine)
+        loop_min.setShowDividerLine(isShowLine)
+    }
+
+    private fun setLineColor() {
+        if (mLineColor == 0) return
+        loop_year.setDividerColor(mContentColor)
+        loop_month.setDividerColor(mContentColor)
+        loop_day.setDividerColor(mContentColor)
+        if (!isShowHourMin) return
+        loop_hour.setDividerColor(mContentColor)
+        loop_min.setDividerColor(mContentColor)
+    }
+
+    private fun setIsLoop() {
+        loop_year.setLoop(isLoop)
+        loop_month.setLoop(isLoop)
+        loop_day.setLoop(isLoop)
+        if (!isShowHourMin) return
+        loop_hour.setLoop(isLoop)
+        loop_min.setLoop(isLoop)
+    }
+
+
+    private fun initListener() {
+        tv_dialog_time_picker_cancle.setOnClickListener {
+            dismiss()
+        }
+        tv_dialog_time_picker_sure.setOnClickListener {
+            sure()
+        }
+    }
+
+    private fun sure() {
+        val selectedItem = loop_year.selectedItem
+        val selectedItem1 = loop_month.selectedItem
+        val selectedItem2 = loop_day.selectedItem
+        if (isShowHourMin) {
+            if (mYearList.isNullOrEmpty() || mMonthList.isNullOrEmpty() || mDayList.isNullOrEmpty() || mHourList.isNullOrEmpty() || mMinuteList.isNullOrEmpty())
+                return
+            val selectedItem3 = loop_hour.selectedItem
+            val selectedItem4 = loop_min.selectedItem
+            if (::onSelectTImePickerHourMin.isInitialized) {
+
+                onSelectTImePickerHourMin(
+                    mYearList!![selectedItem],
+                    mMonthList!![selectedItem1],
+                    mDayList!![selectedItem2],
+                    mHourList!![selectedItem3],
+                    mMinuteList!![selectedItem4]
+                )
+                dismiss()
+            }
+
+        } else {
+            if (mYearList.isNullOrEmpty() || mMonthList.isNullOrEmpty() || mDayList.isNullOrEmpty())
+                return
+            if (::onSelectTImePickerNoHourMin.isInitialized) {
+                onSelectTImePickerNoHourMin(
+                    mYearList!![selectedItem],
+                    mMonthList!![selectedItem1],
+                    mDayList!![selectedItem2]
+                )
+                dismiss()
+            }
+        }
+
+
+    }
+
+
+    /***
+     *
+     * @param type 0 年 1 月 2 天 3 时 4 分
+     * @param loopView
+     * @param select 选中的时间
+     * @return
+     */
+
+    private fun gmSetViewData(type: Int, loopView: LoopView, select: Int) {
+        var postion = 0
+        when (type) {
+            0 -> {//年
+                if (mYearList.isNullOrEmpty())
+                    mYearList = ArrayList<String>()
+                else
+                    mYearList?.clear()
+                if (mStartYear > mEndYear) {
+                    throw NumberFormatException("开始时间$mStartYear 大于 结束$mEndYear")
+                }
+                for (i in mStartYear..mEndYear) {
+                    mYearList?.add("$i")
+                }
+                if (!mYearList.isNullOrEmpty()) {
+                    for ((index, child) in mYearList!!.withIndex()) {
+                        if (child == "$select") {
+                            postion = index
+                            break
+                        }
+                    }
+                }
+                loopView.setItems(mYearList)
+            }
+            1 -> {//月
+                if (mMonthList.isNullOrEmpty()) {
+                    mMonthList = ArrayList<String>()
+                } else
+                    mMonthList?.clear()
+
+                for (i in 1..12) {
+                    mMonthList?.add("$i")
+                }
+                if (!mMonthList.isNullOrEmpty()) {
+                    for ((index, child) in mMonthList!!.withIndex()) {
+                        if (child == "$select") {
+                            postion = index
+                            break
+                        }
+                    }
+                }
+
+                loopView.setItems(mMonthList)
+            }
+            2 -> {//日
+                if (mDayList.isNullOrEmpty()) {
+                    mDayList = ArrayList<String>()
+                } else
+                    mDayList?.clear()
+                for (i in 1..31) {
+                    mDayList?.add("$i")
+                }
+                if (!mDayList.isNullOrEmpty()) {
+                    for ((index, child) in mDayList!!.withIndex()) {
+                        if (child == "$select") {
+                            postion = index
+                            break
+                        }
+                    }
+                }
+
+                loopView.setItems(mDayList)
+            }
+            3 -> {//时
+                if (mHourList.isNullOrEmpty()) {
+
+                    mHourList = ArrayList<String>()
+                } else {
+                    mHourList?.clear()
+                }
+                for (i in 0..23) {
+                    mHourList?.add("$i")
+                }
+                if (!mHourList.isNullOrEmpty()) {
+                    for ((index, child) in mHourList!!.withIndex()) {
+                        if (child == "$select") {
+                            postion = index
+                            break
+                        }
+                    }
+                }
+
+                loopView.setItems(mHourList)
+            }
+            4 -> {//分
+                if (mMinuteList.isNullOrEmpty()) {
+                    mMinuteList = ArrayList<String>()
+                } else
+                    mMinuteList?.clear()
+                for (i in 0..59) {
+                    mMinuteList?.add("$i")
+                }
+                if (!mMinuteList.isNullOrEmpty()) {
+                    for ((index, child) in mMinuteList!!.withIndex()) {
+                        if (child == "$select") {
+                            postion = index
+                            break
+                        }
+                    }
+                }
+
+                loopView.setItems(mMinuteList)
+            }
+        }
+        loopView.setInitPosition(postion)
+        loopView.setOnItemScrollListener(object : OnItemScrollListener {
+            override fun onItemScrollStateChanged(
+                loopView: LoopView?,
+                currentPassItem: Int,
+                oldScrollState: Int,
+                scrollState: Int,
+                totalScrollY: Int
+            ) {
+                //滑动停止
+                if (scrollState == LoopView.SCROLL_STATE_IDLE) {
+                    bindViewData()
+                    if (mIsLinkAge)
+                        setIsLinkage(type)
+                }
+            }
+
+            override fun onItemScrolling(
+                loopView: LoopView?,
+                currentPassItem: Int,
+                scrollState: Int,
+                totalScrollY: Int
+            ) {
+            }
+
+        })
+    }
+
+    /***
+     * @param type 0 年 1 月 2 天 3 时 4 分
+     * @return
+     */
+    private fun setIsLinkage(type: Int) {
+        when (type) {
+            0 -> {
+                val selectedItem = loop_year.selectedItem
+                val com = mYearList!![selectedItem]
+                if (com != mLinkageYear) {
+                    setCustiomPostion(0, true, 0, true, 0, true, 0, true)
+                }
+            }
+            1 -> {
+                val selectedItem = loop_month.selectedItem
+                val com = mMonthList!![selectedItem]
+                if (com != mLinkageMonth) {
+                    setCustiomPostion(0, false, 0, true, 0, true, 0, true)
+                }
+
+            }
+            2 -> {
+                val selectedItem = loop_day.selectedItem
+                val com = mDayList!![selectedItem]
+                if (com != mLinkageDay) {
+                    setCustiomPostion(0, false, 0, false, 0, true, 0, true)
+                }
+            }
+            3 -> {
+                val selectedItem = loop_hour.selectedItem
+                val com = mHourList!![selectedItem]
+                if (com != mLinkageHour) {
+                    setCustiomPostion(0, false, 0, false, 0, false, 0, true)
+                }
+            }
+            4 -> {
+            }
+            else -> {
+            }
+        }
+
+    }
+
+    /***
+     * @param month 月份索引
+     * @param day    天数索引
+     * @param hour  小时索引
+     * @param min  分钟索引
+     * @return
+     */
+    private fun setCustiomPostion(
+        month: Int,
+        isChangerMonth: Boolean,
+        day: Int,
+        isChangerDay: Boolean,
+        hour: Int,
+        isChangerHour: Boolean,
+        min: Int,
+        isChangerMin: Boolean
+    ) {
+        if (isChangerMonth)
+            loop_month.setCurrentPosition(month)
+        if (isChangerDay)
+            loop_day.setCurrentPosition(day)
+        if (isChangerHour)
+            loop_hour.setCurrentPosition(hour)
+        if (isChangerMin)
+            loop_min.setCurrentPosition(min)
+    }
+
+
+    private fun bindViewData() {
+        val selectedItem = loop_year.selectedItem
+        val selectedItem1 = loop_month.selectedItem
+        val selectedItem2 = loop_day.selectedItem
+        if (isShowHourMin) {
+            if (mYearList.isNullOrEmpty() || mMonthList.isNullOrEmpty() || mDayList.isNullOrEmpty() || mHourList.isNullOrEmpty() || mMinuteList.isNullOrEmpty())
+                return
+            val selectedItem3 = loop_hour.selectedItem
+            val selectedItem4 = loop_min.selectedItem
+            tv_dialog_time_picker_time.text =
+                "${mYearList!![selectedItem]}-${mMonthList!![selectedItem1]}-${mDayList!![selectedItem2]}  ${mHourList!![selectedItem3]}:${mMinuteList!![selectedItem4]}"
+
+        } else {
+            if (mYearList.isNullOrEmpty() || mMonthList.isNullOrEmpty() || mDayList.isNullOrEmpty())
+                return
+            tv_dialog_time_picker_time.text =
+                "${mYearList!![selectedItem]}-${mMonthList!![selectedItem1]}-${mDayList!![selectedItem2]}"
+        }
+    }
+
+
+    private fun setSizeMode() {
+        val params = window!!.attributes
+        params.width = metrics.widthPixels
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT
+        window!!.attributes = params
+        window!!.setGravity(Gravity.BOTTOM)
+        val windowManager = mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val defaultDisplay = windowManager.defaultDisplay
+        var height: Int
+        if (Build.VERSION.SDK_INT < 17) {
+            height = defaultDisplay.height
+        } else {
+            val size = Point()
+            defaultDisplay.getRealSize(size)
+            height = size.y
+        }
+
+        val layoutParams = rootviewtimepicek.layoutParams
+        layoutParams.height = (height * mPercentage).toInt()
+        rootviewtimepicek.layoutParams = layoutParams
+    }
+
+
+}

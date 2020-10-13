@@ -192,7 +192,6 @@
     </declare-styleable>
 
 
-
     <declare-styleable name="TitleCustomBar">
         <!--        自定义标题栏背景-->
         <attr name="customTopbarBg" format="color" />
@@ -236,9 +235,9 @@
         <!--        是否图片文字显示左侧-->
         <attr name="showTvOrIvLife" format="boolean" />
         <!--        是否显示右侧-->
-        <attr name="showRight" format="boolean"/>
+        <attr name="showRight" format="boolean" />
         <!--        是否显示左侧-->
-        <attr name="showLife" format="boolean"/>
+        <attr name="showLife" format="boolean" />
 
     </declare-styleable>
     <declare-styleable name="CustomMarqueeView">
@@ -397,6 +396,27 @@
         <attr name="switcherTextSize" format="dimension" />
         <!--        广告栏时间-->
         <attr name="switcherRollingTime" format="integer" />
+    </declare-styleable>
+    <!--    //时间-->
+    <declare-styleable name="LoopView">
+        <!--        字体大小-->
+        <attr name="awv_textsize" format="integer" />
+        <!--        线间距-->
+        <attr name="awv_lineSpace" format="float" />
+        <!--        中间字体颜色-->
+        <attr name="awv_centerTextColor" format="color" />
+        <!--        其它字体颜色-->
+        <attr name="awv_outerTextColor" format="color" />
+        <!--        绘制字体颜色-->
+        <attr name="awv_dividerTextColor" format="color" />
+        <!--        显示数据量-->
+        <attr name="awv_itemsVisibleCount" format="integer" />
+        <!--        是否循环-->
+        <attr name="awv_isLoop" format="boolean" />
+        <!--        初始化坐标-->
+        <attr name="awv_initialPosition" format="integer" />
+        <!--        设置距离查-->
+        <attr name="awv_scaleX" format="float" />
     </declare-styleable>
 
 
