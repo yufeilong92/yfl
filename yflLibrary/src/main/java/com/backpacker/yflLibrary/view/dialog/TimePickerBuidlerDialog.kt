@@ -92,7 +92,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
     //顶层line 颜色
     private var mTopLineColor: Int = 0
     //iTem 线的左右距离
-    private var mItemLineSpace: Int = 0
+    private var mItemLineSpace: Float = 0.0f
 
 
     class Builder(var mContext: Context) {
@@ -145,7 +145,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
          * @param space item 线左右间距
          * @return
          */
-        fun setItemLineSpace(space: Int): Builder {
+        fun setItemLineSpace(space: Float): Builder {
             timePicker.mItemLineSpace = space
             return this
         }
@@ -303,7 +303,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         loop_h_min.setItemsVisibleCount(mNumber)
     }
     private fun setItemLineSpace() {
-        if (mItemLineSpace == 0) return
+        if (mItemLineSpace == 0.0f) return
         loop_h_hour.setItemLineSpace(mItemLineSpace)
         loop_h_min.setItemLineSpace(mItemLineSpace)
     }

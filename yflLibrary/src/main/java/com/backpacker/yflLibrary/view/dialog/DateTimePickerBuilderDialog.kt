@@ -106,7 +106,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
     private var mLinkageHour: String? = null
     private var mLinkageMin: String? = null
     //iTem 线的左右距离
-    private var mItemLineSpace: Int = 0
+    private var mItemLineSpace: Float = 0.0f
 
     //是否显示头顶颜色
     private var mShowTopLine = true
@@ -135,7 +135,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
          * @param space item 线左右间距
          * @return
          */
-        fun setItemLineSpace(space: Int): Builder {
+        fun setItemLineSpace(space: Float): Builder {
             timePicker.mItemLineSpace = space
             return this
         }
@@ -390,7 +390,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         initLinkAge()
     }
     private fun setItemLineSpace() {
-        if (mItemLineSpace == 0) return
+        if (mItemLineSpace == 0.0f) return
         loop_year.setItemLineSpace(mItemLineSpace)
         loop_month.setItemLineSpace(mItemLineSpace)
         loop_day.setItemLineSpace(mItemLineSpace)

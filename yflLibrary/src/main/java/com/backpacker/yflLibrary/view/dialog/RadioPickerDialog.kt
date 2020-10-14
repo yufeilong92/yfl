@@ -80,7 +80,7 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     private var mTextItemSize = 0.0F
 
     //iTem 线的左右距离
-    private var mItemLineSpace: Int = 0
+    private var mItemLineSpace: Float = 0.0f
 
 
     class Builder(var mContext: Context) {
@@ -98,7 +98,7 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
          * @param space item 线左右间距
          * @return
          */
-        fun setItemLineSpace(space: Int):Builder {
+        fun setItemLineSpace(space: Float):Builder {
             mRadioPicker.mItemLineSpace = space
             return this
         }
@@ -254,7 +254,7 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     }
 
     private fun setItemLineSpace() {
-        if (mItemLineSpace == 0) return
+        if (mItemLineSpace == 0.0f) return
         loop_h_hour.setItemLineSpace(mItemLineSpace)
         loop_h_min.setItemLineSpace(mItemLineSpace)
     }
