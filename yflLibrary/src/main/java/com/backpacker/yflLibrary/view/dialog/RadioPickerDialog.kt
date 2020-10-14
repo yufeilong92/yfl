@@ -5,6 +5,8 @@ import android.graphics.Point
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.View
@@ -228,7 +230,11 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
         }
 
     }
-
+    val handler: Handler =object : Handler(){
+        override fun handleMessage(msg: Message) {
+            tv_dialog_radio_picker_time.text = msg.obj.toString()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_radio_picker)
@@ -299,7 +305,10 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
         loop_item_view.setOnStopListener(object :OnStopListener{
             override fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int) {
                 val selectedItem = loop_item_view.selectedItem
-                tv_dialog_radio_picker_time.text = mItemLists!![selectedItem]
+                val com = mItemLists!![selectedItem]
+                handler.sendMessage(Message().apply {
+                    obj=com
+                })
             }
 
         })

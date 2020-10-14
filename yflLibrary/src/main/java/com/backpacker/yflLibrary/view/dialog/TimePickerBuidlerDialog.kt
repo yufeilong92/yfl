@@ -5,6 +5,8 @@ import android.graphics.Point
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.View
@@ -393,6 +395,13 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         }
     }
 
+    val handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            bindViewData()
+            if (mIsLinkAge)
+                setIsLinkage(msg.arg1)
+        }
+    }
     /***
      *
      * @param type 0 年 1 月 2 天 3 时 4 分
@@ -448,9 +457,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         loopView.setInitPosition(postion)
         loopView.setOnStopListener(object :OnStopListener{
             override fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int) {
-                bindViewData()
-                if (mIsLinkAge)
-                    setIsLinkage(type)
+                handler.sendMessage(Message().apply { arg1 = type })
             }
 
         })

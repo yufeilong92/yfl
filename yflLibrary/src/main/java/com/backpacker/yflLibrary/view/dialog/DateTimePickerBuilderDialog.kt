@@ -5,6 +5,8 @@ import android.graphics.Point
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.View
@@ -350,6 +352,14 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
             timePicker.show()
         }
 
+    }
+
+    val handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            bindViewData()
+            if (mIsLinkAge)
+                setIsLinkage(msg.arg1)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -712,9 +722,9 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         loopView.setInitPosition(postion)
         loopView.setOnStopListener(object :OnStopListener{
             override fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int) {
-                bindViewData()
-                if (mIsLinkAge)
-                    setIsLinkage(type)
+                handler.sendMessage(Message().apply {
+                    arg1 = type
+                })
             }
 
         })
