@@ -79,6 +79,10 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     //设置item 字体大小
     private var mTextItemSize = 0.0F
 
+    //iTem 线的左右距离
+    private var mItemLineSpace: Int = 0
+
+
     class Builder(var mContext: Context) {
         val mRadioPicker = RadioPickerDialog(mContext)
 
@@ -88,6 +92,14 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
          */
         fun setInitData(data: MutableList<String>?): Builder {
             mRadioPicker.mItemLists = data
+            return this
+        }
+        /***
+         * @param space item 线左右间距
+         * @return
+         */
+        fun setItemLineSpace(space: Int):Builder {
+            mRadioPicker.mItemLineSpace = space
             return this
         }
 
@@ -228,6 +240,7 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
     private fun initEvent() {
         tv_dialog_radio_picker_time.text = "请选择"
         setTopShow()
+        setItemLineSpace()
         setTopLineColor()
         setLoopNumber()
         bindViewData()
@@ -238,6 +251,12 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
         setLineColor()
         setShowline()
         setIsLoop()
+    }
+
+    private fun setItemLineSpace() {
+        if (mItemLineSpace == 0) return
+        loop_h_hour.setItemLineSpace(mItemLineSpace)
+        loop_h_min.setItemLineSpace(mItemLineSpace)
     }
 
     private fun setTvSize() {

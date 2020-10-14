@@ -91,6 +91,8 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
 
     //顶层line 颜色
     private var mTopLineColor: Int = 0
+    //iTem 线的左右距离
+    private var mItemLineSpace: Int = 0
 
 
     class Builder(var mContext: Context) {
@@ -137,6 +139,14 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
 
         fun setLineColor(@ColorInt color: Int): Builder {
             timePicker.mLineColor = color
+            return this
+        }
+        /***
+         * @param space item 线左右间距
+         * @return
+         */
+        fun setItemLineSpace(space: Int): Builder {
+            timePicker.mItemLineSpace = space
             return this
         }
 
@@ -248,6 +258,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
     private fun initEvent() {
         tv_dialog_time_picker_h_time.text = "请选择"
         setLoopNumber()
+        setItemLineSpace()
         setTopLineColor()
         setTopShow()
         gmSetViewData(3, loop_h_hour, mSelectHour)
@@ -271,6 +282,7 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
 
     }
 
+
     private fun setTopShow() {
         view_line_h_one.visibility = if (mShowTopLine) View.VISIBLE else View.GONE
     }
@@ -289,6 +301,11 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
         if (mNumber == 0) return
         loop_h_hour.setItemsVisibleCount(mNumber)
         loop_h_min.setItemsVisibleCount(mNumber)
+    }
+    private fun setItemLineSpace() {
+        if (mItemLineSpace == 0) return
+        loop_h_hour.setItemLineSpace(mItemLineSpace)
+        loop_h_min.setItemLineSpace(mItemLineSpace)
     }
 
     private fun setTvTypeface() {

@@ -105,6 +105,8 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
     private var mLinkageDay: String? = null
     private var mLinkageHour: String? = null
     private var mLinkageMin: String? = null
+    //iTem 线的左右距离
+    private var mItemLineSpace: Int = 0
 
     //是否显示头顶颜色
     private var mShowTopLine = true
@@ -127,6 +129,14 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
          */
         fun setStartTime(year: Int): Builder {
             timePicker.mStartYear = year
+            return this
+        }
+        /***
+         * @param space item 线左右间距
+         * @return
+         */
+        fun setItemLineSpace(space: Int): Builder {
+            timePicker.mItemLineSpace = space
             return this
         }
 
@@ -354,6 +364,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
     private fun initEvent() {
         tv_dialog_time_picker_time.text = "请选择"
         setTopLineColor()
+        setItemLineSpace()
         setTopShow()
         gmSetViewData(0, loop_year, mSelectYear)
         gmSetViewData(1, loop_month, mSelectMonth)
@@ -378,7 +389,15 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
         setIsLoop()
         initLinkAge()
     }
-
+    private fun setItemLineSpace() {
+        if (mItemLineSpace == 0) return
+        loop_year.setItemLineSpace(mItemLineSpace)
+        loop_month.setItemLineSpace(mItemLineSpace)
+        loop_day.setItemLineSpace(mItemLineSpace)
+        if (!isShowHourMin) return
+        loop_hour.setItemLineSpace(mItemLineSpace)
+        loop_min.setItemLineSpace(mItemLineSpace)
+    }
     private fun setTvSize() {
         if (mTextItemSize == 0.0F) return
         loop_year.setTextSize(mTextItemSize)
