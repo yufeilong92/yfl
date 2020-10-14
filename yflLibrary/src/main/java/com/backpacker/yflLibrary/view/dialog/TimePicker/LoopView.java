@@ -323,7 +323,7 @@ public class LoopView extends View {
     }
 
     void smoothScroll(ACTION action) {
-        cancelFuture();
+        cancelFuture(false);
         if (action == ACTION.FLING || action == ACTION.DRAG) {
             float itemHeight = lineSpacingMultiplier * itemTextHeight;
             mOffset = (int) ((totalScrollY % itemHeight + itemHeight) % itemHeight);
@@ -335,23 +335,23 @@ public class LoopView extends View {
         }
         mFuture =
                 mExecutor.scheduleWithFixedDelay(new SmoothScrollTimerTask(this, mOffset), 0, 10, TimeUnit.MILLISECONDS);
-        changeScrollState(SCROLL_STATE_SCROLLING);
+        changeScrollState(SCROLL_STATE_SCROLLING,false);
     }
 
     protected final void scrollBy(float velocityY) {
-        cancelFuture();
+        cancelFuture(false);
         // change this number, can change fling speed
         int velocityFling = 10;
         mFuture = mExecutor.scheduleWithFixedDelay(new InertiaTimerTask(this, velocityY), 0, velocityFling,
                 TimeUnit.MILLISECONDS);
-        changeScrollState(SCROLL_STATE_DRAGGING);
+        changeScrollState(SCROLL_STATE_DRAGGING,false);
     }
 
-    public void cancelFuture() {
+    public void cancelFuture(Boolean stop) {
         if (mFuture != null && !mFuture.isCancelled()) {
             mFuture.cancel(true);
             mFuture = null;
-            changeScrollState(SCROLL_STATE_IDLE);
+            changeScrollState(SCROLL_STATE_IDLE,stop);
         }
     }
 
@@ -375,17 +375,18 @@ public class LoopView extends View {
         Log.i("printMethodStackTrace", sb.toString());
     }
 
-    private void changeScrollState(int scrollState) {
+    private void changeScrollState(int scrollState,Boolean stop) {
         if (scrollState != currentScrollState && !handler.hasMessages(MessageHandler.WHAT_SMOOTH_SCROLL_INERTIA)) {
             lastScrollState = currentScrollState;
             currentScrollState = scrollState;
-            if (mOnItemScrollListener != null) {
-                mOnItemScrollListener.onItemScrollStateChanged(this, getSelectedItem(),  currentScrollState,0, totalScrollY);
-            }
 
-//            if(scrollState == SCROLL_STATE_SCROLLING || scrollState == SCROLL_STATE_IDLE){
+            if (stop&&(scrollState == SCROLL_STATE_SCROLLING || scrollState == SCROLL_STATE_IDLE)) {
 //                printMethodStackTrace("changeScrollState");
-//            }
+                Log.e("==", "scrollState触发处3");
+                if (mOnItemScrollListener != null) {
+                    mOnItemScrollListener.onItemScrollStateChanged(this, getSelectedItem(), lastScrollState, SCROLL_STATE_IDLE, totalScrollY);
+                }
+            }
         }
     }
 
@@ -487,7 +488,7 @@ public class LoopView extends View {
             initPosition = position;
             totalScrollY = 0;
             mOffset = 0;
-            changeScrollState(SCROLL_STATE_SETTING);
+            changeScrollState(SCROLL_STATE_SETTING,false);
             invalidate();
         }
     }
@@ -653,7 +654,7 @@ public class LoopView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 startTime = System.currentTimeMillis();
-                cancelFuture();
+                cancelFuture(false);
                 previousY = event.getRawY();
                 if (getParent() != null) {
                     getParent().requestDisallowInterceptTouchEvent(true);
@@ -676,7 +677,7 @@ public class LoopView extends View {
                         totalScrollY = (int) bottom;
                     }
                 }
-                changeScrollState(SCROLL_STATE_DRAGGING);
+                changeScrollState(SCROLL_STATE_DRAGGING,false);
                 break;
 
             case MotionEvent.ACTION_UP:
