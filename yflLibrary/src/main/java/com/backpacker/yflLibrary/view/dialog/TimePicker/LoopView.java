@@ -92,7 +92,7 @@ public class LoopView extends View {
     int change;
 
     int itemsVisibleCount;
-    OnItemSelectListener mOnStopListener;
+    OnStopListener mOnStopListener;
 
     HashMap<Integer, IndexString> drawingStrings;
 //    HashMap<String,Integer> drawingStr
@@ -186,7 +186,7 @@ public class LoopView extends View {
         this.showDividerColor = show;
     }
 
-    public final void setOnStopListener( OnItemSelectListener mOnItemScrollListener) {
+    public final void setOnStopListener(OnStopListener mOnItemScrollListener) {
         this.mOnStopListener = mOnItemScrollListener;
     }
 

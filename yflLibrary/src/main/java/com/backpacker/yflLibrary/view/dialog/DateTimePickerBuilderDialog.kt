@@ -13,11 +13,9 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
-import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
-import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemSelectListener
+import com.backpacker.yflLibrary.view.dialog.TimePicker.OnStopListener
 import com.example.UtilsLibrary.R
 import kotlinx.android.synthetic.main.dialog_date_time_picker.*
-import kotlinx.android.synthetic.main.dialog_time_picker.*
 import java.lang.NumberFormatException
 import java.util.ArrayList
 
@@ -712,7 +710,7 @@ public class DateTimePickerBuilderDialog(var mContext: Context) :
             }
         }
         loopView.setInitPosition(postion)
-        loopView.setOnStopListener(object :OnItemSelectListener{
+        loopView.setOnStopListener(object :OnStopListener{
             override fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int) {
                 bindViewData()
                 if (mIsLinkAge)

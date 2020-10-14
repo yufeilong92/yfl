@@ -13,8 +13,7 @@ import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
-import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
-import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemSelectListener
+import com.backpacker.yflLibrary.view.dialog.TimePicker.OnStopListener
 import com.example.UtilsLibrary.R
 import kotlinx.android.synthetic.main.dialog_radio_picker.*
 import kotlinx.android.synthetic.main.dialog_time_picker.*
@@ -297,7 +296,7 @@ class RadioPickerDialog(var mContext: Context) : AlertDialog(mContext, R.style.m
         }
         loop_item_view.setItems(mItemLists)
         loop_item_view.setInitPosition(postion)
-        loop_item_view.setOnStopListener(object :OnItemSelectListener{
+        loop_item_view.setOnStopListener(object :OnStopListener{
             override fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int) {
                 val selectedItem = loop_item_view.selectedItem
                 tv_dialog_radio_picker_time.text = mItemLists!![selectedItem]

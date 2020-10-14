@@ -7,6 +7,6 @@ package com.backpacker.yflLibrary.view.dialog.TimePicker
  * @Time :2020/10/14 14:30
  * @Purpose :
  */
-public interface OnItemSelectListener {
+public interface OnStopListener {
     fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int)
 }
