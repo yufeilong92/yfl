@@ -113,14 +113,24 @@ public class LoopView extends View {
     private Typeface contenttypeface = Typeface.DEFAULT_BOLD;
     private Typeface outtypeface = Typeface.DEFAULT;
     //线的左右间距
-    int lineSpace = 0;
+    Float lineSpace = 0.0f;
     /**
      * @param space 线的左右间距
      */
-    public void setItemLineSpace(Integer space) {
-        lineSpace = space;
+    public void setItemLineSpace(Float space) {
+        lineSpace =dp2px(space);
     }
+    private float density = Resources.getSystem().getDisplayMetrics().density;
 
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     *
+     * @param dpValue 虚拟像素
+     * @return 像素
+     */
+    private float dp2px(Float dpValue) {
+        return 0.5f + dpValue * density;
+    }
     /**
      * set text line space, must more than 1
      *
