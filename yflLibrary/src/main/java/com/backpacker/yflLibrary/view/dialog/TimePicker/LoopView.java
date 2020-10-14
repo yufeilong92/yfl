@@ -379,6 +379,10 @@ public class LoopView extends View {
         if (scrollState != currentScrollState && !handler.hasMessages(MessageHandler.WHAT_SMOOTH_SCROLL_INERTIA)) {
             lastScrollState = currentScrollState;
             currentScrollState = scrollState;
+            if (mOnItemScrollListener != null) {
+                mOnItemScrollListener.onItemScrollStateChanged(this, getSelectedItem(),  currentScrollState,0, totalScrollY);
+            }
+
 //            if(scrollState == SCROLL_STATE_SCROLLING || scrollState == SCROLL_STATE_IDLE){
 //                printMethodStackTrace("changeScrollState");
 //            }
