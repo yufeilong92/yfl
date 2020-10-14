@@ -13,6 +13,7 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.app.AlertDialog
 import com.backpacker.yflLibrary.view.dialog.TimePicker.LoopView
 import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemScrollListener
+import com.backpacker.yflLibrary.view.dialog.TimePicker.OnItemSelectListener
 import com.example.UtilsLibrary.R
 import kotlinx.android.synthetic.main.dialog_time_picker.*
 import java.util.ArrayList
@@ -446,28 +447,11 @@ class TimePickerBuidlerDialog(var mContext: Context) : AlertDialog(mContext, R.s
             }
         }
         loopView.setInitPosition(postion)
-        loopView.setOnItemScrollListener(object : OnItemScrollListener {
-            override fun onItemScrollStateChanged(
-                loopView: LoopView?,
-                currentPassItem: Int,
-                oldScrollState: Int,
-                scrollState: Int,
-                totalScrollY: Int
-            ) {
-                //滑动停止
-                if (scrollState == LoopView.SCROLL_STATE_IDLE) {
-                    bindViewData()
-                    if (mIsLinkAge)
-                        setIsLinkage(type)
-                }
-            }
-
-            override fun onItemScrolling(
-                loopView: LoopView?,
-                currentPassItem: Int,
-                scrollState: Int,
-                totalScrollY: Int
-            ) {
+        loopView.setOnStopListener(object :OnItemSelectListener{
+            override fun onItemScrollStateChanged(loopView: LoopView?, currentPassItem: Int) {
+                bindViewData()
+                if (mIsLinkAge)
+                    setIsLinkage(type)
             }
 
         })

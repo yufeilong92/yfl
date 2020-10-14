@@ -92,6 +92,7 @@ public class LoopView extends View {
     int change;
 
     int itemsVisibleCount;
+    OnItemSelectListener mOnStopListener;
 
     HashMap<Integer, IndexString> drawingStrings;
 //    HashMap<String,Integer> drawingStr
@@ -185,6 +186,9 @@ public class LoopView extends View {
         this.showDividerColor = show;
     }
 
+    public final void setOnStopListener( OnItemSelectListener mOnItemScrollListener) {
+        this.mOnStopListener = mOnItemScrollListener;
+    }
 
     /**
      * set text typeface
@@ -383,8 +387,8 @@ public class LoopView extends View {
             if (stop&&(scrollState == SCROLL_STATE_SCROLLING || scrollState == SCROLL_STATE_IDLE)) {
 //                printMethodStackTrace("changeScrollState");
                 Log.e("==", "scrollState触发处3");
-                if (mOnItemScrollListener != null) {
-                    mOnItemScrollListener.onItemScrollStateChanged(this, getSelectedItem(), lastScrollState, SCROLL_STATE_IDLE, totalScrollY);
+                if (mOnStopListener != null) {
+                    mOnStopListener.onItemScrollStateChanged(this, getSelectedItem());
                 }
             }
         }
