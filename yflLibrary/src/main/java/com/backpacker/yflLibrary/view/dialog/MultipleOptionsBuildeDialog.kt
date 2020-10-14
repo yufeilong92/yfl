@@ -208,6 +208,7 @@ class MultipleOptionsBuildeDialog(
                     if (::onMultipeDataListener.isInitialized) {
                         onMultipeDataListener.invoke(null)
                     }
+                    dismiss()
                     return
                 }
                 if (mIsFilter) {
@@ -215,17 +216,20 @@ class MultipleOptionsBuildeDialog(
                     if (::onMultipeDataListener.isInitialized) {
                         onMultipeDataListener.invoke(filter)
                     }
+                    dismiss()
                     return
                 }
                 if (::onMultipeDataListener.isInitialized) {
                     onMultipeDataListener.invoke(mData)
                 }
+                dismiss()
             }
             else -> {
                 if (mData.isNullOrEmpty()) {
                     if (::onSingleDataListener.isInitialized) {
                         onSingleDataListener.invoke(null)
                     }
+                    dismiss()
                     return
                 }
                 val list = mData.filter { it.check }
@@ -233,11 +237,13 @@ class MultipleOptionsBuildeDialog(
                     if (::onSingleDataListener.isInitialized) {
                         onSingleDataListener.invoke(null)
                     }
+                    dismiss()
                     return
                 }
                 if (::onSingleDataListener.isInitialized) {
                     onSingleDataListener.invoke(list[0])
                 }
+                dismiss()
 
             }
         }
