@@ -6,6 +6,7 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import java.util.*
 
 /**
  * @Author : YFL  is Creating a porject in basehttps
@@ -21,12 +22,14 @@ object KotlinKeyBoardUtils {
      * @param mEditText
      * @param mContext
      */
-    fun openKeybord(mEditText: EditText, mContext: Context) {
+    fun openKeybord(mEditText: View, mContext: Context) {
         val imm = mContext
             .getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN)
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,
-            InputMethodManager.HIDE_IMPLICIT_ONLY)
+        imm.toggleSoftInput(
+            InputMethodManager.SHOW_FORCED,
+            InputMethodManager.HIDE_IMPLICIT_ONLY
+        )
     }
 
     /**
@@ -35,11 +38,19 @@ object KotlinKeyBoardUtils {
      * @param mEditText
      * @param mContext
      */
-    fun closeKeybord(mEditText: EditText, mContext: Context) {
+    fun closeKeybord(mEditText: View, mContext: Context) {
         val imm = mContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(mEditText.windowToken, 0)
+    } /**
+     * 关闭软键盘
+     *
+     * @param mEditText
+     * @param mContext
+     */
+    fun closeKeybord( mContext: Activity) {
+        val imm = mContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(mContext.currentFocus!!.windowToken, 0)
     }
-
 
     /**
      * des:隐藏软键盘,这种方式参数为activity
@@ -50,8 +61,10 @@ object KotlinKeyBoardUtils {
         if (activity == null || activity.currentFocus == null)
             return
         (activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
-            .hideSoftInputFromWindow(activity.currentFocus!!
-                .windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            .hideSoftInputFromWindow(
+                activity.currentFocus!!
+                    .windowToken, InputMethodManager.HIDE_NOT_ALWAYS
+            )
     }
 
     /**
@@ -63,5 +76,28 @@ object KotlinKeyBoardUtils {
             view.requestFocus()
             imm!!.showSoftInput(view, 0)
         }
+    }
+
+    /**
+     * 打卡软键盘
+     *
+     * @param mEditText 输入框
+     * @param mContext  上下文
+     */
+    fun openKeybord500(mEditText: EditText?, mContext: Context) {
+
+        //必须要等UI绘制完成之后，打开软键盘的代码才能生效，所以要设置一个延时
+        val timer = Timer()
+        timer.schedule(object : TimerTask() {
+           override fun run() {
+                val imm = mContext
+                    .getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN)
+                imm.toggleSoftInput(
+                    InputMethodManager.SHOW_FORCED,
+                    InputMethodManager.HIDE_IMPLICIT_ONLY
+                )
+            }
+        }, 500)
     }
 }

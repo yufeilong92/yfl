@@ -77,14 +77,16 @@ class KotlinSystemUiUtil(private val window: Window) {
      * @param color 颜色
      */
     fun setStatusBar(color: Int):KotlinSystemUiUtil {
-        window.statusBarColor = when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> color.apply {
-                setStatusBarStyle(
-                    this
-                )
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> color.apply {
+                    setStatusBarStyle(
+                        this
+                    )
+                }
+                KotlinColorUtil(color).grayscale < this.grayscale -> color
+                else -> Color.BLACK
             }
-            KotlinColorUtil(color).grayscale < this.grayscale -> color
-            else -> Color.BLACK
         }
         return this
     }

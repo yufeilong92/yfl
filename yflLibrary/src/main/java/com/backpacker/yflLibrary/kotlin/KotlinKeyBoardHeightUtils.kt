@@ -25,7 +25,7 @@ class KotlinKeyBoardHeightUtils constructor(activity: Activity, private val keyB
         mChildOfContent = content.getChildAt(0)
         mChildOfContent.viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener)
         content.setOnClickListener {
-            KotlinUtil.hideInputMethod(activity)
+            KotlinKeyBoardUtils.closeKeybord(activity)
         }
     }
 

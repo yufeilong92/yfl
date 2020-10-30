@@ -34,49 +34,6 @@ import com.backpacker.yflLibrary.java.JavaStringUtil
  * @Copyright: 2019
  */
 object KotlinUtil {
-    /**
-     * 隐藏键盘
-     *
-     * @param context context
-     * @param view    The currently focused view
-     */
-    fun hideInputMethod(context: Context?, view: View?) {
-        if (context == null || view == null) {
-            return
-        }
-
-        val imm = context!!
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (imm != null) {
-            imm!!.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
-        }
-    }
-
-    /**
-     * 隐藏键盘
-     *
-     * @param activity activity
-     */
-    fun hideInputMethod(activity: Activity) {
-        hideInputMethod(activity, activity.currentFocus)
-    }
-
-    /**
-     * 显示输入键盘
-     *
-     * @param context context
-     * @param view    The currently focused view, which would like to receive soft
-     * keyboard input
-     */
-    fun showInputMethod(context: Context?, view: View?) {
-        if (context == null || view == null) {
-            return
-        }
-
-        val imm = context
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm?.showSoftInput(view, 0)
-    }
 
 
     /**
