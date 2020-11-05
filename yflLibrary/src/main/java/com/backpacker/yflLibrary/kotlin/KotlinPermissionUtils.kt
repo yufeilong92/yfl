@@ -26,7 +26,7 @@ object KotlinPermissionUtils {
                 if (KotlinStringUtil.isEmpty(titleContent)) {
                     message = titleContent
                 } else
-                    message =  "小乐到家需要以下权限才能继续"
+                    message =  "APP需要以下权限才能继续"
                 scope.showRequestReasonDialog(deniedList, message, "允许", "拒绝")
             }
             .request { allGranted, grantedList, deniedList ->
