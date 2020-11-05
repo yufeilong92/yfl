@@ -3,69 +3,39 @@ package com.backpacker.yflLibrary.kotlin
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import com.permissionx.guolindev.PermissionX
 import com.yanzhenjie.permission.AndPermission
 
 
 object KotlinPermissionUtils {
-
     /**
-     * 权限提示
+     * 请求权限
      */
-    fun showPermission(
-        mContext: Activity, titleContent: String,
-        permissionStr: Array<String>
-        , onGrantedListener: () -> Unit
+    fun showPermissionX(
+        mContext: FragmentActivity, titleContent: String,
+        permissionStr: MutableList<String>, onGrantedListener: () -> Unit
     ) {
-        AndPermission.with(mContext).runtime().permission(permissionStr)
-            .onGranted { permissions ->
-                onGrantedListener()
+        PermissionX.init(mContext)
+            .permissions(permissionStr)
+            .setDialogTintColor(Color.parseColor("#008577"), Color.parseColor("#83e8dd"))
+            .onExplainRequestReason { scope, deniedList ->
+                var message: String
+                if (KotlinStringUtil.isEmpty(titleContent)) {
+                    message = titleContent
+                } else
+                    message =  "小乐到家需要以下权限才能继续"
+                scope.showRequestReasonDialog(deniedList, message, "允许", "拒绝")
             }
-            .onDenied { permissions ->
-                val builder = AlertDialog.Builder(mContext)
-                builder.setTitle("权限提示")
-                builder.setMessage(titleContent) //提示内容
-                builder.setPositiveButton("确定")
-                { dialog: DialogInterface, which: Int ->
-                    KotlinSystemUtil.getAppDetailSettingIntent(
-                        mContext
-                    )
+            .request { allGranted, grantedList, deniedList ->
+                if (allGranted) {
+                    onGrantedListener()
+                } else {
+                    Toast.makeText(mContext, "您拒绝改:$deniedList,部分功能无法使用", Toast.LENGTH_SHORT).show()
                 }
-                builder.setNegativeButton("取消") { dialog: DialogInterface, which: Int -> }
-                val dialog = builder.create()
-                dialog.show()
             }
-            .start()
     }
-
-    /**
-     * 权限提示
-     */
-    fun showPermission(
-        mContext: Activity, titleName: String,
-        titleContent: String,
-        permissionStr: Array<String>
-        , onGrantedListener: () -> Unit
-    ) {
-        AndPermission.with(mContext).runtime().permission(permissionStr)
-            .onGranted { permissions ->
-                onGrantedListener()
-            }
-            .onDenied { permissions ->
-                val builder = AlertDialog.Builder(mContext)
-                builder.setTitle(titleName)
-                builder.setMessage(titleContent) //提示内容
-                builder.setPositiveButton("确定")
-                { dialog: DialogInterface, which: Int ->
-                    KotlinSystemUtil.getAppDetailSettingIntent(
-                        mContext
-                    )
-                }
-                builder.setNegativeButton("取消") { dialog: DialogInterface, which: Int -> }
-                val dialog = builder.create()
-                dialog.show()
-            }
-            .start()
-    }
-
 
 }
