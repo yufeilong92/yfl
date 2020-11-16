@@ -1,7 +1,13 @@
 package com.backpacker.yflLibrary.java;
 
 import java.io.*;
-
+/**
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:44
+ * @Purpose :io 工具类
+ */
 public class JavaIoUtils {
 
     private static final int BUFFER_SIZE = 1024 * 2;

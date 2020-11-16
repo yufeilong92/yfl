@@ -11,7 +11,13 @@ import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:44
+ * @Purpose :输入工具类
+ */
 public class JavaEditTextUtil {
     public interface SearchInterface {
         void searchOnClick(String com);

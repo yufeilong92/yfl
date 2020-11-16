@@ -7,7 +7,13 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
-
+/**
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:52
+ * @Purpose :分享工具
+ */
 public class JavaShareUtil {
 
     private volatile static JavaShareUtil singleton;

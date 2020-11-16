@@ -7,7 +7,13 @@ import android.widget.Button;
 import com.example.UtilsLibrary.R;
 
 import org.jetbrains.annotations.Nullable;
-
+/**
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:42
+ * @Purpose :倒计时
+ */
 public class JavaCountdownUtil {
     int recLen = 60;
     private Context mContext;

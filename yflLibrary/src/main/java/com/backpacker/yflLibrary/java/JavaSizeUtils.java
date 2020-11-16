@@ -5,14 +5,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/8/2
- *     desc  : 尺寸相关工具类
- * </pre>
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:52
+ * @Purpose :尺寸相关工具类
  */
 public class JavaSizeUtils {
 

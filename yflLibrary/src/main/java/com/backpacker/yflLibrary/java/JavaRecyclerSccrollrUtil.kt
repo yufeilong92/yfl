@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @Time :2019/11/13 11:34
  * @Purpose :滑动工具
  */
-class JavaRecyclerSccrollrUtil {
+ public  class JavaRecyclerSccrollrUtil {
   companion object {//被companion object包裹的语句都是private的
 
           private var singletonInstance: JavaRecyclerSccrollrUtil ?= null

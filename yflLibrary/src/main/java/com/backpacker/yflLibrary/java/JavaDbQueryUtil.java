@@ -6,7 +6,7 @@ import android.database.Cursor;
  * @version V 1.0 xxxxxxxx
  * @Title: kotlin_androidone
  * @Package com.backpacker.UtilsLibrary.java
- * @Description: todo
+ * @Description: 数据库操作类
  * @author: L-BackPacker
  * @date: 2019/4/1 0:09
  * @verdescript 版本号 修改时间  修改人 修改的概要说明

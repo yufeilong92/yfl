@@ -9,7 +9,7 @@ import java.util.Random;
  * @Package com.backpacker.yflLibrary.java
  * @Email : yufeilong92@163.com
  * @Time :2020/11/10 15:52
- * @Purpose :
+ * @Purpose : 随机数据工具类
  */
 public class JavaRandomUtils {
     public static final String NUMBERS_AND_LETTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

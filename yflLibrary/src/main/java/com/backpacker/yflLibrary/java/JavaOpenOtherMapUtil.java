@@ -19,7 +19,7 @@ import java.util.List;
  * @Package cn.ruiye.worker.utils
  * @Email : yufeilong92@163.com
  * @Time :2020/2/26 9:18
- * @Purpose :打开第三方工具
+ * @Purpose :打开第三方工具（地图工具类）
  */
 public class JavaOpenOtherMapUtil {
     public final static String BAIDU_PACKAGENAME = "com.baidu.BaiduMap";

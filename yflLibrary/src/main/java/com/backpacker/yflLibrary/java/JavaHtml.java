@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.java.tool;
+package com.backpacker.yflLibrary.java;
 
 import android.graphics.Paint;
 import android.os.Build;
@@ -16,7 +16,7 @@ import android.widget.TextView;
  * @Author : YFL  is Creating a porject in DELL
  * @Tip
  */
-public class UHtml {
+public class JavaHtml {
     /**
      * @Tip 给字符添加下划线
      */

@@ -6,10 +6,10 @@ import android.widget.EditText;
 
 /**
  * @Author : YFL  is Creating a porject in
- * @Package 设置只允许输入两位小说
+ * @Package
  * @Email : yufeilong92@163.com
  * @Time :2019/4/1 10:32
- * @Purpose :
+ * @Purpose : 设置只允许输入两位小说
  */
 public class JavaMoneyTextWatcher implements TextWatcher {
     private EditText editText;

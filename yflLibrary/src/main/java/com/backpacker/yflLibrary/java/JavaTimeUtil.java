@@ -4,6 +4,7 @@ package com.backpacker.yflLibrary.java;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -847,4 +848,102 @@ public class JavaTimeUtil {
         }
         return 0;
     }
+    /**
+     * 获取现在时间
+     *
+     * @return 返回时间类型 yyyy-MM-dd HH:mm:ss
+     */
+    public static Date getNowDate() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        ParsePosition pos = new ParsePosition(8);
+        Date currentTime_2 = formatter.parse(dateString, pos);
+        return currentTime_2;
+    }
+
+    /**
+     * 获取现在时间
+     *
+     * @return返回短时间格式 yyyy-MM-dd
+     */
+    public static Date getNowDateShort() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+        ParsePosition pos = new ParsePosition(8);
+        Date currentTime_2 = formatter.parse(dateString, pos);
+        return currentTime_2;
+    }
+
+    /**
+     * 获取现在时间
+     *
+     * @return返回字符串格式 yyyy-MM-dd HH:mm:ss
+     */
+    public static String getStringDate() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        return dateString;
+    }
+    /**
+     * 获取现在时间
+     *
+     * @return 返回短时间字符串格式yyyy-MM-dd
+     */
+    public static String getStringDateShort() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+        return dateString;
+    }
+
+    /**
+     * 获取现在时间
+     *
+     * @return返回短时间格式 yyyy年MM月dd日
+     */
+    public static String getNowDateShortCN() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
+        String dateString = formatter.format(currentTime);
+        return dateString;
+    }
+
+    /**
+     * 提取一个月中的最后一天
+     *
+     * @param day
+     * @return
+     */
+    public static Date getLastDate(long day) {
+        Date date = new Date();
+        long date_3_hm = date.getTime() - 3600000 * 34 * day;
+        Date date_3_hm_date = new Date(date_3_hm);
+        return date_3_hm_date;
+    }
+    /**
+     * 得到二个日期间的间隔天数
+     *
+     * @param sj1
+     * @param sj2
+     * @return 二个日期间的间隔天数
+     */
+    public static String getTwoDay(String sj1, String sj2) {
+        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        long day = 0;
+        try {
+            Date date = myFormatter.parse(sj1);
+            Date mydate = myFormatter.parse(sj2);
+            day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
+        } catch (Exception e) {
+            return "";
+        }
+        return day + "";
+    }
+
+
+
+
 }

@@ -14,8 +14,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.backpacker.yflLibrary.java.tool.ConvertUtils;
-import com.backpacker.yflLibrary.java.tool.RxFileTool;
+
+import com.backpacker.yflLibrary.view.dialog.addresspicker.ConvertUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,12 +26,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/8/11
- *     desc  : SD卡相关工具类
- * </pre>
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:51
+ * @Purpose :SD卡相关工具类
  */
 public class JavaSDCardUtils {
 
@@ -97,25 +96,11 @@ public class JavaSDCardUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            RxFileTool.closeIO(bufferedReader);
         }
         return Environment.getExternalStorageDirectory().getPath() + File.separator;
     }
 
-    /**
-     * 获取SD卡剩余空间
-     *
-     * @return SD卡剩余空间
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static String getFreeSpace() {
-        if (!isSDCardEnable()) return "sdcard unable!";
-        StatFs stat = new StatFs(getSDCardPath());
-        long blockSize, availableBlocks;
-        availableBlocks = stat.getAvailableBlocksLong();
-        blockSize = stat.getBlockSizeLong();
-        return ConvertUtils.byte2FitSize(availableBlocks * blockSize);
-    }
+
 
 
     /**

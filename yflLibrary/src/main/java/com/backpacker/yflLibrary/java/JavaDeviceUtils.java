@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.java.tool;
+package com.backpacker.yflLibrary.java;
 
 import android.content.Context;
 import android.net.wifi.WifiInfo;
@@ -6,21 +6,15 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/8/1
- *     desc  : 设备相关工具类
- * </pre>
+ * @Author : YFL  is Creating a porject in Dell
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:44
+ * @Purpose :设备相关工具类
  */
-public class DeviceUtils {
+public class JavaDeviceUtils {
 
-    private DeviceUtils() {
+    private JavaDeviceUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -61,29 +55,7 @@ public class DeviceUtils {
         return null;
     }
 
-    /**
-     * 获取设备MAC地址
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>}</p>
-     *
-     * @return MAC地址
-     */
 
-    public static String getMacAddress() {
-        String macAddress = null;
-        LineNumberReader lnr = null;
-        InputStreamReader isr = null;
-        try {
-            Process pp = Runtime.getRuntime().exec("cat /sys/class/net/wlan0/address");
-            isr = new InputStreamReader(pp.getInputStream());
-            lnr = new LineNumberReader(isr);
-            macAddress = lnr.readLine().replace(":", "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            RxFileTool.closeIO(lnr, isr);
-        }
-        return macAddress == null ? "" : macAddress;
-    }
 
     /**
      * 获取设备厂商，如Xiaomi

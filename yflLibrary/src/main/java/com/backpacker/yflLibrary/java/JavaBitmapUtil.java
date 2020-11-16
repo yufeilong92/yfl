@@ -1,16 +1,29 @@
 package com.backpacker.yflLibrary.java;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * @Author : YFL  is Creating a porject in PC
@@ -153,6 +166,34 @@ public class JavaBitmapUtil {
         byte[] bytes = bStream.toByteArray();
         string = Base64.encodeToString(bytes, Base64.DEFAULT);
         return string;
+    }
+
+    /**
+     * 读取图片属性：旋转的角度
+     *
+     * @param path 图片绝对路径
+     * @return degree旋转的角度
+     */
+    public static int getPicRotate(String path) {
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
     }
 
     /**
@@ -339,4 +380,151 @@ public class JavaBitmapUtil {
             return tempBitmap; // 如果没有缩放，那么不回收
         }
     }
+
+    /**
+     * 把一个view保存成图片
+     *
+     * @param context  上下文对象
+     * @param view     view
+     * @param callBack 回调
+     */
+    public static void viewSaveToImage(Context context, View view, SavaCallBack callBack) {
+        view.setDrawingCacheEnabled(true);
+        view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        view.setDrawingCacheBackgroundColor(Color.WHITE);
+        // 把一个View转换成图片
+        Bitmap cachebmp = loadBitmapFromView(view);
+//        // 添加水印
+//        Bitmap bitmap = Bitmap.createBitmap(createWatermarkBitmap(cachebmp,
+//                context.getString(R.string.app_name) ));
+        try {
+            // 判断手机设备是否有SD卡
+            boolean isHasSDCard = Environment.getExternalStorageState().equals(
+                    Environment.MEDIA_MOUNTED);
+            if (isHasSDCard) {
+                // SD卡根目录
+                saveImageToGallery(context, cachebmp, callBack);
+            } else {
+                throw new Exception("Make dirs Failed!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        view.destroyDrawingCache();
+    }
+
+    public interface SavaCallBack {
+        void onSuccess();
+
+        void onFailed(Exception e);
+    }
+
+    /**
+     * 把view转换成图片
+     *
+     * @param v
+     * @return
+     */
+    private static Bitmap loadBitmapFromView(View v) {
+        int w = v.getWidth();
+        int h = v.getHeight();
+        Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmp);
+        c.drawColor(Color.WHITE);
+        /** 如果不设置canvas画布为白色，则生成透明 */
+        v.layout(0, 0, w, h);
+        v.draw(c);
+        return bmp;
+    }
+
+    /**
+     * 把图片保存到相册
+     *
+     * @param context  上下文对象
+     * @param bmp      返回值
+     * @param callBack 回调
+     */
+    public static void saveImageToGallery(Context context, Bitmap bmp, SavaCallBack callBack) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "Boohee");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".png";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+//            // 其次把文件插入到系统图库
+//            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+//                    file.getAbsolutePath(), fileName, null);
+            callBack.onSuccess();
+        } catch (Exception e) {
+            callBack.onFailed(e);
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getAbsolutePath())));
+    }
+
+    /**
+     * 为图片target添加水印
+     *
+     * @param target 图片
+     * @param str    水印文字
+     * @return 添加水印后的bitmap
+     */
+    private static Bitmap createWatermarkBitmap(Bitmap target, String str) {
+        int w = target.getWidth();
+        int h = target.getHeight();
+
+        Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        Paint p = new Paint();
+        // 水印的颜色
+        p.setColor(Color.RED);
+        // 水印的字体大小
+        p.setTextSize(16);
+        p.setAntiAlias(true);// 去锯齿
+        canvas.drawBitmap(target, 0, 0, p);
+        // 在中间位置开始添加水印
+        canvas.drawText(str, w / 2, h / 2, p);
+//        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.restore();
+        return bmp;
+    }
+
+    public static String saveBitmap(Context context, Bitmap b) {
+        String path = "";
+        if (path.equals("")) {
+            path =Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +"fileuploadandimagetext";
+            File f = new File(path);
+            if (!f.exists()) {
+                f.mkdir();
+            }
+        }
+        long dataTake = System.currentTimeMillis();
+        String jpegName = path + "/" + dataTake + ".png";
+        Log.i(TAG, "saveBitmap:jpegName = " + jpegName);
+        try {
+            FileOutputStream fout = new FileOutputStream(jpegName);
+            BufferedOutputStream bos = new BufferedOutputStream(fout);
+            b.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            bos.flush();
+            bos.close();
+            // 最后通知图库更新
+            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + jpegName)));
+            Log.i(TAG, "saveBitmap success");
+            return jpegName;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            Log.i(TAG, "saveBitmap:fail");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

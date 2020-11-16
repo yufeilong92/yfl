@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @version V 1.0 xxxxxxxx
- * @Title: MyApplication2
- * @Copyright: 2018
+ * @Author : YFL  is Creating a porject in Dell
+ * @Package :
+ * @Email : yufeilong92@163.com
+ * @Time :2020/11/16 13:51
+ * @Purpose :截屏工具类
  */
 public class JavaScreenShot {
     /**

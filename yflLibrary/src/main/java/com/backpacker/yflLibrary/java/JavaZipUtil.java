@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.java.sys;
+package com.backpacker.yflLibrary.java;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ import java.util.zip.ZipOutputStream;
  * @Time :2020/8/13 14:52
  * @Purpose :压缩文件的工具类
  */
-public class ZipUtil {
+public class JavaZipUtil {
     /**
      * 压缩文件
      *

@@ -14,7 +14,7 @@ import top.zibin.luban.OnCompressListener;
  * @Author : YFL  is Creating a porject in PC$
  * @Email : yufeilong92@163.com
  * @Time :2019/8/19 14:27
- * @Purpose :
+ * @Purpose : 鲁班压缩工具类
  */
 public class JavaLunBanUtil {
 
