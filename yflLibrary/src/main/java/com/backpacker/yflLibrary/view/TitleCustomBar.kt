@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -95,11 +96,24 @@ class TitleCustomBar : ConstraintLayout {
             val content_Color =
                 a.getColor(R.styleable.TitleCustomBar_customContentColor, Color.BLACK)
             val typeface = a.getInt(R.styleable.TitleCustomBar_customtextStyle, 0)
+            val gravity = a.getInt(R.styleable.TitleCustomBar_customContentGravity, -1)
             tv_Content.text = contentComstring
             tv_Content.textSize = content_Size
             tv_Content.setTextColor(content_Color)
             tv_Content.setTypeface(Typeface.defaultFromStyle(typeface))
-
+            when (gravity) {
+                1 -> {
+                    tv_Content.gravity = Gravity.CENTER
+                }
+                2 -> {
+                    tv_Content.gravity = Gravity.START
+                }
+                3 -> {
+                    tv_Content.gravity = Gravity.END
+                }
+                else -> {
+                }
+            }
             val showLife = a.getBoolean(R.styleable.TitleCustomBar_showLife, true)
             val showRight = a.getBoolean(R.styleable.TitleCustomBar_showRight, true)
 

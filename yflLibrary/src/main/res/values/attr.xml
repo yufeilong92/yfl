@@ -230,6 +230,12 @@
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
         </attr>
+        <!--        中间文字-->
+        <attr name="customContentGravity" format="integer" >
+            <flag name="content" value="1"/>
+            <flag name="lift" value="2"/>
+            <flag name="right" value="3"/>
+        </attr>
         <!--        是否图片文字显示右侧-->
         <attr name="showTvOrIvRight" format="boolean" />
         <!--        是否图片文字显示左侧-->
