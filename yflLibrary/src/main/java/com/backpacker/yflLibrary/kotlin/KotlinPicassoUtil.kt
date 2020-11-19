@@ -1,11 +1,14 @@
 package com.backpacker.yflLibrary.kotlin
 
 import android.content.Context
-import android.graphics.*
 import android.widget.ImageView
-import com.backpacker.yflLibrary.view.RoundTransform
+import android.graphics.*
+import androidx.recyclerview.widget.RecyclerView
+import com.backpacker.yflLibrary.view.RoundedCornersTransformation
+import com.example.UtilsLibrary.R
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
+import java.io.File
 
 
 /**
@@ -16,77 +19,119 @@ import com.squareup.picasso.Transformation
  * @Purpose :图片工具
  */
 object KotlinPicassoUtil {
-    fun loadQuadRangleImager(context: Context,imageView: ImageView,path:String){
+    private val PucassiTag="img"
+    fun loadImager(imageView: ImageView, path: String?) {
         if (KotlinStringUtil.isEmpty(path)) {
-            imageView.setImageResource(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            return
-        }
-
-
-        Picasso.get()
-            .load(path)
-            .transform(RoundTransform(10))
-            .placeholder(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            .error(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            .fit()
-            .tag("img")
-            .centerCrop()
-            .into(imageView)
-    }
-    fun loadImager(imageView: ImageView, path: String) {
-        if (KotlinStringUtil.isEmpty(path)) {
-            imageView.setImageResource(com.example.UtilsLibrary.R.mipmap.ic_default_img)
+            imageView.setImageResource(R.mipmap.ic_default_img)
             return
         }
         Picasso.get()
             .load(path)
-            .placeholder(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            .error(com.example.UtilsLibrary.R.mipmap.ic_default_img)
+            .placeholder(R.mipmap.ic_default_img)
+            .error(R.mipmap.ic_default_img)
             .fit()
-            .centerCrop()
-            .tag("img")
+            .tag(PucassiTag)
             .into(imageView)
     }
+
+    fun loadBImager(imageView: ImageView, path: String?) {
+        if (KotlinStringUtil.isEmpty(path)) {
+            imageView.setImageResource(R.mipmap.ic_default_img)
+            return
+        }
+        Picasso.get()
+            .load(File(path))
+            .placeholder(R.mipmap.ic_default_img)
+            .error(R.mipmap.ic_default_img)
+            .fit()
+            .tag(PucassiTag)
+            .into(imageView)
+    }
+
+    /**
+     * 加载部分圆角图片
+     */
+    fun loadQuadRangleHalfTypeImager(
+        imageView: ImageView,
+        path: String, radius: Int,
+        type: RoundedCornersTransformation.CornerType
+    ) {
+        if (KotlinStringUtil.isEmpty(path)) {
+            imageView.setImageResource(R.mipmap.ic_default_img)
+            return
+        }
+
+        Picasso.get()
+            .load(path)
+            .placeholder(R.mipmap.ic_default_img)
+            .error(R.mipmap.ic_default_img)
+            .fit()
+            .transform(RoundedCornersTransformation(radius, 0, type))
+            .tag(PucassiTag)
+            .into(imageView)
+    }
+    /**
+     * 加载部分圆角图片
+     */
+    fun loadQuadBRangleHalfTypeImager(
+        imageView: ImageView,
+        path: String, radius: Int,
+        type: RoundedCornersTransformation.CornerType
+    ) {
+        if (KotlinStringUtil.isEmpty(path)) {
+            imageView.setImageResource(R.mipmap.ic_default_img)
+            return
+        }
+
+        Picasso.get()
+            .load(File(path))
+            .placeholder(R.mipmap.ic_default_img)
+            .error(R.mipmap.ic_default_img)
+            .fit()
+            .transform(RoundedCornersTransformation(radius, 0, type))
+            .tag(PucassiTag)
+            .into(imageView)
+    }
+
     /***
      * @param data
      *  加载圆角图片  不带剧中
      * @return
      */
-    fun loadQuadRangleImagerWitOutScay(context: Context, imageView: ImageView, path: String) {
+    fun loadCircleImager(imageView: ImageView,  path: String?) {
         if (KotlinStringUtil.isEmpty(path)) {
-            imageView.setImageResource(com.example.UtilsLibrary.R.mipmap.ic_default_img)
+            imageView.setImageResource(R.mipmap.ic_default_img)
             return
         }
 
-
         Picasso.get()
             .load(path)
-            .transform(RoundTransform(10))
-            .placeholder(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            .error(com.example.UtilsLibrary.R.mipmap.ic_default_img)
+            .placeholder(R.mipmap.ic_default_img)
+            .error(R.mipmap.ic_default_img)
             .fit()
-            .tag("img")
-            .into(imageView)
-    }
-    /***
-     * @param data
-     *  加载圆角图片  不带剧中
-     * @return
-     */
-    fun loadCircleImager(imageView: ImageView, path: String) {
-        if (KotlinStringUtil.isEmpty(path)) {
-            imageView.setImageResource(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            return
-        }
-
-
-        Picasso.get()
-            .load(path)
             .transform(CircleTransform())
-            .placeholder(com.example.UtilsLibrary.R.mipmap.ic_default_img)
-            .error(com.example.UtilsLibrary.R.mipmap.ic_default_img)
+            .tag(PucassiTag)
+            .into(imageView)
+    }
+    /***
+     * @param data
+     *  加载圆角图片  不带剧中
+     * @return
+     */
+    fun loadBCircleImager(com:Context,imageView: ImageView,  path: String?) {
+        if (KotlinStringUtil.isEmpty(path)) {
+            imageView.setImageResource(R.mipmap.ic_default_img)
+            return
+        }
+
+
+        Picasso.get()
+            .load(File(path))
+            .placeholder(R.mipmap.ic_default_img)
+            .error(R.mipmap.ic_default_img)
             .fit()
-            .tag("img")
+            .transform(CircleTransform())
+            .tag(PucassiTag)
             .into(imageView)
     }
 
@@ -97,27 +142,42 @@ object KotlinPicassoUtil {
 
         override fun transform(source: Bitmap?): Bitmap {
             return source?.let {
-                val size = Math.min(it.width, it.height)
-                val x = (it.width - size) / 2
-                val y = (it.height - size) / 2
-                val createBitmap = Bitmap.createBitmap(it, x, y, size, size)
-                if (createBitmap != it)
-                    it.recycle()
-                val   bitmap = Bitmap.createBitmap(size, size, it.config)
+                val size = Math.min(source.width, source.height)
+                val width = (source.width - size) / 2
+                val height = (source.height - size) / 2
+                val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
                 val canvas = Canvas(bitmap)
                 val paint = Paint()
                 val shader =
-                    BitmapShader(createBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-                paint.setShader(shader)
+                    BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+                if (width != 0 || height != 0) {
+                    // source isn't square, move viewport to center
+                    val matrix = Matrix()
+                    matrix.setTranslate(-width.toFloat(), -height.toFloat())
+                    shader.setLocalMatrix(matrix)
+                }
+                paint.shader = shader
                 paint.isAntiAlias = true
                 val r = size / 2f
                 canvas.drawCircle(r, r, r, paint)
-                createBitmap.recycle()
+                source.recycle()
                 bitmap
 
             }!!
         }
 
 
+    }
+    fun setPauseTagAndResueTag(rlv: RecyclerView){
+        rlv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Picasso.get().resumeTag(PucassiTag)
+                } else {
+                    Picasso.get().pauseTag(PucassiTag)
+                }
+            }
+        })
     }
 }

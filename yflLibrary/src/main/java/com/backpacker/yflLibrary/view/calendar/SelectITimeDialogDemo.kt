@@ -20,7 +20,7 @@ import java.util.*
  * @Time :2020/8/27 15:40
  * @Purpose :选择区域时间对话框
  */
-abstract class SelectITimeDialog(var mContext: Context) : AlertDialog(mContext, R.style.dialog) {
+abstract class SelectITimeDialogDemo(var mContext: Context) : AlertDialog(mContext, R.style.dialog) {
 
     private var metrics: DisplayMetrics = context.resources.displayMetrics
 
