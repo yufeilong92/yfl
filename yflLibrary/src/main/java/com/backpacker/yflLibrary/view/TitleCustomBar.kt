@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -81,14 +82,16 @@ class TitleCustomBar : ConstraintLayout {
             val life_Size = a.getDimension(R.styleable.TitleCustomBar_customLifeSize, 14F)
             val life_Color = a.getColor(R.styleable.TitleCustomBar_customLifeColor, Color.BLACK)
             tv_life.text = lifeComstring
-            tv_life.textSize = life_Size
+//            tv_life.textSize = life_Size
+            tv_life.setTextSize(TypedValue.COMPLEX_UNIT_PX, life_Size)
             tv_life.setTextColor(life_Color)
 
             val rightComstring = a.getString(R.styleable.TitleCustomBar_customRightText)
             val right_Size = a.getDimension(R.styleable.TitleCustomBar_customRightSize, 14F)
             val right_Color = a.getColor(R.styleable.TitleCustomBar_customRightColor, Color.BLACK)
             tv_right.text = rightComstring
-            tv_right.textSize = right_Size
+//            tv_right.textSize = right_Size
+            tv_right.setTextSize(TypedValue.COMPLEX_UNIT_PX,right_Size)
             tv_right.setTextColor(right_Color)
 
             val contentComstring = a.getString(R.styleable.TitleCustomBar_customContentText)
@@ -98,7 +101,8 @@ class TitleCustomBar : ConstraintLayout {
             val typeface = a.getInt(R.styleable.TitleCustomBar_customtextStyle, 0)
             val gravity = a.getInt(R.styleable.TitleCustomBar_customContentGravity, -1)
             tv_Content.text = contentComstring
-            tv_Content.textSize = content_Size
+//            tv_Content.textSize = content_Size
+            tv_Content.setTextSize(TypedValue.COMPLEX_UNIT_PX,content_Size)
             tv_Content.setTextColor(content_Color)
             tv_Content.setTypeface(Typeface.defaultFromStyle(typeface))
             when (gravity) {
