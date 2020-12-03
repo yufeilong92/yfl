@@ -1,10 +1,10 @@
-package com.backpacker.yflLibrary.view.toast.style;
+package com.backpacker.yflLibrary.toast.style;
 
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
 
-import com.backpacker.yflLibrary.view.toast.IToastStyle;
+import com.backpacker.yflLibrary.toast.IToastStyle;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view.toast;
+package com.backpacker.yflLibrary.toast;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

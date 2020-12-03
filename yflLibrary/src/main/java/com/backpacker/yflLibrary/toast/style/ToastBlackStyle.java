@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view.toast.style;
+package com.backpacker.yflLibrary.toast.style;
 
 import android.content.Context;
 

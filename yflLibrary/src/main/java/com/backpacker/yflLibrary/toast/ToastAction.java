@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view.toast;
+package com.backpacker.yflLibrary.toast;
 
 import androidx.annotation.StringRes;
 

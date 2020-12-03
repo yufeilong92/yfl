@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view.toast;
+package com.backpacker.yflLibrary.toast;
 
 import android.app.Activity;
 import android.app.Application;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.backpacker.yflLibrary.view.toast.style.ToastBlackStyle;
+import com.backpacker.yflLibrary.toast.style.ToastBlackStyle;
 
 
 /**

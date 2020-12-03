@@ -1,48 +1,42 @@
-package com.backpacker.yflLibrary.view.toast.style;
+package com.backpacker.yflLibrary.toast.style;
 
 import android.content.Context;
-import android.view.Gravity;
 
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/ToastUtils
- *    time   : 2018/12/06
- *    desc   : 支付宝样式实现
+ *    time   : 2018/09/01
+ *    desc   : QQ 样式实现
  */
-public class ToastAliPayStyle extends BaseToastStyle {
+public class ToastQQStyle extends BaseToastStyle {
 
-    public ToastAliPayStyle(Context context) {
+    public ToastQQStyle(Context context) {
         super(context);
     }
 
     @Override
-    public int getGravity() {
-        return Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM;
-    }
-
-    @Override
-    public int getYOffset() {
-        return dp2px(100);
+    public int getZ() {
+        return 0;
     }
 
     @Override
     public int getCornerRadius() {
-        return dp2px(5);
+        return dp2px(4);
     }
 
     @Override
     public int getBackgroundColor() {
-        return 0XEE575757;
+        return 0XFF333333;
     }
 
     @Override
     public int getTextColor() {
-        return 0XFFFFFFFF;
+        return 0XFFE3E3E3;
     }
 
     @Override
     public float getTextSize() {
-        return sp2px(16);
+        return sp2px(12);
     }
 
     @Override
@@ -52,6 +46,6 @@ public class ToastAliPayStyle extends BaseToastStyle {
 
     @Override
     public int getPaddingTop() {
-        return dp2px(10);
+        return dp2px(14);
     }
 }

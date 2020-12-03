@@ -1,9 +1,4 @@
-package com.backpacker.yflLibrary.view.toast
-
-import android.app.Application
-import android.util.Log
-import android.widget.Toast
-import com.backpacker.yflLibrary.view.toast.style.ToastAliPayStyle
+package com.backpacker.yflLibrary.toast
 
 /**
  * @Author : YFL  is Creating a porject in My Application

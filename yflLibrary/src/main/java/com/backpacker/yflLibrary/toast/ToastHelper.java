@@ -1,4 +1,4 @@
-package com.backpacker.yflLibrary.view.toast;
+package com.backpacker.yflLibrary.toast;
 
 import android.app.Activity;
 import android.app.Application;
