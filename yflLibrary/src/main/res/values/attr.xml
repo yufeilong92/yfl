@@ -439,5 +439,14 @@
         <attr name="drawItemCount" format="integer"/>
         <attr name="lineSpacingMultiplier" format="float"/>
     </declare-styleable>
-
+    <declare-styleable name="NavigationView">
+        <attr name="iconSize" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="activeTextColor" format="color"/>
+        <attr name="unactiveTextColor" format="color"/>
+        <attr name="icon_margin_top" format="dimension"/>
+        <attr name="text_margin_bottom" format="dimension"/>
+        <attr name="lineColor" format="color"/>
+        <attr name="showLine" format="boolean"/>
+    </declare-styleable>
 </resources>

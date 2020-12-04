@@ -1,0 +1,30 @@
+        nav_button.setOnTabSelectedListener(object :NavigationView.OnTabSelectedListener{
+              override fun selected(index: Int, model: NavigationView.Model?) {
+
+              }
+
+              override fun unselected(index: Int, model: NavigationView.Model?) {
+              }
+          })
+
+    val list = mutableListOf<NavigationView.Model>()
+        list.add(
+            NavigationView.Model.Builder(R.mipmap.home_s, R.mipmap.home_n).title("主页")
+                .setSelect(true)
+                .build()
+        )
+        list.add(
+            NavigationView.Model.Builder(R.mipmap.home_s, R.mipmap.home_n).title("音乐")
+                .setSelect(false)
+                .build()
+        )
+        list.add(
+            NavigationView.Model.Builder(R.mipmap.home_s, R.mipmap.home_n).title("电影")
+                .setSelect(false)
+                .build()
+        )
+        nav_button.setItems(list)
+        nav_button.build()
+        nav_button.reminder(0, show, "$number")
+        nav_button.reminder(1, show, "${number + 1}")
+        nav_button.reminder(2, show, "${number + 2}")
