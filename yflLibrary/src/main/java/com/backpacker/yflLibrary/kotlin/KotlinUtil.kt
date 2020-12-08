@@ -1,5 +1,6 @@
 package com.backpacker.yflLibrary.kotlin
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -12,6 +13,7 @@ import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.graphics.Color
+import android.os.Build
 import android.text.*
 import android.widget.*
 import java.io.BufferedReader
@@ -19,6 +21,7 @@ import java.io.InputStreamReader
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.view.ViewTreeObserver
 import com.backpacker.yflLibrary.java.JavaArithUtil
 import com.backpacker.yflLibrary.java.JavaStringUtil
 
@@ -439,6 +442,41 @@ object KotlinUtil {
             -1
         } else {
             num / Math.pow(10.0, k - 1.toDouble()).toInt() % number
+        }
+    }
+
+
+    /**
+     * 参数：maxLines 要限制的最大行数
+     * 参数：content  指TextView中要显示的内容
+     */
+    fun setMaxEcplise(mTextView: TextView, maxLines: Int, content: String) {
+        val observer = mTextView.viewTreeObserver
+        observer.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                mTextView.text = content
+                if (mTextView.lineCount > maxLines) {
+                    val lineEndIndex = mTextView.layout.getLineEnd(maxLines - 1)
+                    //下面这句代码中：我在项目中用数字3发现效果不好，改成1了
+                    val text = content.subSequence(0, lineEndIndex - 3).toString() + "..."
+                    mTextView.text = text
+                } else {
+                    removeGlobalOnLayoutListener(mTextView.viewTreeObserver, this)
+                }
+            }
+        })
+    }
+
+    @SuppressLint("NewApi")
+    private fun removeGlobalOnLayoutListener(
+        obs: ViewTreeObserver?,
+        listener: ViewTreeObserver.OnGlobalLayoutListener
+    ) {
+        if (obs == null) return
+        if (Build.VERSION.SDK_INT < 16) {
+            obs.removeGlobalOnLayoutListener(listener)
+        } else {
+            obs.removeOnGlobalLayoutListener(listener)
         }
     }
 }
